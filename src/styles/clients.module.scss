@@ -1,9 +1,8 @@
 .logoBox {
   display: flex;
   align-items: center;
-  // transition: margin-top 0.33s ease-in-out;
   transition: transform 0.33s ease;
-  transform-origin: center top;
+  // transform-origin: center top;
 
   & img {
     // opacity: 0.6;
@@ -12,43 +11,10 @@
   }   
 
   &:hover {
-    // margin-top: -0.3em;
     transform: translate(0, -0.3em);
     // & img {
     //   filter: unset;
     //   opacity: 1;
     // }
   }
-}
-
-.sectionHeader {
-  margin-left: 16px;
-  text-transform: uppercase;
-  font-size: medium;
-  font-weight: 500;  
-}
-.sectionHeaderRight {
-  margin-left: 8px;
-  text-transform: uppercase;
-  font-size: medium;
-  font-weight: 500;
-}
-
-.sectionHeaderLine {
-  content: "";
-  width: 50px;
-  height: 3px;
-  background-color: #7d7789;
-  left: 100%;
-  top: 0; //50%;
-  margin-left: 8px;
-}
-.sectionHeaderLineRight {
-  content: "";
-  width: 50px;
-  height: 3px;
-  background-color: #7d7789;
-  left: 100%;
-  top: 0; //50%;
-  margin-left: 16px;
 }
