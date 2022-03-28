@@ -7,6 +7,7 @@ import AOS from "aos";
 
 import HeaderSection from "./sections/header";
 import ClientsSection from "./sections/clients";
+import PortfolioSection from "./sections/portfolio";
 import RecentSection from "./sections/recent-work";
 
 import 'aos/dist/aos.css'; // You can also use <link> for styles
@@ -30,7 +31,7 @@ const Home: NextPage = () => {
         <NavBar />
         <HeaderSection />
         <ClientsSection />
-        <RecentSection />
+        <PortfolioSection />
       </main>
 
       <footer className={styles.footer}>

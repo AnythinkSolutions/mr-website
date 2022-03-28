@@ -1,20 +1,23 @@
 .logoBox {
   display: flex;
   align-items: center;
-  transition: transform 0.33s ease;
-  // transform-origin: center top;
+  overflow: visible;
+
+  & span {
+    overflow: visible !important;
+  }
 
   & img {
+    transition: transform 0.33s ease; //, filter 0.33s ease-in-out, opacity 0.33s ease-in-out !important;
     // opacity: 0.6;
-    // filter: grayscale(100);
-    // transition: filter 0.33s ease-in-out, opacity 0.33s ease-in-out !important;
+    // filter: grayscale(0.33);
   }   
 
   &:hover {
-    transform: translate(0, -0.3em);
-    // & img {
-    //   filter: unset;
-    //   opacity: 1;
-    // }
+    & img {
+      transform: translate(0, -0.3em);
+      // filter: unset;
+      // opacity: 1;
+    }
   }
 }

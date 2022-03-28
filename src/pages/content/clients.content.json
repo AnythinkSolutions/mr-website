@@ -1,0 +1,70 @@
+[
+  {
+    "type": "magazine",
+    "src": "wh-logo.png",
+    "alt": "Women's Health",
+    "url": "https://www.womenshealthmag.com/author/4061/meghan-rabbitt/"
+  },
+  {
+    "type": "magazine",
+    "src": "oprah-logo.png",
+    "alt": "Oprah Daily"
+  },
+  {
+    "type": "magazine",
+    "src": "mh-logo.png",
+    "alt": "Men's Health",
+    "url": "https://www.menshealth.com/author/4061/meghan-rabbitt/"
+  },
+  {
+    "type": "magazine",
+    "src": "yj-logo.png",
+    "alt": "Yoga Journal",
+    "url": "https://www.yogajournal.com/byline/meghan-rabbitt/"
+  },
+  {
+    "type": "magazine",
+    "src": "health-logo-transparent.png",
+    "alt": "Health",
+    "url": "https://www.health.com/author/meghan-rabbitt"
+  },
+  {
+    "type": "magazine",
+    "src": "prevention-logo.png",
+    "alt": "Prevention",
+    "width": 148,
+    "url": "https://www.prevention.com/author/4061/meghan-rabbitt/"
+  },
+  {
+    "type": "magazine",
+    "src": "bazaar-logo.png",
+    "alt": "Harper's Baazar"
+  },
+  {
+    "type": "magazine",
+    "src": "good-housekeeping-logo.png",
+    "alt": "Good Housekeeping"
+  },
+  {
+    "type": "content",
+    "src": "peloton-logo.png",
+    "alt": "Peloton"
+  },
+  {
+    "type": "content",
+    "src": "jandj-logo.png",
+    "alt": "Johnson & Johnson"
+  },
+  {
+    "type": "content",
+    "src": "under-armour-logo.png",
+    "alt": "Under Armour",
+    "height": 48
+  },
+  {
+    "type": "content",
+    "src": "pandg-logo.png",
+    "alt": "Proctor & Gamble",
+    "height": 48
+  }
+]

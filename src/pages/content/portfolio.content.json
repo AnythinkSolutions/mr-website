@@ -1,0 +1,42 @@
+[
+  {
+    "src": "prevention-foot-pain.jpg",
+    "alt": "foot pain",
+    "title": "Your Annoying Foot Pain, Explained",
+    "url": "https://www.prevention.com/fitness/a20480503/5-reasons-your-feet-hurt/",
+    "client": "Prevention",
+    "category": ["Health"]
+  },
+  {
+    "src": "prevention-lose-weight.jpg",
+    "alt": "scale, weight loss",
+    "title": "18 Most Effective Ways to Lose Weight After 50",
+    "url": "https://www.prevention.com/fitness/a20467060/lose-weight-after-50/",
+    "client": "Prevention",
+    "category": ["Travel"]
+  },
+  {
+    "src": "wh-bipolar.jpg",
+    "alt": "bipolar faces",
+    "title": "Living With Bipolar Isn't At All Like What You Think",
+    "url": "https://www.womenshealthmag.com/health/a36636234/bipolar-misconceptions/",
+    "client": "Women's Health",
+    "category": ["Health"]
+  },
+  {
+    "src": "health-grief.webp",
+    "alt": "person with lights",
+    "title": "Grief Is Never Easy, but During the Holidays, It's Especially Tough--Here's How Others Got Through It",
+    "url": "https://www.health.com/mind-body/grief-during-the-holidays",
+    "client": "Health",
+    "category": ["Travel"]
+  },
+  {
+    "src": "health-serotonin.webp",
+    "alt": "happy woman",
+    "title": "What Is Serotonin and How Does It Affect Your Mood?",
+    "url": "https://www.health.com/mind-body/what-is-serotonin",
+    "client": "Health",
+    "category": ["Health"]
+  }
+]
