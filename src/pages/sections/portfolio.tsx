@@ -53,8 +53,10 @@ const PortfolioSection = () => {
         <div className={`container flex flex-wrap p-4 md:justify-start sm:justify-center ${styles["work-container"]}`} data-aos="fade-up" data-aos-duration={900}>
           <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null} >
             {items.map(item => (
-              <div key={item.url} className="xl:w-1/4 lg:w-1/3 md:w-1/2 sm:w-1/1" data-aos="fade-up" data-aos-duration={900} data-aos-delay={index * 200}>
-                <PortfolioItemCard index={index++} item={item}/>
+              <div key={item.url} className="xl:w-1/4 lg:w-1/3 md:w-1/2 sm:w-1/1">
+                <div data-aos="fade-up" data-aos-duration={900} data-aos-delay={index * 200}>
+                  <PortfolioItemCard index={index++} item={item}/>
+                </div>
               </div>
               )
             )}
