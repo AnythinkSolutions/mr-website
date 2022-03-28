@@ -6,24 +6,25 @@ interface IControlProps {
   initialText?: string;
   speed?: number;
   pauseOnComma?: boolean;
+  startDelay?: number;
 }
 
-function TypeSpan({children, initialText, speed, pauseOnComma}: IControlProps){
-  const defaultDelay = speed ?? 70;
+function TypeSpan({children, initialText, speed, pauseOnComma, startDelay}: IControlProps){
+  const letterDelay = speed ?? 70;
   const isPausing = pauseOnComma ?? true;
   const [textPart, setTextPart] = useState(initialText ?? "");
   const [isFinished, setIsFinished] = useState(false);
   const [offset, setOffset] = useState(0);
-  const [delay, setDelay] = useState(defaultDelay);
+  const [delay, setDelay] = useState(startDelay ?? letterDelay);
   
   function checkForPause(){
     if(isPausing){
       const nextChar = children.substring(offset, offset + 1);
       if(nextChar === ","){
-        setDelay(defaultDelay * 5);
+        setDelay(letterDelay * 5);
       }
-      else if(delay !== defaultDelay){
-        setDelay(defaultDelay);
+      else if(delay !== letterDelay){
+        setDelay(letterDelay);
       }
     }
   }

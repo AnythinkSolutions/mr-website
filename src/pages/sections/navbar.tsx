@@ -5,7 +5,7 @@ import styles from "../../styles/header.module.scss"
 function NavBarSection(){
   
   return (
-    <div id="navbar" className="container flex justify-between center-content p-4 pb-0" data-aos="fade-down" data-aos-delay="500">
+    <div id="navbar" className="container flex justify-between center-content p-4 pb-0" data-aos="fade-in" data-aos-duration={500}>   {/*data-aos="fade-down" data-aos-delay="500"*/}
       <div>
         <a href="#">
           <Image src="/assets/images/mr-logo-sm.jpg" alt="Meghan Rabbitt Logo" height={96} width={324}/>
