@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import FlipMove from "react-flip-move";
 import styles from "../../styles/work.module.scss";
 import { IPortfolioItem } from "../../utilities/portfolio-utilties";
@@ -113,7 +113,7 @@ function PortfolioItemCard({item, index}: IPortfolioCard){
     <div className={`hover:bg-gray-100 hover-float`}>
       <a href={item.url} target="_blank" rel="noreferrer">
         <div className="flex flex-col p-4">
-          <Image src={path} alt={item.alt} height={252} width={315} />
+          <img src={path} alt={item.alt} height={252} width={315} />
           <h3 className="mt-2 text-center font-bold text-sky-600">{item.title}</h3>
           <h4 className="mt-2 text-center italic">{item.client}</h4>
         </div>
