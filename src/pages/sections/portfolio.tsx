@@ -15,6 +15,7 @@ const PortfolioSection = ({data}: {data: IPortfolioItem[]}) => {
 
   const allItems = useMemo<IPortfolioItem[]>(() => {
     //data comes from server with hidden filtered out, and ordered by order prop
+    if(!data || data.length === 0) return [];
     const highlighted = data.filter(d => d.isHighlighted);
     if(highlighted.length > NUM_ITEMS){
       return highlighted.slice(0, NUM_ITEMS);
@@ -27,6 +28,7 @@ const PortfolioSection = ({data}: {data: IPortfolioItem[]}) => {
   }, [data]);
 
   const categories = useMemo<string[]>(() => {
+    if(!allItems || allItems.length === 0) return ["All"];
     const cats = allItems.flatMap(i => i.category ?? []).filter(onlyUniqueFilter);
     return ["All", ...cats];
   }, [allItems]);
