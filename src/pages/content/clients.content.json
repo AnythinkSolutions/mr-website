@@ -57,6 +57,12 @@
   },
   {
     "type": "content",
+    "src": "levels-logo.png",
+    "alt": "Levels"
+  },
+  
+  {
+    "type": "content",
     "src": "under-armour-logo.png",
     "alt": "Under Armour",
     "height": 48

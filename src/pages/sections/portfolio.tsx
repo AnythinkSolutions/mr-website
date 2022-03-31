@@ -1,27 +1,36 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import FlipMove from "react-flip-move";
-import portfolio from "../content/portfolio.content.json";
 import styles from "../../styles/work.module.scss";
+import { IPortfolioItem } from "../../utilities/portfolio-utilties";
+import { onlyUniqueFilter } from "../../utilities/string-utilities";
 
-const basePath = "/assets/images/portfolio";
-const categories = ["All", "Health", "Travel", "Content Marketing", "Other" ];
-interface IPortfolioItem {
-  src: string;
-  alt: string;
-  title: string;
-  body?: string;
-  url?: string;
-  client?: string;
-  category?: string[];
-}
+const NUM_ITEMS = 12;
 
-const PortfolioSection = () => {
+const PortfolioSection = ({data}: {data: IPortfolioItem[]}) => {
   let index = 0;
   let index2 = 0;
 
-  const allItems = useMemo<IPortfolioItem[]>(() => portfolio, []);
-  //TODO: make this list dynamic based on the categories in portfolio
+  // console.log("portfolio data: ", data);
+
+  const allItems = useMemo<IPortfolioItem[]>(() => {
+    //data comes from server with hidden filtered out, and ordered by order prop
+    const highlighted = data.filter(d => d.isHighlighted);
+    if(highlighted.length > NUM_ITEMS){
+      return highlighted.slice(0, NUM_ITEMS);
+    }
+    else if(highlighted.length < NUM_ITEMS){
+      const extras = data.filter(d => !d.isHighlighted).slice(0, NUM_ITEMS - highlighted.length);
+      return [...highlighted, ...extras];
+    }
+    return highlighted;
+  }, [data]);
+
+  const categories = useMemo<string[]>(() => {
+    const cats = allItems.flatMap(i => i.category ?? []).filter(onlyUniqueFilter);
+    return ["All", ...cats];
+  }, [allItems]);
+  
   const [category, setCategory] = useState<string>("All");  
   const [items, setItems] = useState<IPortfolioItem[]>(allItems);
 
@@ -74,13 +83,35 @@ interface IPortfolioCard extends Record<string, any>{
   index: number;
 }
 
+const basePath = "/assets/images/portfolio";
+const gdBase = "https://drive.google.com/uc?id=";
+const gdImage = "https://drive.google.com/file/d/{src}/view?usp=sharing"
+
+function getImgSrc(imgUrl: string){
+  if(!imgUrl) return `${basePath}/placeholder-3.jpg`;
+  else if(imgUrl.startsWith("gd/")){
+    return `${imgUrl.replace("gd/", gdBase)}`;    
+  }
+  else if(imgUrl.startsWith("https://drive")){
+    const src = imgUrl.replace("https://drive.google.com/file/d/", gdBase).replace("/view?usp=sharing", "");
+    console.log("drive image: ", src);
+    return src;
+  }
+  else if(imgUrl.length){
+    return `${basePath}/${imgUrl}`;
+  }
+  else return `${basePath}/placeholder-3.jpg`;
+}
+
 function PortfolioItemCard({item, index}: IPortfolioCard){
 
+  const path = useMemo(() => getImgSrc(item.src), [item.src]);
+  
   return (
     <div className={`hover:bg-gray-100 hover-float`}>
       <a href={item.url} target="_blank" rel="noreferrer">
         <div className="flex flex-col p-4">
-          <Image src={`${basePath}/${item.src}`} alt={item.alt} height={252} width={315} />
+          <Image src={path} alt={item.alt} height={252} width={315} />
           <h3 className="mt-2 text-center font-bold text-sky-600">{item.title}</h3>
           <h4 className="mt-2 text-center italic">{item.client}</h4>
         </div>

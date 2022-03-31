@@ -8,13 +8,20 @@ import AOS from "aos";
 import HeaderSection from "./sections/header";
 import ClientsSection from "./sections/clients";
 import PortfolioSection from "./sections/portfolio";
-import RecentSection from "./sections/recent-work";
+
+import { getPortfolioData } from "./api/portfolio-api";
 
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 import styles from '../styles/Home.module.scss'
 
-const Home: NextPage = () => {
+interface IPageProps {
+  portfolioData: any;
+}
+
+const Home: NextPage<IPageProps> = (props) => {
   
+  const { portfolioData } = props;
+
   React.useEffect(() => {
     AOS.init();
   }, []);
@@ -31,7 +38,7 @@ const Home: NextPage = () => {
         <NavBar />
         <HeaderSection />
         <ClientsSection />
-        <PortfolioSection />
+        <PortfolioSection data={portfolioData}/>
       </main>
 
       <footer className={styles.footer}>
@@ -47,3 +54,13 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+export async function getStaticProps() {
+  const sheet = await getPortfolioData();
+  return {
+    props: {
+      portfolioData: sheet.slice(0, sheet.length), // remove sheet header
+    },
+    revalidate: 30, //60*60*4, // In seconds
+  };
+}
