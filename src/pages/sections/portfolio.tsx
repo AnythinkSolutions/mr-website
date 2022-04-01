@@ -94,18 +94,16 @@ function getImgSrc(imgUrl: string){
   else if(imgUrl.startsWith("https://res.cloudinary.com")){
     return imgUrl;
   }
-  else if(imgUrl.startsWith("gd/")){
-    return `${imgUrl.replace("gd/", gdBase)}`;    
-  }
   else if(imgUrl.startsWith("https://drive")){
     const src = imgUrl.replace("https://drive.google.com/file/d/", gdBase).replace("/view?usp=sharing", "");
     console.log("drive image: ", src);
     return src;
   }
-  else if(imgUrl.length){
-    return `${basePath}/${imgUrl}`;
-  }
-  else return `${basePath}/placeholder-3.jpg`;
+  // else if(imgUrl.length){
+  //   return `${basePath}/${imgUrl}`;
+  // }
+  // else return `${basePath}/placeholder-3.jpg`;
+  else return imgUrl; //`${basePath}/placeholder-3.jpg`;
 }
 
 function PortfolioItemCard({item, index}: IPortfolioCard){
@@ -113,10 +111,10 @@ function PortfolioItemCard({item, index}: IPortfolioCard){
   const path = useMemo(() => getImgSrc(item.src), [item.src]);
   
   return (
-    <div className={`hover:bg-gray-100 hover-float`}>
+    <div className="hover:bg-gray-100 hover-float">
       <a href={item.url} target="_blank" rel="noreferrer">
         <div className="flex flex-col p-4">
-          <Image src={path} alt={item.alt} height={252} width={315} />
+          <Image priority={false} src={path} alt={item.alt} height={252} width={315} />
           <h3 className="mt-2 text-center font-bold text-sky-600">{item.title}</h3>
           <h4 className="mt-2 text-center italic">{item.client}</h4>
         </div>
