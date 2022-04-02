@@ -103,3 +103,13 @@ a {
   transform: scale(0.5);
   transition: opacity 300ms ease-out, transform 300ms ease-out;
 }
+
+.blinkingCursor{
+  user-select: none;
+  animation: blink 1s steps(2, start) infinite
+}
+
+@keyframes blink {
+  from {visibility: visible };
+  to {visibility: hidden };
+}

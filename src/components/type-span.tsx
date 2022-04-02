@@ -7,15 +7,20 @@ interface IControlProps {
   speed?: number;
   pauseOnComma?: boolean;
   startDelay?: number;
+  onFinish?: () => void;
+  withCursor?: boolean;
+  cursorDelay?: number;
 }
 
-function TypeSpan({children, initialText, speed, pauseOnComma, startDelay}: IControlProps){
+function TypeSpan({children, initialText, speed, pauseOnComma, startDelay, onFinish, withCursor, cursorDelay}: IControlProps){
   const letterDelay = speed ?? 70;
   const isPausing = pauseOnComma ?? true;
   const [textPart, setTextPart] = useState(initialText ?? "");
   const [isFinished, setIsFinished] = useState(false);
   const [offset, setOffset] = useState(0);
   const [delay, setDelay] = useState(startDelay ?? letterDelay);
+  const [started, setStarted] = useState(false);
+  const [cursorStyle, setCursorStyle] = useState("blinkingCursor");
   
   function checkForPause(){
     if(isPausing){
@@ -30,10 +35,25 @@ function TypeSpan({children, initialText, speed, pauseOnComma, startDelay}: ICon
   }
 
   useInterval(() => {
+    if(!started){
+      setStarted(true);
+      if(withCursor && cursorDelay){
+        setDelay(cursorDelay);  //start with the blinking cursor
+        return;
+      }
+    }
+    else if(withCursor){
+      setCursorStyle(""); //don't blink the cursor while typing
+    }
+
     const nextPart = children.substring(0, offset);
     setTextPart(nextPart);
     checkForPause();
-    if(offset === children.length) setIsFinished(true);
+    if(offset === children.length){
+      setIsFinished(true);
+      setCursorStyle("blinkingCursor");  //start the cursor blinking after we're finished
+      if(onFinish) onFinish();
+    }
     setOffset(offset + 1);
 
   }, isFinished ? null : delay);
@@ -41,6 +61,7 @@ function TypeSpan({children, initialText, speed, pauseOnComma, startDelay}: ICon
   return (
     <div>
       <span>{textPart}</span>
+      {withCursor && started && <span className={cursorStyle}>_</span>}
     </div>
   )
 }
