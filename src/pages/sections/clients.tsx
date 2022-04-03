@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import Image from "next/image";
 import styles from "../../styles/clients.module.scss";
 import clients from "../content/clients.content.json";
@@ -13,15 +13,19 @@ interface IClient {
 
 const basePath = "/assets/images/clients";
 
-function ClientsSection(){
+function ClientsSection({data}: {data: any[]}){
   let index1 = 0;
   let index2 = 0;
+
+  useEffect(() => {
+    console.log("Clients:", data);
+  }, []);
 
   const magazineClients = useMemo<IClient[]>(() => clients.filter(c => c.type === "magazine") as IClient[], []);
   const contentClients = useMemo<IClient[]>(() => clients.filter(c => c.type === "content") as IClient[], []);
 
   return (
-    <div id="clients" className="container flex flex-col mt-8">
+    <div id="clients" className="container flex flex-col my-12">
       <div className="container" data-aos="fade-up" data-aos-delay="250" data-aos-duration="900">
         <div className="container flex items-center mt-4 section-header" >
           <h1>You&apos;ve seen my work in</h1>

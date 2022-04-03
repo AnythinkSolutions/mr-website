@@ -9,7 +9,7 @@ function HeaderSection(){
   return (
     <div id="header" className="container relative p-4 py-0">
       <div className={styles.headerBg} />
-      <div className={`flex`}>
+      <div className="flex">
         <div className="w-2/5" data-aos="fade-in" data-aos-duration={600}>
           <Image priority src="/assets/images/headshot-bw-2x3.jpg" alt="Meghan Rabbitt" height={600} width={400}/>
         </div>

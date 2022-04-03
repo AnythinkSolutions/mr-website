@@ -1,4 +1,4 @@
-export interface IPortfolioItem {
+export interface IArticle {
   isHidden?: boolean;
   isHighlighted?: boolean;
   order?: number;
@@ -11,6 +11,14 @@ export interface IPortfolioItem {
   category?: string[];
 }
 
+export interface IClient {
+  key: string;
+  name: string;
+  isHidden?: boolean;
+  order?: number;
+  logo?: any;
+}
+
 //0. hide	
 //1. highlight	
 //2. order
@@ -21,7 +29,7 @@ export interface IPortfolioItem {
 //7. image alt	
 //8. url	
 //9. image url
-export enum PortfolioColumn {
+enum PortfolioColumn {
   isHidden = 0,
   isHighlighted = 1,
   order = 2,
@@ -31,6 +39,13 @@ export enum PortfolioColumn {
   alt = 7,
   url = 8,
   src = 9
+};
+enum ClientColumn {
+  key = 0,
+  name = 1,
+  order = 2,
+  isHidden = 3,
+  logo = 4
 };
 
 function withDefault<T>(value: any, defaultValue : T) : T {
@@ -43,7 +58,7 @@ function asBool(value: string, defaultValue: boolean) : boolean{
   return BOOL_OPTIONS.includes(value.trim().toLowerCase());
 }
 
-export function mapRowToItem(row: any) : IPortfolioItem {
+export function mapRowToArticle(row: any) : IArticle {
   return {
     isHidden: asBool(row[PortfolioColumn.isHidden], false),
     isHighlighted: asBool(row[PortfolioColumn.isHighlighted], false),
@@ -54,5 +69,15 @@ export function mapRowToItem(row: any) : IPortfolioItem {
     url: row[PortfolioColumn.url] ?? null,
     client: row[PortfolioColumn.client] ?? null,
     category: withDefault(row[PortfolioColumn.category], "").split(","),
+  };
+}
+
+export function mapRowToClient(row: any) : IClient {
+  return {
+    key: row[ClientColumn.key] ?? null,
+    name: row[ClientColumn.name] ?? null,
+    isHidden: asBool(row[ClientColumn.isHidden], false),
+    order: withDefault(row[ClientColumn.order], 999),
+    logo: row[ClientColumn.logo] ?? null,
   };
 }

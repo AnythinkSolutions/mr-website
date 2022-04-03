@@ -7,20 +7,23 @@ import AOS from "aos";
 
 import HeaderSection from "./sections/header";
 import ClientsSection from "./sections/clients";
+import AboutSection from "./sections/about";
 import PortfolioSection from "./sections/portfolio";
 
 import { getPortfolioData } from "./api/portfolio-api";
 
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 import styles from '../styles/Home.module.scss'
+import { getClientData } from "./api/clients-api";
 
 interface IPageProps {
   portfolioData: any;
+  clientData: any;
 }
 
 const Home: NextPage<IPageProps> = (props) => {
   
-  const { portfolioData } = props;
+  const { portfolioData, clientData } = props;
 
   React.useEffect(() => {
     AOS.init();
@@ -37,7 +40,8 @@ const Home: NextPage<IPageProps> = (props) => {
       <main className={styles.main}>
         <NavBar />
         <HeaderSection />
-        <ClientsSection />
+        <ClientsSection data={clientData}/>
+        <AboutSection />
         <PortfolioSection data={portfolioData}/>
       </main>
 
@@ -57,9 +61,12 @@ export default Home
 
 export async function getStaticProps() {
   const sheet = await getPortfolioData();
+  // const clients = await getClientData();
+
   return {
     props: {
-      portfolioData: sheet.slice(0, sheet.length), // remove sheet header
+      portfolioData: sheet, //.slice(0, sheet.length), // remove sheet header
+      clientData: null, //clients,
     },
     revalidate: 30, //60*60*4, // In seconds
   };
