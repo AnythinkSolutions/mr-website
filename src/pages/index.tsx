@@ -42,7 +42,7 @@ const Home: NextPage<IPageProps> = (props) => {
         <HeaderSection />
         <ClientsSection data={clientData}/>
         <AboutSection />
-        <PortfolioSection data={portfolioData}/>
+        <PortfolioSection articles={portfolioData} clients={clientData}/>
       </main>
 
       <footer className={styles.footer}>
@@ -61,12 +61,12 @@ export default Home
 
 export async function getStaticProps() {
   const sheet = await getPortfolioData();
-  // const clients = await getClientData();
+  const clients = await getClientData();
 
   return {
     props: {
       portfolioData: sheet, //.slice(0, sheet.length), // remove sheet header
-      clientData: null, //clients,
+      clientData: clients,
     },
     revalidate: 30, //60*60*4, // In seconds
   };

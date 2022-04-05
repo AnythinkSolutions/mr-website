@@ -8,7 +8,9 @@ export interface IArticle {
   // body?: string;
   url?: string;
   client?: string;
+  clientKey?: string;
   category?: string[];
+  clientObject?: IClient;
 }
 
 export interface IClient {
@@ -16,7 +18,11 @@ export interface IClient {
   name: string;
   isHidden?: boolean;
   order?: number;
-  logo?: any;
+  category?: string;
+  logo?: any;       //url to the logo image
+  height?: number;  //if non-default, provide height
+  width?: number;   //if non-default, provide width
+  url?: string;     //url to the author page for this client
 }
 
 //0. hide	
@@ -34,18 +40,23 @@ enum PortfolioColumn {
   isHighlighted = 1,
   order = 2,
   client = 3,
-  category = 4,
-  title = 5,
-  alt = 7,
-  url = 8,
-  src = 9
+  clientKey = 4,
+  category = 5,
+  title = 6,
+  alt = 8,
+  url = 9,
+  src = 10
 };
 enum ClientColumn {
   key = 0,
   name = 1,
   order = 2,
   isHidden = 3,
-  logo = 4
+  category = 4,
+  logo = 5,
+  height = 6,
+  width = 7,
+  url = 8
 };
 
 function withDefault<T>(value: any, defaultValue : T) : T {
@@ -68,6 +79,7 @@ export function mapRowToArticle(row: any) : IArticle {
     title: row[PortfolioColumn.title] ?? null,
     url: row[PortfolioColumn.url] ?? null,
     client: row[PortfolioColumn.client] ?? null,
+    clientKey: row[PortfolioColumn.clientKey] ?? null,
     category: withDefault(row[PortfolioColumn.category], "").split(","),
   };
 }
@@ -78,6 +90,10 @@ export function mapRowToClient(row: any) : IClient {
     name: row[ClientColumn.name] ?? null,
     isHidden: asBool(row[ClientColumn.isHidden], false),
     order: withDefault(row[ClientColumn.order], 999),
+    category: withDefault(row[ClientColumn.category], "magazine"),
     logo: row[ClientColumn.logo] ?? null,
+    height: withDefault(row[ClientColumn.height], 32), 
+    width: withDefault(row[ClientColumn.width], 108),
+    url: row[ClientColumn.url] ?? null,
   };
 }

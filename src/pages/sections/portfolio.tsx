@@ -2,34 +2,47 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import FlipMove from "react-flip-move";
 import styles from "../../styles/work.module.scss";
-import { IArticle } from "../../utilities/portfolio-utilties";
+import clientStyles from "../../styles/clients.module.scss";
+import { IArticle, IClient } from "../../utilities/portfolio-utilties";
 import { onlyUniqueFilter } from "../../utilities/string-utilities";
+import ClientLogo from "../../components/client-logo";
 
 const NUM_ITEMS = 12;
 
-const PortfolioSection = ({data}: {data: IArticle[]}) => {
+const PortfolioSection = ({articles, clients}: {articles: IArticle[], clients: IClient[]}) => {
   let index = 0;
   let index2 = 0;
 
-  // console.log("portfolio data: ", data);
-
   const allItems = useMemo<IArticle[]>(() => {
     //data comes from server with hidden filtered out, and ordered by order prop
-    if(!data || data.length === 0) return [];
-    const highlighted = data.filter(d => d.isHighlighted);
+    if(!articles || articles.length === 0) return [];
+
+    const highlighted = articles.filter(d => d.isHighlighted);
+    let result: IArticle[] = [];
     if(highlighted.length > NUM_ITEMS){
-      return highlighted.slice(0, NUM_ITEMS);
+      result = highlighted.slice(0, NUM_ITEMS);
     }
     else if(highlighted.length < NUM_ITEMS){
-      const extras = data.filter(d => !d.isHighlighted).slice(0, NUM_ITEMS - highlighted.length);
-      return [...highlighted, ...extras];
+      const extras = articles.filter(d => !d.isHighlighted).slice(0, NUM_ITEMS - highlighted.length);
+      result = [...highlighted, ...extras];
     }
-    return highlighted;
-  }, [data]);
+    result = highlighted;
+
+    result = result.map(article => {
+      if(article.clientKey){
+        const client = clients.find(c => c.key === article.clientKey);
+        if(client) return {...article, clientObject: client } as IArticle;
+      } 
+      return article;
+    });
+
+    return result;
+  }, [articles, clients]); 
 
   const categories = useMemo<string[]>(() => {
     if(!allItems || allItems.length === 0) return ["All"];
     const cats = allItems.flatMap(i => i.category ?? []).filter(onlyUniqueFilter);
+    console.log("categories: ", cats);
     return ["All", ...cats];
   }, [allItems]);
   
@@ -110,9 +123,16 @@ function PortfolioItemCard({item, index}: IPortfolioCard){
     <div className="hover:bg-gray-100 hover-float">
       <a href={item.url} target="_blank" rel="noreferrer">
         <div className="flex flex-col p-4">
-          <Image priority={false} src={path} alt={item.alt} height={252} width={315} />
+          <Image priority={false} src={path} alt={item.alt} height={252} width={315} objectFit="cover" />
           <h3 className="mt-2 text-center font-bold text-sky-600">{item.title}</h3>
-          <h4 className="mt-2 text-center italic">{item.client}</h4>
+          {item.clientObject?.logo && 
+            <div className="flex justify-center mt-1">
+              <ClientLogo index={0} client={item.clientObject} styles={clientStyles} noAnimation={true}/>
+            </div>
+          }
+          {!item.clientObject?.logo && 
+            <h4 className="mt-2 text-center italic">{item.client}</h4>
+          }
         </div>
       </a>
     </div>

@@ -21,3 +21,14 @@
     }
   }
 }
+
+.logoBoxNoAnimate {
+  display: flex;
+  align-items: center;
+  overflow: visible;
+
+  & span {
+    overflow: visible !important;
+  }
+
+}
