@@ -1,5 +1,4 @@
 import { useEffect, useMemo } from "react";
-// import Image from "next/image";
 import styles from "../../styles/clients.module.scss";
 import { IClient } from "../../utilities/portfolio-utilties";
 import ClientLogo from "../../components/client-logo";
@@ -15,8 +14,8 @@ function ClientsSection({data}: {data: IClient[]}){
     console.log("Clients:", data);
   }, []);
 
-  const magazineClients = useMemo<IClient[]>(() => data.filter(c => c.category === "magazine").slice(0, 14) as IClient[], []);
-  const contentClients = useMemo<IClient[]>(() => data.filter(c => c.category === "content").slice(0, 14) as IClient[], []);
+  const magazineClients = useMemo<IClient[]>(() => data?.filter(c => c.category === "magazine").slice(0, 14) as IClient[], [data]);
+  const contentClients = useMemo<IClient[]>(() => data?.filter(c => c.category === "content").slice(0, 14) as IClient[], [data]);
 
   return (
     <div id="clients" className="container flex flex-col my-12">
@@ -26,7 +25,7 @@ function ClientsSection({data}: {data: IClient[]}){
           <span />
         </div>
         <div id="clients" className="container flex flex-wrap p-4 gap-x-6 gap-y-6">
-          {magazineClients.map(client => <ClientLogo key={index1} index={index1++} client={client} styles={styles} />)}
+          {magazineClients?.map(client => <ClientLogo key={index1} index={index1++} client={client} styles={styles} />)}
         </div>
       </div>
       <div className="container" data-aos="fade-up" data-aos-delay="250" data-aos-duration="900">
@@ -35,7 +34,7 @@ function ClientsSection({data}: {data: IClient[]}){
           <h1>And I work with</h1>
         </div>
         <div id="clients" className="container flex p-4 gap-x-6">
-          {contentClients.map(client => <ClientLogo key={index2} index={index2++} client={client} styles={styles}/>)}
+          {contentClients?.map(client => <ClientLogo key={index2} index={index2++} client={client} styles={styles}/>)}
         </div>
       </div>
     </div>    
@@ -43,20 +42,3 @@ function ClientsSection({data}: {data: IClient[]}){
 }
 
 export default ClientsSection;
-
-// function ClientLogo({client, index} : {client: IClient, index: number}){
-
-//   return (
-//     <div className={styles.logoBox} data-aos="fade-in" data-aos-duration="900" data-aos-delay={index * 200}>
-//       {client.url && 
-//         <a href={client.url} target="_blank" rel="noreferrer">
-//           <Image className={styles.clientLogo} src={client.logo} alt={client.name} height={client.height ?? 32} width={client.width ?? 108}/>
-//         </a>
-//       }
-//       {!client.url && 
-//         <Image className={styles.clientLogo} src={client.logo} alt={client.name} height={client.height ?? 32} width={client.width ?? 108}/>
-//       }
-      
-//     </div>
-//   )
-// }
