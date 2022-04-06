@@ -9,21 +9,22 @@ import HeaderSection from "./sections/header";
 import ClientsSection from "./sections/clients";
 import AboutSection from "./sections/about";
 import PortfolioSection from "./sections/portfolio";
-
-import { getPortfolioData } from "./api/portfolio-api";
+import TestimonialsSection from "./sections/testimonials";
+import { getClientData, getPortfolioData, getTestimonialData } from "./api/google-sheet-api";
 
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 import styles from '../styles/Home.module.scss'
-import { getClientData } from "./api/clients-api";
+import { IArticle, IClient, ITestimonial } from "../utilities/api-utilities";
 
 interface IPageProps {
-  portfolioData: any;
-  clientData: any;
+  portfolioData: IArticle[];
+  clientData: IClient[];
+  testimonialData: ITestimonial[]
 }
 
 const Home: NextPage<IPageProps> = (props) => {
   
-  const { portfolioData, clientData } = props;
+  const { portfolioData, clientData, testimonialData } = props;
 
   React.useEffect(() => {
     AOS.init();
@@ -42,6 +43,7 @@ const Home: NextPage<IPageProps> = (props) => {
         <HeaderSection />
         <ClientsSection data={clientData}/>
         <AboutSection />
+        <TestimonialsSection testimonials={testimonialData} clients={clientData}/>
         <PortfolioSection articles={portfolioData} clients={clientData}/>
       </main>
 
@@ -62,11 +64,13 @@ export default Home
 export async function getStaticProps() {
   const sheet = await getPortfolioData();
   const clients = await getClientData();
+  const testimonials = await getTestimonialData();
 
   return {
     props: {
       portfolioData: sheet, //.slice(0, sheet.length), // remove sheet header
       clientData: clients,
+      testimonialData: testimonials,
     },
     revalidate: 30, //60*60*4, // In seconds
   };

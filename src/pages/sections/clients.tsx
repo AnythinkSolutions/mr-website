@@ -1,8 +1,7 @@
 import { useEffect, useMemo } from "react";
 import styles from "../../styles/clients.module.scss";
-import { IClient } from "../../utilities/portfolio-utilties";
+import { IClient } from "../../utilities/api-utilities";
 import ClientLogo from "../../components/client-logo";
-
 
 // const basePath = "/assets/images/clients";
 
@@ -10,15 +9,15 @@ function ClientsSection({data}: {data: IClient[]}){
   let index1 = 0;
   let index2 = 0;
 
-  useEffect(() => {
-    console.log("Clients:", data);
-  }, []);
+  // useEffect(() => {
+  //   console.log("Clients:", data);
+  // }, []);
 
   const magazineClients = useMemo<IClient[]>(() => data?.filter(c => c.category === "magazine").slice(0, 14) as IClient[], [data]);
   const contentClients = useMemo<IClient[]>(() => data?.filter(c => c.category === "content").slice(0, 14) as IClient[], [data]);
 
   return (
-    <div id="clients" className="container flex flex-col my-12">
+    <div id="clients" className="container flex flex-col mt-4 mb-12">
       <div className="container" data-aos="fade-up" data-aos-delay="250" data-aos-duration="900">
         <div className="container flex items-center mt-4 section-header" >
           <h1>You&apos;ve seen my work in</h1>

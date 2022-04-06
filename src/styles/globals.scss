@@ -113,3 +113,46 @@ a {
   from {visibility: visible };
   to {visibility: hidden };
 }
+
+ul.slick-dots {
+  li {
+    & button:before {
+      content: '',
+    }
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    
+    &.slick-active {
+      background-color: rgba(0,0,0,0.8);
+    }
+  }
+}
+
+.slick-slider .slick-list {
+  padding-left: 35px;
+}
+.slick-arrow.slick-prev {
+  left: 0;
+  z-index: 1;
+}
+.slick-arrow.slick-prev:before {
+  // content: '←';
+  color: rgba(0,0,0,0.8);
+  font-size: 35px;
+  // &:hover {
+  //   color: rgba(0,0,0,0.8);
+  // }
+}
+// .slick-arrow.slick-next {
+//   margin-right: 15px;
+// }
+.slick-arrow.slick-next:before {
+  // content: '←';
+  color: rgba(0,0,0,0.8);
+  font-size: 35px;
+  // &:hover {
+  //   color: rgba(0,0,0,0.8);
+  // }
+}

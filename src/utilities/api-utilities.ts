@@ -25,16 +25,19 @@ export interface IClient {
   url?: string;     //url to the author page for this client
 }
 
-//0. hide	
-//1. highlight	
-//2. order
-//3. client	
-//4. category(ies)	
-//5. title	
-//6. image filename	
-//7. image alt	
-//8. url	
-//9. image url
+export interface ITestimonial {
+  name: string;     //person's name
+  title: string;    //title of the person
+  linkedIn?: string;
+  isHidden?: boolean;
+  order?: number;
+  quote: string;
+  client?: string;
+  clientKey?: string;
+  clientObject?: IClient;
+  mapKey?: number;
+}
+
 enum PortfolioColumn {
   isHidden = 0,
   isHighlighted = 1,
@@ -46,7 +49,8 @@ enum PortfolioColumn {
   alt = 8,
   url = 9,
   src = 10
-};
+}
+
 enum ClientColumn {
   key = 0,
   name = 1,
@@ -57,7 +61,18 @@ enum ClientColumn {
   height = 6,
   width = 7,
   url = 8
-};
+}
+
+enum TestimonialColumn {
+  name = 0,
+  title = 1,
+  client = 2,
+  clientKey = 3,
+  quote = 4,
+  linkedIn = 5,
+  order = 6,
+  isHidden = 7,
+}
 
 function withDefault<T>(value: any, defaultValue : T) : T {
   return value && value.length ? value as T : defaultValue;
@@ -95,5 +110,18 @@ export function mapRowToClient(row: any) : IClient {
     height: withDefault(row[ClientColumn.height], 32), 
     width: withDefault(row[ClientColumn.width], 108),
     url: row[ClientColumn.url] ?? null,
+  };
+}
+
+export function mapRowToTestimonial(row: any) : ITestimonial {
+  return {
+    name: row[TestimonialColumn.name] ?? null,
+    title: row[TestimonialColumn.title] ?? null,
+    client: row[TestimonialColumn.client] ?? null,
+    clientKey: row[TestimonialColumn.clientKey] ?? null,
+    quote: row[TestimonialColumn.quote] ?? null,
+    linkedIn: row[TestimonialColumn.linkedIn] ?? null,
+    isHidden: asBool(row[TestimonialColumn.isHidden], false),
+    order: withDefault(row[TestimonialColumn.order], 999),    
   };
 }

@@ -10,7 +10,7 @@ const AboutSection = () => {
 
           <div className="container flex mb-8" data-aos="fade-left" data-aos-duration="900">
             <div className="w-2/3 p-8 flex flex-col">
-              <h1 className="font-bold text-3xl mb-4">Hello</h1>
+              <h1 className="font-bold text-3xl mb-4">Hello!</h1>
               <p className="text-lg">I&apos;m an award-winning journalist who writes for national print magazines and digital outlets, including Women&apos;s Health, Men&apos;s Health, Prevention, Good Housekeeping, Oprah Daily, Harper’s BAAZAR, and more. I&apos;m also an experienced branded content writer, working for companies like Johnson &amp; Johnson, Peloton, Levels Health, Under Armour, and many more.</p>
             </div>
             <div className="w-1/3">
