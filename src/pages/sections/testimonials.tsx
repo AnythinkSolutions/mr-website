@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-// import Image from "next/image";
 import { IClient, ITestimonial } from "../../utilities/api-utilities";
 import Slider from "react-slick";
 import styles from "../../styles/testimonials.module.scss";
@@ -39,8 +38,8 @@ function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonia
   };
 
   return (
-    <div id="testimonials" className="w-full flex" data-aos="fade-up" data-aos-duration="900">
-      <div className="container my-8 p-4 py-0 flex-col items-center">
+    <div id="testimonials" className="w-full" data-aos="fade-up" data-aos-duration="900">
+      <div className="my-8 p-4 py-0 flex-col">
         <div className="container">
           <div className="container flex items-center section-header mb-4">
             <h1>What My Clients Say</h1>
@@ -68,11 +67,11 @@ const Testimonial = ({item}: {item: ITestimonial}) => {
           <div className="basis-3/5">
             <p className={styles.quote}>{item.quote}</p>
           </div>
-          <div className="basis-2/5 flex flex-col">
+          <div className="basis-2/5 flex flex-col pl-12">
             <p className={styles.name}>{item.name}</p>
             <p className={styles.title}>{item.title}</p>
             {item.clientObject?.logo && 
-              <div className="flex mt-1">
+              <div className="flex mt-2">
                 <ClientLogo index={0} client={item.clientObject} styles={clientStyles} noAnimation={true}/>
               </div>
             }

@@ -1,17 +1,11 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import styles from "../../styles/clients.module.scss";
 import { IClient } from "../../utilities/api-utilities";
 import ClientLogo from "../../components/client-logo";
 
-// const basePath = "/assets/images/clients";
-
 function ClientsSection({data}: {data: IClient[]}){
   let index1 = 0;
   let index2 = 0;
-
-  // useEffect(() => {
-  //   console.log("Clients:", data);
-  // }, []);
 
   const magazineClients = useMemo<IClient[]>(() => data?.filter(c => c.category === "magazine").slice(0, 14) as IClient[], [data]);
   const contentClients = useMemo<IClient[]>(() => data?.filter(c => c.category === "content").slice(0, 14) as IClient[], [data]);
