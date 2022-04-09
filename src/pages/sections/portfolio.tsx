@@ -42,7 +42,7 @@ const PortfolioSection = ({articles, clients}: {articles: IArticle[], clients: I
   const categories = useMemo<string[]>(() => {
     if(!allItems || allItems.length === 0) return ["All"];
     const cats = allItems.flatMap(i => i.category ?? []).filter(onlyUniqueFilter);
-    console.log("categories: ", cats);
+    // console.log("categories: ", cats);
     return ["All", ...cats];
   }, [allItems]);
   
@@ -60,7 +60,7 @@ const PortfolioSection = ({articles, clients}: {articles: IArticle[], clients: I
   }, [category, allItems]);
 
   return (
-    <div id="recent-work"  className="bg-slate-50 w-full flex flex-col">
+    <div id="recent-work"  className="flex flex-col">
       <div className="container my-8 p-4 py-0 flex-col items-center">
         <div className="container" data-aos="fade-up" data-aos-duration="900">
           {/* <div className="container flex items-center section-header mb-4">

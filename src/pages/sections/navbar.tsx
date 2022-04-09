@@ -17,10 +17,16 @@ function NavBarSection(){
             <a href="#clients">Clients</a>
           </li>
           <li className="px-2 slide-up-sm">
-            <a href="#work">Work</a>
+            <a href="#about">About</a>
+          </li>
+          <li className="px-2 slide-up-sm">
+            <a href="#testimonials">Testimonials</a>
           </li>
           <li className="px-2 slide-up-sm">
             <a href="#services">Services</a>
+          </li>
+          <li className="px-2 slide-up-sm">
+            <a href="#work">Work</a>
           </li>
           <li className="px-2">
             <div className={styles.vline} />

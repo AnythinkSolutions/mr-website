@@ -15,6 +15,7 @@ import { getClientData, getPortfolioData, getTestimonialData } from "./api/googl
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 import styles from '../styles/Home.module.scss'
 import { IArticle, IClient, ITestimonial } from "../utilities/api-utilities";
+import ServicesSection from "./sections/services";
 
 interface IPageProps {
   portfolioData: IArticle[];
@@ -42,8 +43,15 @@ const Home: NextPage<IPageProps> = (props) => {
         <NavBar />
         <HeaderSection />
         <ClientsSection data={clientData}/>
-        <AboutSection />
-        <TestimonialsSection testimonials={testimonialData} clients={clientData}/>
+        <div className={styles.section_gray}>
+          <AboutSection />
+        </div>
+        <div className={styles.section}>
+          <ServicesSection />
+        </div>
+        <div className={styles.section_gray}>
+          <TestimonialsSection testimonials={testimonialData} clients={clientData}/>
+        </div>
         <PortfolioSection articles={portfolioData} clients={clientData}/>
       </main>
 

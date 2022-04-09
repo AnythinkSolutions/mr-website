@@ -1,0 +1,171 @@
+.flipCard {
+  display: flex;
+  min-height: 270px;
+  min-width: 350px;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-perspective: 1200px;
+  perspective: 1200px;
+  width: 100%;
+  height: 100%;
+
+  &:hover{
+     .innerCard {
+      -webkit-transform: rotate3d(1, 0, 0, 180deg);
+      -moz-transform: rotate3d(1, 0, 0, 180deg);
+      -ms-transform: rotate3d(1, 0, 0, 180deg);
+      -o-transform: rotate3d(1, 0, 0, 180deg);
+      transform: rotate3d(1, 0, 0, 180deg);
+    }
+  }
+
+  // & img {
+  //   border-radius: 5px;
+  // }
+
+}
+
+.innerCard {
+  position: relative;
+  transition-property: box-shadow, -webkit-transform;
+  transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform, -webkit-transform;
+  transition-duration: 0.6s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transform-style: inherit;
+  -moz-transform-style: inherit;
+  -ms-transform-style: inherit;
+  -o-transform-style: inherit;
+  transform-style: inherit;
+  -webkit-perspective: inherit;
+  -moz-perspective: inherit;
+  -ms-perspective: inherit;
+  -o-perspective: inherit;
+  perspective: inherit;
+  height: 100%;
+  width: 100%;
+  margin-bottom: 30px;
+  
+}
+
+.flipContent {
+    -webkit-transform: translate3d(0, 0, 60px) scale(0.85);
+    -moz-transform: translate3d(0, 0, 60px) scale(0.85);
+    -ms-transform: translate3d(0, 0, 60px) scale(0.85);
+    -o-transform: translate3d(0, 0, 60px) scale(0.85);
+    transform: translate3d(0, 0, 60px) scale(0.85);
+}
+
+.cardFront {
+  // border-radius: 5px;
+  background-color: #fff;
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  -webkit-transform-style: inherit;
+  -moz-transform-style: inherit;
+  -ms-transform-style: inherit;
+  -o-transform-style: inherit;
+  transform-style: inherit;
+  -webkit-perspective: inherit;
+  -moz-perspective: inherit;
+  -ms-perspective: inherit;
+  -o-perspective: inherit;
+  perspective: inherit;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+
+  &:before{
+    right: 0;
+    content: "";
+    position: absolute;
+    background: #000;
+    left: 0;
+    height: 100%;
+    opacity: 0.2;
+  }
+
+  .backgroundImage {
+    position: absolute; 
+    z-index: -1; 
+    top: 0;
+    left: 0;  
+  }
+  .titleContainer {
+    background: rgba(0,0,0, 0.4);
+    padding: 4px;
+    border-radius: 5px;
+
+    .title {
+      font-weight: 700;
+      font-size: 2rem;
+      color: white;
+    }
+  }
+}
+
+.cardBack {
+  border-radius: 5px;
+  -webkit-transform: rotateY(-180deg) rotateZ(-180deg);
+     -moz-transform: rotateY(-180deg) rotateZ(-180deg);
+      -ms-transform: rotateY(-180deg) rotateZ(-180deg);
+       -o-transform: rotateY(-180deg) rotateZ(-180deg);
+          transform: rotateY(-180deg) rotateZ(-180deg);
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transform: rotate3d(0, 1, 0, 180deg);
+     -moz-transform: rotate3d(0, 1, 0, 180deg);
+      -ms-transform: rotate3d(0, 1, 0, 180deg);
+       -o-transform: rotate3d(0, 1, 0, 180deg);
+          transform: rotate3d(0, 1, 0, 180deg);
+  z-index: 1;
+  background: #e0f2fe; //rgb(5 150 105); //#fd735a;
+  -webkit-transform-style: inherit;
+  -moz-transform-style: inherit;
+  -ms-transform-style: inherit;
+  -o-transform-style: inherit;
+  transform-style: inherit;
+  -webkit-perspective: inherit;
+  -moz-perspective: inherit;
+  -ms-perspective: inherit;
+  -o-perspective: inherit;
+  perspective: inherit;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  -webkit-transform: rotateY(-180deg) rotateZ(-180deg);
+  -moz-transform: rotateY(-180deg) rotateZ(-180deg);
+  -ms-transform: rotateY(-180deg) rotateZ(-180deg);
+  -o-transform: rotateY(-180deg) rotateZ(-180deg);
+  transform: rotateY(-180deg) rotateZ(-180deg);
+}
+
+.backTitle {
+  color: #075985; //white;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.backDesc {
+  color: #075985; //white;
+  font-size: 16px;
+  font-weight: 400;
+}
+
