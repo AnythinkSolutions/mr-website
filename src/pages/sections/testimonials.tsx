@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { IClient, ITestimonial } from "../../utilities/api-utilities";
+import { IClient, ITestimonial } from "../../utilities/app-types";
 import Slider from "react-slick";
 import styles from "../../styles/testimonials.module.scss";
 import clientStyles from "../../styles/clients.module.scss";

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import styles from "../../styles/clients.module.scss";
-import { IClient } from "../../utilities/api-utilities";
+import { IClient } from "../../utilities/app-types";
 import ClientLogo from "../../components/client-logo";
 
 function ClientsSection({data}: {data: IClient[]}){

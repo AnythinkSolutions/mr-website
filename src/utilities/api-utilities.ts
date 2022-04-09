@@ -1,42 +1,4 @@
-export interface IArticle {
-  isHidden?: boolean;
-  isHighlighted?: boolean;
-  order?: number;
-  src: string;    //the source of the image for the article
-  alt: string;
-  title: string;
-  // body?: string;
-  url?: string;
-  client?: string;
-  clientKey?: string;
-  category?: string[];
-  clientObject?: IClient;
-}
-
-export interface IClient {
-  key: string;
-  name: string;
-  isHidden?: boolean;
-  order?: number;
-  category?: string;
-  logo?: any;       //url to the logo image
-  height?: number;  //if non-default, provide height
-  width?: number;   //if non-default, provide width
-  url?: string;     //url to the author page for this client
-}
-
-export interface ITestimonial {
-  name: string;     //person's name
-  title: string;    //title of the person
-  linkedIn?: string;
-  isHidden?: boolean;
-  order?: number;
-  quote: string;
-  client?: string;
-  clientKey?: string;
-  clientObject?: IClient;
-  mapKey?: number;
-}
+import { IArticle, IClient, IService, ITestimonial } from "./app-types";
 
 enum PortfolioColumn {
   isHidden = 0,
@@ -72,6 +34,14 @@ enum TestimonialColumn {
   linkedIn = 5,
   order = 6,
   isHidden = 7,
+}
+
+enum ServiceColumn {
+  key = 0,
+  title = 1,
+  description = 2,
+  image = 3,
+  isHidden = 4
 }
 
 function withDefault<T>(value: any, defaultValue : T) : T {
@@ -123,5 +93,15 @@ export function mapRowToTestimonial(row: any) : ITestimonial {
     linkedIn: row[TestimonialColumn.linkedIn] ?? null,
     isHidden: asBool(row[TestimonialColumn.isHidden], false),
     order: withDefault(row[TestimonialColumn.order], 999),    
+  };
+}
+
+export function mapRowToService(row: any) : IService {
+  return {
+    key: row[ServiceColumn.key] ?? null,
+    title: row[ServiceColumn.title] ?? null,
+    description: row[ServiceColumn.description] ?? null,
+    image: row[ServiceColumn.image] ?? null,
+    isHidden: asBool(row[ServiceColumn.isHidden], false),
   };
 }

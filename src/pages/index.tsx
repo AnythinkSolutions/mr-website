@@ -10,22 +10,23 @@ import ClientsSection from "./sections/clients";
 import AboutSection from "./sections/about";
 import PortfolioSection from "./sections/portfolio";
 import TestimonialsSection from "./sections/testimonials";
-import { getClientData, getPortfolioData, getTestimonialData } from "./api/google-sheet-api";
+import { getClientData, getPortfolioData, getServiceData, getTestimonialData } from "./api/google-sheet-api";
 
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 import styles from '../styles/Home.module.scss'
-import { IArticle, IClient, ITestimonial } from "../utilities/api-utilities";
+import { IArticle, IClient, IService, ITestimonial } from "../utilities/app-types";
 import ServicesSection from "./sections/services";
 
 interface IPageProps {
   portfolioData: IArticle[];
   clientData: IClient[];
-  testimonialData: ITestimonial[]
+  testimonialData: ITestimonial[],
+  serviceData: IService[],
 }
 
 const Home: NextPage<IPageProps> = (props) => {
   
-  const { portfolioData, clientData, testimonialData } = props;
+  const { portfolioData, clientData, testimonialData, serviceData } = props;
 
   React.useEffect(() => {
     AOS.init();
@@ -47,7 +48,7 @@ const Home: NextPage<IPageProps> = (props) => {
           <AboutSection />
         </div>
         <div className={styles.section}>
-          <ServicesSection />
+          <ServicesSection serviceData={serviceData} />
         </div>
         <div className={styles.section_gray}>
           <TestimonialsSection testimonials={testimonialData} clients={clientData}/>
@@ -73,13 +74,15 @@ export async function getStaticProps() {
   const sheet = await getPortfolioData();
   const clients = await getClientData();
   const testimonials = await getTestimonialData();
+  const services = await getServiceData();
 
   return {
     props: {
-      portfolioData: sheet, //.slice(0, sheet.length), // remove sheet header
+      portfolioData: sheet,
       clientData: clients,
       testimonialData: testimonials,
+      serviceData: services,
     },
-    revalidate: 30, //60*60*4, // In seconds
+    revalidate: 1, //60*60*4, // In seconds
   };
 }

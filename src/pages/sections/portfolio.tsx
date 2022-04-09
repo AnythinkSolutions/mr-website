@@ -3,7 +3,7 @@ import Image from "next/image";
 import FlipMove from "react-flip-move";
 import styles from "../../styles/work.module.scss";
 import clientStyles from "../../styles/clients.module.scss";
-import { IArticle, IClient } from "../../utilities/api-utilities";
+import { IArticle, IClient } from "../../utilities/app-types";
 import { onlyUniqueFilter } from "../../utilities/string-utilities";
 import ClientLogo from "../../components/client-logo";
 

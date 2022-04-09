@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { IClient } from "../utilities/api-utilities";
+import { IClient } from "../utilities/app-types";
 
 
 function ClientLogo({client, index, styles, noAnimation} : {client: IClient, index: number, styles: any, noAnimation?: boolean}){

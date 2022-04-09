@@ -3,7 +3,7 @@ import styles from "./flip-card.module.scss";
 
 export interface IFlipCardProps {
   title: string;
-  description: string;
+  description?: string;
   children: ReactElement;
   backColor: string;
 }
@@ -13,14 +13,12 @@ const FlipCard: React.FC<IFlipCardProps> = ({title, description, backColor, chil
     <div className={`${styles.flipCard}`}>
       <div className={`${styles.innerCard}`}>
         <div className={`${styles.cardFront}`}>
-          {/* <div className={`${styles.flipContent}`}> */}
-            <div className={`${styles.backgroundImage}`}>
-              {children}
-            </div>
-            <div className={`${styles.titleContainer}`}>
-              <h5 className={`${styles.title} `}>{title}</h5>
-            </div>
-          {/* </div> */}
+          <div className={`${styles.backgroundImage}`}>
+            {children}
+          </div>
+          <div className={`${styles.flipContent}`}>
+            <h5 className={`${styles.title} `}>{title}</h5>
+          </div>
         </div>
         <div className={`${styles.cardBack}`}>
           <div className={`${styles.flipContent}`}>
