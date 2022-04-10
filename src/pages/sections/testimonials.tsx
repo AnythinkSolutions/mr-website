@@ -2,8 +2,7 @@ import { useMemo } from "react";
 import { IClient, ITestimonial } from "../../utilities/app-types";
 import Slider from "react-slick";
 import styles from "../../styles/testimonials.module.scss";
-import clientStyles from "../../styles/clients.module.scss";
-import ClientLogo from "../../components/client-logo";
+import ClientLogo from "../../components/client-logo/client-logo";
 
 function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonial[], clients: IClient[]}){
 
@@ -72,7 +71,7 @@ const Testimonial = ({item}: {item: ITestimonial}) => {
             <p className={styles.title}>{item.title}</p>
             {item.clientObject?.logo && 
               <div className="flex mt-2">
-                <ClientLogo index={0} client={item.clientObject} styles={clientStyles} noAnimation={true}/>
+                <ClientLogo index={0} client={item.clientObject} noAnimation={true}/>
               </div>
             }
             {!item.clientObject?.logo && 

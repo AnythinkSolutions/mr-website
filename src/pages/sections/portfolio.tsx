@@ -1,11 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import FlipMove from "react-flip-move";
 import styles from "../../styles/work.module.scss";
-import clientStyles from "../../styles/clients.module.scss";
 import { IArticle, IClient } from "../../utilities/app-types";
 import { onlyUniqueFilter } from "../../utilities/string-utilities";
-import ClientLogo from "../../components/client-logo";
+import FloatCard from "../../components/float-card/float-card";
 
 const NUM_ITEMS = 12;
 
@@ -63,15 +61,11 @@ const PortfolioSection = ({articles, clients}: {articles: IArticle[], clients: I
     <div id="recent-work"  className="flex flex-col">
       <div className="container my-8 p-4 py-0 flex-col items-center">
         <div className="container" data-aos="fade-up" data-aos-duration="900">
-          {/* <div className="container flex items-center section-header mb-4">
+          <div className="container flex items-center section-header mb-4">
             <h1>My Recent Work</h1>
             <span/>
-          </div> */}
-          <div className="container flex items-center mt-4 section-header header-right">
-            <span />
-            <h1>My Recent Work</h1>
           </div>
-
+          
           <div className="container flex justify-center gap-y-4 px-4 py-2">
             {categories.map(cat => (
               <div key={index2++} className={`uppercase slide-up-sm mx-2 ${cat === category ? 'text-sky-500' : ' cursor-pointer hover:text-sky-300'}`} onClick={() => setCategory(cat)}>{cat}</div>
@@ -84,7 +78,7 @@ const PortfolioSection = ({articles, clients}: {articles: IArticle[], clients: I
             {items.map(item => (
               <div key={item.url} className="xl:w-1/4 lg:w-1/3 md:w-1/2 sm:w-1/1">
                 <div data-aos="fade-up" data-aos-duration={900} data-aos-delay={index * 200}>
-                  <PortfolioItemCard index={index++} item={item}/>
+                  <FloatCard index={index++} item={item}/>
                 </div>
               </div>
               )
@@ -97,49 +91,3 @@ const PortfolioSection = ({articles, clients}: {articles: IArticle[], clients: I
 }
 
 export default PortfolioSection;
-
-interface IPortfolioCard extends Record<string, any>{
-  item: IArticle;
-  index: number;
-}
-
-const basePath = "/assets/images";
-const gdBase = "https://drive.google.com/uc?id=";
-// const gdImage = "https://drive.google.com/file/d/{src}/view?usp=sharing"
-
-function getImgSrc(imgUrl: string){
-  if(!imgUrl) return `${basePath}/placeholder-3.jpg`;
-  else if(imgUrl.startsWith("https://res.cloudinary.com")){
-    return imgUrl;
-  }
-  else if(imgUrl.startsWith("https://drive")){
-    const src = imgUrl.replace("https://drive.google.com/file/d/", gdBase).replace("/view?usp=sharing", "");
-    console.log("drive image: ", src);
-    return src;
-  }
-  else return imgUrl;
-}
-
-function PortfolioItemCard({item, index}: IPortfolioCard){
-
-  const path = useMemo(() => getImgSrc(item.src), [item.src]);
-  
-  return (
-    <div className="hover:bg-white hover-float">
-      <a href={item.url} target="_blank" rel="noreferrer">
-        <div className="flex flex-col p-4">
-          <Image priority={false} src={path} alt={item.alt} height={252} width={315} objectFit="cover" />
-          <h3 className="mt-2 text-center font-bold text-sky-600">{item.title}</h3>
-          {item.clientObject?.logo && 
-            <div className="flex justify-center mt-1">
-              <ClientLogo index={0} client={item.clientObject} styles={clientStyles} noAnimation={true}/>
-            </div>
-          }
-          {!item.clientObject?.logo && 
-            <h4 className="mt-2 text-center italic">{item.client}</h4>
-          }
-        </div>
-      </a>
-    </div>
-  );
-}

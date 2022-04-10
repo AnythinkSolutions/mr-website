@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { IClient } from "../utilities/app-types";
+import { IClient } from "../../utilities/app-types";
+import styles from "./client-logo.module.scss";
 
 
-function ClientLogo({client, index, styles, noAnimation} : {client: IClient, index: number, styles: any, noAnimation?: boolean}){
+function ClientLogo({client, index, noAnimation} : {client: IClient, index: number, noAnimation?: boolean}){
   const animation = noAnimation ? null : "fade-in";
   const logoStyle = noAnimation ? styles.logoBoxNoAnimate : styles.logoBox;
 

@@ -21,7 +21,6 @@ export async function getClientData() {
   const clients = await getSheetData(sheetName, mapRowToClient);
 
   const ordered = clients
-    .filter(i => !i.isHidden)
     .sort((a, b) => (a.order ?? 999)  - (b.order ?? 999));
 
   return ordered;
