@@ -21,7 +21,7 @@ const FloatCard: React.FC<IFloatCardProps> = ({item, index}) => {
           <h3 className="mt-2 text-center font-light text-slate-500">{item.title}</h3>
           {item.clientObject?.logo && 
             <div className="flex justify-center mt-1">
-              <LogoImage index={0} {...logoProps} noAnimation={true}/>
+              <LogoImage index={0} {...logoProps} noAnimation={true} size="sm"/>
             </div>
           }
           {!item.clientObject?.logo && 
@@ -36,18 +36,17 @@ const FloatCard: React.FC<IFloatCardProps> = ({item, index}) => {
 export default FloatCard;
 
 const basePath = "/assets/images";
-const gdBase = "https://drive.google.com/uc?id=";
-// const gdImage = "https://drive.google.com/file/d/{src}/view?usp=sharing"
+// const gdBase = "https://drive.google.com/uc?id=";
 
 function getImgSrc(imgUrl: string){
   if(!imgUrl) return `${basePath}/placeholder-3.jpg`;
   else if(imgUrl.startsWith("https://res.cloudinary.com")){
     return imgUrl;
   }
-  else if(imgUrl.startsWith("https://drive")){
-    const src = imgUrl.replace("https://drive.google.com/file/d/", gdBase).replace("/view?usp=sharing", "");
-    console.log("drive image: ", src);
-    return src;
-  }
+  // else if(imgUrl.startsWith("https://drive")){
+  //   const src = imgUrl.replace("https://drive.google.com/file/d/", gdBase).replace("/view?usp=sharing", "");
+  //   console.log("drive image: ", src);
+  //   return src;
+  // }
   else return imgUrl;
 }
