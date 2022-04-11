@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { IArticle } from "../../utilities/app-types";
 import Image from "next/image";
-import ClientLogo from "../client-logo/client-logo";
+import LogoImage, { clientToImageProps } from "../logo-image/logo-image";
 
 interface IFloatCardProps{
   item: IArticle;
@@ -11,16 +11,17 @@ interface IFloatCardProps{
 const FloatCard: React.FC<IFloatCardProps> = ({item, index}) => {
 
   const path = useMemo(() => getImgSrc(item.src), [item.src]);
+  const logoProps = useMemo(() => clientToImageProps(item?.clientObject), [item?.clientObject]);
   
   return (
     <div className="hover:bg-white hover-float">
       <a href={item.url} target="_blank" rel="noreferrer">
         <div className="flex flex-col p-4">
           <Image priority={false} src={path} alt={item.alt} height={252} width={315} objectFit="cover" />
-          <h3 className="mt-2 text-center text-slate-500">{item.title}</h3>
+          <h3 className="mt-2 text-center font-light text-slate-500">{item.title}</h3>
           {item.clientObject?.logo && 
             <div className="flex justify-center mt-1">
-              <ClientLogo index={0} client={item.clientObject} noAnimation={true}/>
+              <LogoImage index={0} {...logoProps} noAnimation={true}/>
             </div>
           }
           {!item.clientObject?.logo && 

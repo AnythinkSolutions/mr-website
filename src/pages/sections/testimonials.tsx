@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { IClient, ITestimonial } from "../../utilities/app-types";
 import Slider from "react-slick";
 import styles from "../../styles/testimonials.module.scss";
-import ClientLogo from "../../components/client-logo/client-logo";
+import LogoImage, { clientToImageProps } from "../../components/logo-image/logo-image";
 
 function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonial[], clients: IClient[]}){
 
@@ -58,6 +58,7 @@ function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonia
 export default TestimonialsSection;
 
 const Testimonial = ({item}: {item: ITestimonial}) => {
+  const logoProps = useMemo(() => clientToImageProps(item?.clientObject), [item?.clientObject]);
 
   return (
     <div className={styles.testimonialCard}>
@@ -71,7 +72,7 @@ const Testimonial = ({item}: {item: ITestimonial}) => {
             <p className={styles.title}>{item.title}</p>
             {item.clientObject?.logo && 
               <div className="flex mt-2">
-                <ClientLogo index={0} client={item.clientObject} noAnimation={true}/>
+                <LogoImage index={0} {...logoProps} noAnimation={true}/>
               </div>
             }
             {!item.clientObject?.logo && 

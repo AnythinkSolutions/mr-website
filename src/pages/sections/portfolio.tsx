@@ -77,9 +77,9 @@ const PortfolioSection = ({articles, clients}: {articles: IArticle[], clients: I
           <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null} >
             {items.map(item => (
               <div key={item.url} className="xl:w-1/4 lg:w-1/3 md:w-1/2 sm:w-1/1">
-                <div data-aos="fade-up" data-aos-duration={900} data-aos-delay={index * 200}>
+                {/* <div data-aos="fade-up" data-aos-duration={900} data-aos-delay={index * 200}> */}
                   <FloatCard index={index++} item={item}/>
-                </div>
+                {/* </div> */}
               </div>
               )
             )}
