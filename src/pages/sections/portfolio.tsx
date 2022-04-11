@@ -40,7 +40,6 @@ const PortfolioSection = ({articles, clients}: {articles: IArticle[], clients: I
   const categories = useMemo<string[]>(() => {
     if(!allItems || allItems.length === 0) return ["All"];
     const cats = allItems.flatMap(i => i.category ?? []).filter(onlyUniqueFilter);
-    // console.log("categories: ", cats);
     return ["All", ...cats];
   }, [allItems]);
   
@@ -73,16 +72,13 @@ const PortfolioSection = ({articles, clients}: {articles: IArticle[], clients: I
           </div>
         </div>
 
-        <div className={`container flex flex-wrap p-4 md:justify-start sm:justify-center ${styles["work-container"]}`} data-aos="fade-up" data-aos-duration={900}>
-          <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null} >
+        <div className={`flex flex-wrap p-4 justify-center ${styles["work-container"]}`} data-aos="fade-up" data-aos-duration={900}>
+          <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
             {items.map(item => (
-              <div key={item.url} className="xl:w-1/4 lg:w-1/3 md:w-1/2 sm:w-1/1">
-                {/* <div data-aos="fade-up" data-aos-duration={900} data-aos-delay={index * 200}> */}
-                  <FloatCard index={index++} item={item}/>
-                {/* </div> */}
+              <div key={item.url}>
+                <FloatCard key={item.url} index={index++} item={item}/>
               </div>
-              )
-            )}
+            ))}
           </FlipMove>
         </div>
       </div>
