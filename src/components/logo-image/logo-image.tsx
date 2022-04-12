@@ -12,8 +12,9 @@ export interface IImageProps {
 }
 export interface ILogoImageProps extends IImageProps {
   index: number;
-  noAnimation?: boolean;
   size?: "sm" | "md" | "lg";    //default to md;
+  hoverAnimation?: boolean;
+  hoverGrayscale?: boolean;
 }
 
 const sizeFactor = {
@@ -22,15 +23,15 @@ const sizeFactor = {
   lg: 1.25
 };
 
-const LogoImage: React.FC<ILogoImageProps> = ({src, height, width, alt, url, index, noAnimation, size}) => {
-  const animation = noAnimation ? null : "fade-in";
-  const logoStyle = noAnimation ? styles.logoBoxNoAnimate : styles.logoBox;
+const LogoImage: React.FC<ILogoImageProps> = ({src, height, width, alt, url, index, hoverAnimation, size, hoverGrayscale}) => {
+  const animation = hoverAnimation ? "fade-in" : null;
 
   const imageHeight = useMemo(() => (height ?? 32) * sizeFactor[size ?? "md"], [height, size]);
   const imageWidth = useMemo(() => (width ?? 108) * sizeFactor[size ?? "md"], [width, size]);
+  const effects = useMemo(() => `${hoverAnimation ? styles.animateHover : ""} ${hoverGrayscale ? styles.grayEffect : ""}`, [hoverAnimation, hoverGrayscale]);
   
   return (
-    <div className={logoStyle} data-aos={animation} data-aos-duration="700" data-aos-delay={index * 200}>
+    <div className={`${styles.logoBox} ${effects}`} data-aos={animation} data-aos-duration="700" data-aos-delay={index * 200}>
       {url && 
         <a href={url} target="_blank" rel="noreferrer">
           <Image className={styles.clientLogo} src={src} alt={alt} height={imageHeight} width={imageWidth}/>
@@ -47,12 +48,12 @@ const LogoImage: React.FC<ILogoImageProps> = ({src, height, width, alt, url, ind
 export default LogoImage;
 
 LogoImage.defaultProps = {
-  noAnimation: false,
   size: "md",
   height: 32,
-  width: 108
+  width: 108,
+  hoverAnimation: false,
+  hoverGrayscale: false,
 };
-
 
 export function clientToImageProps(client?: IClient): IImageProps {
   return {

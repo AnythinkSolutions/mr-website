@@ -28,18 +28,25 @@ a {
 }
 
 .section-header {
-  color: #CBD5E0;
+  color: #334155; //#CBD5E0;
   h1 {
     margin-left: 16px;
     text-transform: uppercase;
     font-size: large;
-    font-weight: 500;  
+    font-weight: 300;  
+    font-family: 'Cinzel', 'Poppins';
   }
   span {
     content: "";
     width: 50px;
     height: 3px;
-    background-color: #CBD5E0; // #7d7789;
+    // background-color: #CBD5E0; // #7d7789;
+    background-image: linear-gradient(to right , #CBD5E0 33%, transparent 98%);
+    background-image: -o-linear-gradient(to right , #CBD5E0 33%, transparent 98%);
+    background-image: -moz-linear-gradient(to right , #CBD5E0 33%, transparent 98%);
+    background-image: -webkit-linear-gradient(to right , #CBD5E0 33%, transparent 98%);
+    background-image: -ms-linear-gradient(to right , #CBD5E0 33%, transparent 98%);
+    background-image: -webkit-gradient( linear, to right bottom, right bottom, color-stop(0.5, gray), color-stop(0.98, white) );
     left: 100%;
     top: 0; //50%;
     margin-left: 8px;
@@ -51,7 +58,55 @@ a {
     }
     span {
       margin-left: 16px;
+      background-image: linear-gradient(to left , #CBD5E0 33%, transparent 98%);
+      background-image: -o-linear-gradient(to left , #CBD5E0 33%, transparent 98%);
+      background-image: -moz-linear-gradient(to left , #CBD5E0 33%, transparent 98%);
+      background-image: -webkit-linear-gradient(to left , #CBD5E0 33%, transparent 98%);
+      background-image: -ms-linear-gradient(to left , #CBD5E0 33%, transparent 98%);
+      background-image: -webkit-gradient( linear, to left bottom, right bottom, color-stop(0.5, gray), color-stop(0.98, white) );
     }
+  }
+  & h2 {
+    color: #334155;
+    font-family: 'Cinzel', 'Poppins';
+    font-size: 35px;
+    z-index: 1;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+  }
+}
+
+.section_head__lg {
+  color: #334155;
+  font-family: 'Cinzel', 'Poppins';
+  font-size: 35px;
+  z-index: 1;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+}
+
+.font-cinzel {
+  font-family: "Cinzel", "Poppins", "San Serif";
+}
+
+.gradient_line {
+  height: 1px;
+  background-color: #E6E6E6;
+  width: 33%;
+  margin: 1rem auto;
+  background-image: linear-gradient(to right , transparent 2%, #CBD5E0 33%, transparent 98%);
+  background-image: -o-linear-gradient(to right , transparent 2%, #CBD5E0 33%, transparent 98%);
+  background-image: -moz-linear-gradient(to right , transparent 2%, #CBD5E0 33%, transparent 98%);
+  background-image: -webkit-linear-gradient(to right , transparent 2%, #CBD5E0 33%, transparent 98%);
+  background-image: -ms-linear-gradient(to right , transparent 2%, #CBD5E0 33%, transparent 98%);
+  background-image: -webkit-gradient( linear, to right bottom, right bottom, color-stop(0.02, white), color-stop(0.5, gray), color-stop(0.98, white) );
+
+  &.lg {
+    width: 50%;
   }
 }
 

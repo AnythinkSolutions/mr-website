@@ -15,9 +15,9 @@ function HeaderSection(){
         </div>
         <div className="w-3/5 p-8 flex flex-col justify-center">
           <h1 className="text-5xl mb-6 font-semibold" data-aos="fade-down" data-aos-duration={500}>Meghan Rabbitt</h1>
-          <span className={styles.line} data-aos="fade-in" data-aos-delay={500} data-aos-duration={500}/>
+          <span className={styles.line} data-aos="fade-in" data-aos-delay={350} data-aos-duration={500}/>
           <div className={`text-2xl ${styles.typespanContainer}`}>
-            <TypeSpan startDelay={1250} speed={40} withCursor cursorDelay={1250} onFinish={() => setFinished(true)}>Writer, Editor, Content Strategist</TypeSpan>
+            <TypeSpan startDelay={750} speed={40} withCursor cursorDelay={1250} onFinish={() => setFinished(true)}>Writer, Editor, Content Strategist</TypeSpan>
           </div>
           {isFinished && 
             <div className={styles.contactLink} data-aos="fade-in" data-aos-duration={1000}>

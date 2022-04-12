@@ -10,9 +10,10 @@ interface IControlProps {
   onFinish?: () => void;
   withCursor?: boolean;
   cursorDelay?: number;
+  textStyle?: string;
 }
 
-function TypeSpan({children, initialText, speed, pauseOnComma, startDelay, onFinish, withCursor, cursorDelay}: IControlProps){
+function TypeSpan({children, initialText, speed, pauseOnComma, startDelay, onFinish, withCursor, cursorDelay, textStyle}: IControlProps){
   const letterDelay = speed ?? 70;
   const isPausing = pauseOnComma ?? true;
   const [textPart, setTextPart] = useState(initialText ?? "");
@@ -60,7 +61,7 @@ function TypeSpan({children, initialText, speed, pauseOnComma, startDelay, onFin
 
   return (
     <div>
-      <span>{textPart}</span>
+      <span className={textStyle}>{textPart}</span>
       {withCursor && started && <span className={cursorStyle}>_</span>}
     </div>
   )

@@ -1,13 +1,22 @@
 .hoverFloat {
-  max-width: 350px;
-  min-height: 390px;
-  width: 350px;
-  // height: 390px;
   border-radius: 3px;
   transition: all 0.33s ease-in-out !important;
   
   &:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,0.25);
     transform: translate(0, -2.5px);
+  }
+
+  &.sm {
+    min-height: 280px;
+    width: 260px;
+  }
+  &.md {
+    min-height: 350px;
+    width: 300px;
+  }
+  &.lg {
+    min-height: 390px;
+    width: 350px;
   }
 }

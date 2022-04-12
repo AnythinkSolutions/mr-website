@@ -7,22 +7,23 @@ import styles from "./float-card.module.scss";
 interface IFloatCardProps{
   item: IArticle;
   index: number;
+  size?: "sm" | "md" | "lg";
 }
 
 const FloatCard: React.FC<IFloatCardProps> = forwardRef((props, ref: Ref<HTMLDivElement>) => {
-  const {item} = props;
+  const {item, size} = props;
   const path = useMemo(() => getImgSrc(item.src), [item.src]);
   const logoProps = useMemo(() => clientToImageProps(item?.clientObject), [item?.clientObject]);
 
   return (
-    <div className={`bg-slate-50 border border-slate-200 hover:bg-white mx-4 my-4 pb-2 ${styles.hoverFloat}`} ref={ref}>
+    <div className={`bg-slate-50 border border-slate-200 hover:bg-white mx-2 my-4 pb-2 ${styles.hoverFloat} ${styles[size ?? "md"]}`} ref={ref}>
       <a href={item.url} target="_blank" rel="noreferrer">
         <div className="flex flex-col">
           <Image priority={false} src={path} alt={item.alt} height={300} width={348} objectFit="cover" />
           <h3 className="py-2 px-4 text-center font-light text-slate-800">{item.title}</h3>
           {item.clientObject?.logo && 
             <div className="flex justify-center mt-1">
-              <LogoImage index={0} {...logoProps} noAnimation={true} size="sm"/>
+              <LogoImage index={0} {...logoProps} size="sm"/>
             </div>
           }
           {!item.clientObject?.logo && 
@@ -34,8 +35,12 @@ const FloatCard: React.FC<IFloatCardProps> = forwardRef((props, ref: Ref<HTMLDiv
   );
 });
 
-FloatCard.displayName = "FloatCard";
 export default FloatCard;
+
+FloatCard.displayName = "FloatCard";
+FloatCard.defaultProps = {
+  size: "md",
+};
 
 const basePath = "/assets/images";
 

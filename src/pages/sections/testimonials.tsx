@@ -40,10 +40,11 @@ function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonia
     <div id="testimonials" className="w-full" data-aos="fade-up" data-aos-duration="900">
       <div className="my-8 p-4 py-0 flex-col">
         <div className="container">
-          <div className="container flex items-center section-header mb-4">
-            <h1>What My Clients Say</h1>
-            <span/>
+          <div className="flex flex-col items-center justify-center my-4 ml-4 section-header">
+            <h2>What my clients say</h2>
+            <div className="gradient_line lg" />
           </div>
+
         </div>
         <div className={styles.sliderContainer}>
           <Slider {...settings}>
@@ -72,7 +73,7 @@ const Testimonial = ({item}: {item: ITestimonial}) => {
             <p className={styles.title}>{item.title}</p>
             {item.clientObject?.logo && 
               <div className="flex mt-2">
-                <LogoImage index={0} {...logoProps} noAnimation={true}/>
+                <LogoImage index={0} {...logoProps}/>
               </div>
             }
             {!item.clientObject?.logo && 

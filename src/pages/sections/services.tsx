@@ -18,23 +18,21 @@ const ServicesSection: React.FC<IServicesProps> = ({serviceData}) => {
   }, [serviceData]);
 
   return (
-    <div id="services" className="flex flex-col w-full">
-      {/* <div className="container my-4 px-4"> */}
-        <div className="container flex items-center mt-4 ml-4 section-header header">
-          <h1>Services</h1>
-          <span />
-        </div>
+    <div id="services" className="flex flex-col w-full" data-aos="fade-up" data-aos-duration={900}>
+      <div className="flex flex-col items-center justify-center my-4 ml-4 section-header">
+        <h2>Services</h2>
+        <div className="gradient_line" />
+      </div>
 
-        <div className="flex flex-row flex-wrap gap-8 mt-6 justify-center">
-          {services.map(svc => (
-            <div key={svc.key}>
-              <FlipCard title={svc.title} description={svc.description} backColor="sky-200">
-                <Image src={svc.image} alt={svc.title} height={imgHeight} width={imgWidth} objectFit="cover"/>
-              </FlipCard>  
-              </div>
-            ))}
-        </div>
-      {/* </div> */}
+      <div className="flex flex-row flex-wrap gap-8 mt-6 justify-center">
+        {services.map(svc => (
+          <div key={svc.key}>
+            <FlipCard title={svc.title} description={svc.description} backColor="sky-200">
+              <Image src={svc.image} alt={svc.title} height={imgHeight} width={imgWidth} objectFit="cover"/>
+            </FlipCard>  
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

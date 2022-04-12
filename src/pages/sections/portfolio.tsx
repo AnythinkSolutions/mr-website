@@ -5,7 +5,7 @@ import { IArticle, IClient } from "../../utilities/app-types";
 import { onlyUniqueFilter } from "../../utilities/string-utilities";
 import FloatCard from "../../components/float-card/float-card";
 
-const NUM_ITEMS = 12;
+const NUM_ITEMS = 6;
 
 const PortfolioSection = ({articles, clients}: {articles: IArticle[], clients: IClient[]}) => {
   let index = 0;
@@ -57,13 +57,14 @@ const PortfolioSection = ({articles, clients}: {articles: IArticle[], clients: I
   }, [category, allItems]);
 
   return (
-    <div id="recent-work"  className="flex flex-col">
+    <div id="work"  className="flex flex-col">
       <div className="container my-8 p-4 py-0 flex-col items-center">
         <div className="container" data-aos="fade-up" data-aos-duration="900">
-          <div className="container flex items-center section-header mb-4">
-            <h1>My Recent Work</h1>
-            <span/>
+          <div className="flex flex-col items-center justify-center my-4 ml-4 section-header">
+            <h2>Recent Highlights</h2>
+            <div className="gradient_line lg" />
           </div>
+
           
           <div className="container flex justify-center gap-y-4 px-4 py-2">
             {categories.map(cat => (
