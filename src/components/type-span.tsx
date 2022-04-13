@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useInterval from "../utilities/app-hooks";
+import { useInterval } from "../utilities/app-hooks";
 
 interface IControlProps {
   children: string;
