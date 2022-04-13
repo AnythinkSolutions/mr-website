@@ -65,7 +65,7 @@ const Testimonial = ({item}: {item: ITestimonial}) => {
     <div className={styles.testimonialCard}>
       <div className={styles.innerCard}>
         <div className="flex flex-row gap-x-8">
-          <div className="basis-3/5">
+          <div className={`basis-3/5 ${styles.quoteDiv}`}>
             <p className={styles.quote}>{item.quote}</p>
           </div>
           <div className="basis-2/5 flex flex-col pl-12">

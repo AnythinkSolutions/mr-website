@@ -2,7 +2,7 @@ import React from "react";
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import NavBar from "./sections/navbar";
+import NavBar from "../components/navbar/navbar";
 import AOS from "aos";
 
 import HeaderSection from "./sections/header";
@@ -44,16 +44,18 @@ const Home: NextPage<IPageProps> = (props) => {
         <NavBar />
         <HeaderSection />
         <ClientsSection data={clientData}/>
-        <div className={styles.section_gray}>
+        {/* <div className={styles.section_gray}>
           <AboutSection />
+        </div> */}
+        <div className={styles.section_gray}>
+          <ServicesSection serviceData={serviceData} />
         </div>
         <div className={styles.section}>
-          <ServicesSection serviceData={serviceData} />
+          <PortfolioSection articles={portfolioData} clients={clientData}/>
         </div>
         <div className={styles.section_gray}>
           <TestimonialsSection testimonials={testimonialData} clients={clientData}/>
         </div>
-        <PortfolioSection articles={portfolioData} clients={clientData}/>
       </main>
 
       <footer className={styles.footer}>

@@ -31,7 +31,7 @@ const LogoImage: React.FC<ILogoImageProps> = ({src, height, width, alt, url, ind
   const effects = useMemo(() => `${hoverAnimation ? styles.animateHover : ""} ${hoverGrayscale ? styles.grayEffect : ""}`, [hoverAnimation, hoverGrayscale]);
   
   return (
-    <div className={`${styles.logoBox} ${effects}`} data-aos={animation} data-aos-duration="700" data-aos-delay={index * 200}>
+    <div className={`${styles.logoBox} ${effects}`} data-aos={animation} data-aos-duration="700" data-aos-delay={index * 150}>
       {url && 
         <a href={url} target="_blank" rel="noreferrer">
           <Image className={styles.clientLogo} src={src} alt={alt} height={imageHeight} width={imageWidth}/>

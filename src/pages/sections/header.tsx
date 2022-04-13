@@ -7,7 +7,7 @@ function HeaderSection(){
   const [isFinished, setFinished] = useState(false);
   
   return (
-    <div id="header" className="container relative p-4 py-0">
+    <div id="header" className={`container relative p-4 py-0 ${styles.header}`}>
       <div className={styles.headerBg} />
       <div className="flex">
         <div className="w-2/5" data-aos="fade-in" data-aos-duration={600}>

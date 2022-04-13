@@ -18,17 +18,27 @@ const FloatCard: React.FC<IFloatCardProps> = forwardRef((props, ref: Ref<HTMLDiv
   return (
     <div className={`bg-slate-50 border border-slate-200 hover:bg-white mx-2 my-4 pb-2 ${styles.hoverFloat} ${styles[size ?? "md"]}`} ref={ref}>
       <a href={item.url} target="_blank" rel="noreferrer">
-        <div className="flex flex-col">
-          <Image priority={false} src={path} alt={item.alt} height={300} width={348} objectFit="cover" />
-          <h3 className="py-2 px-4 text-center font-light text-slate-800">{item.title}</h3>
-          {item.clientObject?.logo && 
-            <div className="flex justify-center mt-1">
-              <LogoImage index={0} {...logoProps} size="sm"/>
+        <div className="flex flex-col h-full">
+          <div className="flex">
+            <Image priority={false} src={path} alt={item.alt} height={300} width={348} objectFit="cover" />
+          </div>
+
+          <div className="flex flex-col h-full items-center justify-between">
+            <div className="flex">
+              <h3 className="py-2 px-4 text-center font-light text-slate-800">{item.title}</h3>
             </div>
-          }
-          {!item.clientObject?.logo && 
-            <h4 className="mt-2 text-center italic">{item.client}</h4>
-          }
+            
+            {item.clientObject?.logo && 
+              <div className="flex mt-1">
+                <LogoImage index={0} {...logoProps} size="sm"/>
+              </div>
+            }
+            {!item.clientObject?.logo && 
+              <div className="flex mt-1">
+                <h4 className="mt-2 text-center italic">{item.client}</h4>
+              </div>
+            }
+          </div>
         </div>
       </a>
     </div>

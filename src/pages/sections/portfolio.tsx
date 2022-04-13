@@ -6,7 +6,7 @@ import { onlyUniqueFilter } from "../../utilities/string-utilities";
 import FloatCard from "../../components/float-card/float-card";
 import { useWindowSize } from "../../utilities/app-hooks";
 
-const WIDESCREEN = 1535;
+const WIDESCREEN = 1375;
 
 export interface IPortfolioProps {
   articles: IArticle[];
@@ -20,12 +20,11 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
   const { width } = useWindowSize();
   const [itemCount, setItemCount] = useState( width > 1280 ? 12 : 9);
 
-  const allItems = useMemo<IArticle[]>(() => {
-    //data comes from server with hidden filtered out, and ordered by order prop
-    if(!articles || articles.length === 0) return [];
-    const highlighted = articles.filter(d => d.isHighlighted);
+  const itemsWithClient = useMemo<IArticle[]>(() => {
+    if(!articles || !clients) return [];
 
-    const result = highlighted.map(article => {
+    //data comes from server with hidden filtered out, and ordered by order prop
+    const result = articles.map(article => {
       if(article.clientKey){
         const client = clients.find(c => c.key === article.clientKey);
         if(client) return {...article, clientObject: client } as IArticle;
@@ -34,32 +33,29 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
     });
 
     return result;
-  }, [articles, clients]); 
+  }, [articles, clients]);
+
+  const highlights = useMemo<IArticle[]>(() => {
+    if(!itemsWithClient || itemsWithClient.length === 0) return [];
+    const result = itemsWithClient.filter(d => d.isHighlighted);
+    return result;
+  }, [itemsWithClient]); 
 
   const categories = useMemo<string[]>(() => {
-    if(!allItems || allItems.length === 0) return ["All"];
-    const cats = allItems.flatMap(i => i.category ?? []).filter(onlyUniqueFilter);
+    if(!highlights || highlights.length === 0) return ["All"];
+    const cats = highlights.flatMap(i => i.category ?? []).filter(onlyUniqueFilter);
     return ["All", ...cats];
-  }, [allItems]);
+  }, [highlights]);
   
-  useEffect(() => {
-    if(width < WIDESCREEN && itemCount !== 9){
-      setItemCount(9);
-    }
-    else if(width >= WIDESCREEN && itemCount !== 12){
-      setItemCount(12);
-    }
-  }, [width, itemCount]);
-
   const displayedItems = useMemo<IArticle[]>(() => {
     let result: IArticle[] = [];
-    const candidates = category === "All" ? allItems : allItems.filter(i => i.category?.includes(category));
+    const candidates = category === "All" ? highlights : highlights.filter(i => i.category?.includes(category));
 
     if(candidates && candidates.length > itemCount){
       result = candidates.slice(0, itemCount);
     }
-    else if(candidates && candidates.length < itemCount && articles){
-      const extras = articles
+    else if(candidates && candidates.length < itemCount && itemsWithClient){
+      const extras = itemsWithClient
         .filter(d => !d.isHighlighted)
         .filter(i => i.category?.includes(category))
         .slice(0, itemCount - candidates.length);
@@ -69,33 +65,46 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
     else result = candidates;
 
     return result;
-  }, [articles, allItems, category, itemCount]);
+  }, [itemsWithClient, highlights, category, itemCount]);
+
+  //== This effect changes the # of items based on the width of the window
+  // to try to keep 3 rows of items for med and lg width.
+  useEffect(() => {
+    if(width < WIDESCREEN && itemCount !== 9){
+      setItemCount(9);
+    }
+    else if(width >= WIDESCREEN && itemCount !== 12){
+      setItemCount(12);
+    }
+  }, [width, itemCount]);
 
   return (
     <div id="work"  className="flex flex-col">
-      <div className="container my-8 p-4 py-0 flex-col items-center">
-        <div className="container" data-aos="fade-up" data-aos-duration="900">
+      <div className="flex flex-col items-center my-8 p-4 py-0" data-aos="fade-up" data-aos-duration={900}>        
+
           <div className="flex flex-col items-center justify-center my-4 ml-4 section-header">
             <h2>Recent Highlights</h2>
             <div className="gradient_line lg" />
           </div>
           
-          <div className="container flex justify-center gap-y-4 px-4 py-2">
-            {categories.map(cat => (
-              <div key={index2++} className={`uppercase slide-up-sm mx-2 ${cat === category ? 'text-sky-500' : ' cursor-pointer hover:text-sky-300'}`} onClick={() => setCategory(cat)}>{cat}</div>
-            ))}
+          <div className="flex flex-col">
+            <div className="flex justify-center gap-y-4 px-4 py-2">
+              {categories.map(cat => (
+                <div key={index2++} className={`uppercase slide-up-sm mx-2 ${cat === category ? 'text-sky-500' : ' cursor-pointer hover:text-sky-300'}`} onClick={() => setCategory(cat)}>{cat}</div>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className={`flex flex-wrap p-4 justify-center ${styles["work-container"]}`} data-aos="fade-up" data-aos-duration={900}>
-          <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
-            {displayedItems.map(item => (
-              <div key={item.url}>
-                <FloatCard key={item.url} index={index++} item={item}/>
-              </div>
-            ))}
-          </FlipMove>
-        </div>
+          <div className={`flex flex-wrap p-4 justify-center ${styles["work-container"]}`}>
+            <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
+              {displayedItems.map(item => (
+                <div key={item.url}>
+                  <FloatCard key={item.url} index={index++} item={item}/>
+                </div>
+              ))}
+            </FlipMove>
+          </div>
+
       </div>
     </div>
   );
