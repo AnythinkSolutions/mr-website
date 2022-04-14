@@ -6,28 +6,18 @@
   & span {
     overflow: visible !important;
   }
-
-  // & img {
-  //   transition: all 0.33s ease;
-  // }   
-
-  // &:hover {
-  //   & img {
-  //     transform: translate(0, -0.3em);
-  //   }
-  // }
 }
 
 .grayEffect {
   & img {
-    opacity: 0.6;
+    // opacity: 0.6;
     filter: grayscale(1);
   }   
 
   &:hover {
     & img {
       filter: unset;
-      opacity: 1;
+      // opacity: 1;
     }
   }
 }

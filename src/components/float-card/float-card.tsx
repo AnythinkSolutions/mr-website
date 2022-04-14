@@ -24,7 +24,7 @@ const FloatCard: React.FC<IFloatCardProps> = forwardRef((props, ref: Ref<HTMLDiv
           </div>
 
           <div className="flex flex-col h-full items-center justify-between">
-            <div className="flex">
+            <div className={`flex ${styles.titleDiv}`}>
               <h3 className="py-2 px-4 text-center font-light text-slate-800">{item.title}</h3>
             </div>
             
