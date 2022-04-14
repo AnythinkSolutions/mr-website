@@ -20,7 +20,7 @@ function HeaderSection(){
             <TypeSpan startDelay={750} speed={40} withCursor cursorDelay={1250} onFinish={() => setFinished(true)}>Writer, Editor, Content Strategist</TypeSpan>
           </div>
           {isFinished && 
-            <div className={styles.contactLink} data-aos="fade-in" data-aos-duration={1000}>
+            <div className={`${styles.contactLink} ${isFinished ? styles.ready: ""}`}>
               <div className="relative slide-up-sm">
                 <a href="#contact">Contact Me</a>
               </div>
