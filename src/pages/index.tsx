@@ -7,7 +7,7 @@ import AOS from "aos";
 
 import HeaderSection from "./sections/header";
 import ClientsSection from "./sections/clients";
-import AboutSection from "./sections/about";
+// import AboutSection from "./sections/about";
 import PortfolioSection from "./sections/portfolio";
 import TestimonialsSection from "./sections/testimonials";
 import { getClientData, getPortfolioData, getServiceData, getTestimonialData } from "./api/google-sheet-api";
@@ -43,14 +43,20 @@ const Home: NextPage<IPageProps> = (props) => {
       <main className={styles.main}>
         <NavBar />
         <HeaderSection />
-        <ClientsSection data={clientData}/>
-        <div className={styles.section_gray}>
+        <div className={`${styles.section}`}>
+          <div id="clients" className="scroll-anchor" />
+          <ClientsSection data={clientData}/>
+        </div>
+        <div className={`${styles.section_gray}`}>
+          <div id="services" className="scroll-anchor" />
           <ServicesSection serviceData={serviceData} />
         </div>
-        <div className={styles.section}>
+        <div className={`${styles.section}`}>
+          <div id="work" className="scroll-anchor" />
           <PortfolioSection articles={portfolioData} clients={clientData}/>
         </div>
-        <div className={styles.section_gray}>
+        <div className={`${styles.section_gray}`}>
+          <div id="testimonials" className="scroll-anchor" />
           <TestimonialsSection testimonials={testimonialData} clients={clientData}/>
         </div>
       </main>
