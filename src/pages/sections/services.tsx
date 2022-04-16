@@ -18,7 +18,7 @@ const ServicesSection: React.FC<IServicesProps> = ({serviceData}) => {
   }, [serviceData]);
 
   return (
-    <div id="services" className="flex flex-col w-full">
+    <div className="flex flex-col w-full">
       <div className="flex flex-col items-center my-8 p-4 py-0" data-aos="fade-up" data-aos-duration={900}>
 
           <div className="flex flex-col items-center justify-center my-4 ml-4 section-header">

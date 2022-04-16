@@ -37,7 +37,7 @@ function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonia
   };
 
   return (
-    <div id="testimonials" className="w-full" data-aos="fade-up" data-aos-duration="900">
+    <div className="w-full" data-aos="fade-up" data-aos-duration="900">
       <div className="my-8 p-4 py-0 flex-col">
         <div className="container">
           <div className="flex flex-col items-center justify-center my-4 ml-4 section-header">
