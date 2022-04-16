@@ -62,7 +62,7 @@ function TypeSpan({children, initialText, speed, pauseOnComma, startDelay, onFin
   return (
     <div>
       <span className={textStyle}>{textPart}</span>
-      {withCursor && started && <span className={cursorStyle}>_</span>}
+      {withCursor && started && <span className={cursorStyle}>|</span>}
     </div>
   )
 }
