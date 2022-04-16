@@ -44,9 +44,6 @@ const Home: NextPage<IPageProps> = (props) => {
         <NavBar />
         <HeaderSection />
         <ClientsSection data={clientData}/>
-        {/* <div className={styles.section_gray}>
-          <AboutSection />
-        </div> */}
         <div className={styles.section_gray}>
           <ServicesSection serviceData={serviceData} />
         </div>

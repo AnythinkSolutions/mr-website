@@ -8,7 +8,7 @@ body {
   margin: 0;
   /* font-family: -apple-system, BlinkMacSystemFont, Poppins, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Josefin Sans', 'Poppins', sans-serif;
   scroll-behavior: smooth;
 }
 
@@ -35,7 +35,7 @@ a {
     text-transform: uppercase;
     font-size: large;
     font-weight: 300;  
-    font-family: 'Cinzel', 'Poppins';
+    font-family: 'Josefin Sans', 'Cinzel', 'Poppins';
   }
   span {
     content: "";
@@ -69,7 +69,7 @@ a {
   }
   & h2 {
     color: #334155;
-    font-family: 'Cinzel', 'Poppins';
+    font-family: 'Josefin Sans', 'Cinzel', 'Poppins';
     font-size: 35px;
     z-index: 1;
     text-transform: uppercase;
@@ -81,7 +81,7 @@ a {
 
 .section_head__lg {
   color: #334155;
-  font-family: 'Cinzel', 'Poppins';
+  font-family: 'Josefin Sans', 'Cinzel', 'Poppins';
   font-size: 35px;
   z-index: 1;
   text-transform: uppercase;
@@ -91,7 +91,7 @@ a {
 }
 
 .font-cinzel {
-  font-family: "Cinzel", "Poppins", "San Serif";
+  font-family: 'Josefin Sans', "Cinzel", "Poppins", "San Serif";
 }
 
 .gradient_line {
@@ -112,6 +112,7 @@ a {
 }
 
 .blinkingCursor{
+  font-weight: 300;
   user-select: none;
   animation: blink 1s steps(2, start) infinite
 }
