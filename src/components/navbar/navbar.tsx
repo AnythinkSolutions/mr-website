@@ -66,7 +66,7 @@ const NavBar : React.FC<INavBarProps> = () => {
             <li className="px-3 slide-up-sm">
               <Link href={`${paths.about}`}>About Me</Link>
             </li>
-            <li className="px-3 full-h hidden md:flex">
+            <li className="px-3 h-full hidden md:flex">
               <div className={styles.vline} />
             </li>
             <li className="px-2 slide-up-sm hidden md:flex shrink-0">
