@@ -5,6 +5,7 @@ import { IArticle, IClient } from "../../utilities/app-types";
 import { onlyUniqueFilter } from "../../utilities/string-utilities";
 import FloatCard from "../../components/float-card/float-card";
 import { useWindowSize } from "../../utilities/app-hooks";
+import EntryMotion from "../../components/entry-motion/entry-motion";
 
 const WIDESCREEN = 1375;
 
@@ -80,32 +81,36 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col items-center my-8 p-4 py-0" data-aos="fade-up" data-aos-duration={900}>        
+      <EntryMotion threshold={0} duration={0.75} hidden={{opacity: 0, translateY: 50}}>
+        <div className="flex flex-col items-center my-8 p-4 py-0">        
 
-          <div className="flex flex-col items-center justify-center my-4 ml-4 section-header">
-            <h2>Recent Highlights</h2>
-            <div className="gradient_line lg" />
-          </div>
-          
-          <div className="flex flex-col">
-            <div className="flex justify-center gap-y-4 px-4 py-2">
-              {categories.map(cat => (
-                <div key={index2++} className={`uppercase slide-up-sm mx-2 ${cat === category ? 'text-sky-500' : ' cursor-pointer hover:text-sky-300'}`} onClick={() => setCategory(cat)}>{cat}</div>
-              ))}
+            <div className="flex flex-col items-center justify-center my-4 ml-4 section-header">
+              <h2>Recent Highlights</h2>
+              <div className="gradient_line lg" />
             </div>
-          </div>
+            
+            <div className="flex flex-col">
+              <div className="flex justify-center gap-y-4 px-4 py-2">
+                {categories.map(cat => (
+                  <div key={index2++} className={`uppercase slide-up-sm mx-2 ${cat === category ? 'text-sky-500' : ' cursor-pointer hover:text-sky-300'}`} onClick={() => setCategory(cat)}>{cat}</div>
+                ))}
+              </div>
+            </div>
 
-          <div className={`flex flex-wrap p-4 justify-center ${styles["work-container"]}`}>
-            <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
-              {displayedItems.map(item => (
-                <div key={item.url}>
-                  <FloatCard key={item.url} index={index++} item={item}/>
-                </div>
-              ))}
-            </FlipMove>
-          </div>
+            <div className={`flex flex-wrap p-4 justify-center ${styles["work-container"]}`}>
+              <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
+                {displayedItems.map((item, index) => (
+                  <div key={item.url}>
+                    <EntryMotion delay={index * 0.1} threshold={0}>
+                      <FloatCard key={item.url} index={index++} item={item}/>
+                    </EntryMotion>
+                  </div>
+                ))}
+              </FlipMove>
+            </div>
 
-      </div>
+        </div>
+      </EntryMotion>
     </div>
   );
 }

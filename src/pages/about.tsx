@@ -4,7 +4,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import NavBar from "../components/navbar/navbar";
 import AboutSection from "./sections/about";
-import AOS from "aos";
 
 import styles from '../styles/Home.module.scss'
 
@@ -13,10 +12,6 @@ interface IPageProps {
 
 const AboutPage: NextPage<IPageProps> = (props) => {
   
-  React.useEffect(() => {
-    AOS.init();
-  }, []);
-
   return (
     <div id="about-page" className={styles.container}>
 

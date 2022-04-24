@@ -1,40 +1,47 @@
 import { useMemo } from "react";
 import { IClient } from "../../utilities/app-types";
 import LogoImage, { clientToImageProps, IImageProps } from "../../components/logo-image/logo-image";
+import EntryMotion from "../../components/entry-motion/entry-motion";
 
 function ClientsSection({data}: {data: IClient[]}){
-  let index1 = 0;
-  let index2 = 0;
-
   const magazineClients = useMemo<IImageProps[]>(() => data?.filter(c => !c.isHidden && c.category === "magazine").slice(0, 14).map(c => clientToImageProps(c)) as IImageProps[], [data]);
   const contentClients = useMemo<IImageProps[]>(() => data?.filter(c => !c.isHidden && c.category === "content").slice(0, 14).map(c => clientToImageProps(c)) as IImageProps[], [data]);
   
   return (
     <div className="flex flex-col w-full">
-      <div className="flex flex-col items-center my-8 p-4 py-0">
+      <EntryMotion>
+        <div className="flex flex-col items-center my-8 p-4 py-0">
 
-        <div className="" data-aos="fade-up" data-aos-delay="250" data-aos-duration="900">
-          <div className=" flex items-center mt-4 section-header" >
-            <h1 className="cinzel">You&apos;ve seen my work in</h1>
-            <span />
+          <div>
+            <div className=" flex items-center mt-4 section-header" >
+              <h1 className="cinzel">You&apos;ve seen my work in</h1>
+              <span />
+            </div>
+            <div className="flex flex-wrap p-4 gap-x-6 gap-y-6">
+              {magazineClients?.map((client, index) => 
+                <EntryMotion key={index} delay={index * 0.1}>
+                  <LogoImage {...client} hoverAnimation={true}/>
+                </EntryMotion>
+              )}
+            </div>
           </div>
-          <div className="flex flex-wrap p-4 gap-x-6 gap-y-6">
-            {magazineClients?.map(client => <LogoImage key={index1} index={index1++} {...client} hoverAnimation={true}/>)}
+
+          <div>
+            <div className=" flex items-center mt-4 section-header header-right">
+              <span />
+              <h1 className="cinzel">And I work with</h1>
+            </div>
+            <div className="flex flex-wrap p-4 gap-x-6 gap-y-6">
+              {contentClients?.map((client, index) => 
+                  <EntryMotion key={index} delay={index * 0.1}>
+                    <LogoImage {...client} hoverAnimation={true}/>
+                  </EntryMotion>
+                )}
+            </div>
           </div>
+
         </div>
-
-        <div className="" data-aos="fade-up" data-aos-delay="250" data-aos-duration="900">
-          <div className=" flex items-center mt-4 section-header header-right">
-            <span />
-            <h1 className="cinzel">And I work with</h1>
-          </div>
-          <div className=" flex p-4 gap-x-6">
-            {contentClients?.map(client => <LogoImage key={index2} index={index2++} {...client} hoverAnimation={true}/>)}
-          </div>
-        </div>
-
-      </div>
-      
+      </EntryMotion>  
     </div>    
   );
 }

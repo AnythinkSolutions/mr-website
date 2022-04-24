@@ -3,16 +3,13 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import NavBar from "../components/navbar/navbar";
-import AOS from "aos";
 
 import HeaderSection from "./sections/header";
 import ClientsSection from "./sections/clients";
-// import AboutSection from "./sections/about";
 import PortfolioSection from "./sections/portfolio";
 import TestimonialsSection from "./sections/testimonials";
 import { getClientData, getPortfolioData, getServiceData, getTestimonialData } from "./api/google-sheet-api";
 
-import 'aos/dist/aos.css'; // You can also use <link> for styles
 import styles from '../styles/Home.module.scss'
 import { IArticle, IClient, IService, ITestimonial } from "../utilities/app-types";
 import ServicesSection from "./sections/services";
@@ -27,10 +24,6 @@ interface IPageProps {
 const Home: NextPage<IPageProps> = (props) => {
   
   const { portfolioData, clientData, testimonialData, serviceData } = props;
-
-  React.useEffect(() => {
-    AOS.init();
-  }, []);
 
   return (
     <div className={styles.container}>

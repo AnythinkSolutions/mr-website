@@ -11,7 +11,6 @@ export interface IImageProps {
   url?: string;
 }
 export interface ILogoImageProps extends IImageProps {
-  index: number;
   size?: "sm" | "md" | "lg";    //default to md;
   hoverAnimation?: boolean;
   hoverGrayscale?: boolean;
@@ -23,7 +22,7 @@ const sizeFactor = {
   lg: 1.25
 };
 
-const LogoImage: React.FC<ILogoImageProps> = ({src, height, width, alt, url, index, hoverAnimation, size, hoverGrayscale}) => {
+const LogoImage: React.FC<ILogoImageProps> = ({src, height, width, alt, url, hoverAnimation, size, hoverGrayscale}) => {
   const animation = hoverAnimation ? "fade-in" : null;
 
   const imageHeight = useMemo(() => (height ?? 32) * sizeFactor[size ?? "md"], [height, size]);
@@ -31,7 +30,7 @@ const LogoImage: React.FC<ILogoImageProps> = ({src, height, width, alt, url, ind
   const effects = useMemo(() => `${hoverAnimation ? styles.animateHover : ""} ${hoverGrayscale ? styles.grayEffect : ""}`, [hoverAnimation, hoverGrayscale]);
   
   return (
-    <div className={`${styles.logoBox} ${effects}`} data-aos={animation} data-aos-duration="700" data-aos-delay={index * 150}>
+    <div className={`${styles.logoBox} ${effects}`}>
       {url && 
         <a href={url} target="_blank" rel="noreferrer">
           <Image className={styles.clientLogo} src={src} alt={alt} height={imageHeight} width={imageWidth}/>

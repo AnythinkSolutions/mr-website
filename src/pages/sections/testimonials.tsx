@@ -3,6 +3,7 @@ import { IClient, ITestimonial } from "../../utilities/app-types";
 import Slider from "react-slick";
 import styles from "../../styles/testimonials.module.scss";
 import LogoImage, { clientToImageProps } from "../../components/logo-image/logo-image";
+import EntryMotion from "../../components/entry-motion/entry-motion";
 
 function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonial[], clients: IClient[]}){
 
@@ -37,21 +38,23 @@ function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonia
   };
 
   return (
-    <div className="w-full" data-aos="fade-up" data-aos-duration="900">
-      <div className="my-8 p-4 py-0 flex-col">
-        <div className="container">
-          <div className="flex flex-col items-center justify-center my-4 ml-4 section-header">
-            <h2>What my clients say</h2>
-            <div className="gradient_line lg" />
-          </div>
+    <div className="w-full">
+      <EntryMotion duration={0.9}>
+        <div className="my-8 p-4 py-0 flex-col">
+          <div className="container">
+            <div className="flex flex-col items-center justify-center my-4 ml-4 section-header">
+              <h2>What my clients say</h2>
+              <div className="gradient_line lg" />
+            </div>
 
+          </div>
+          <div className={styles.sliderContainer}>
+            <Slider {...settings}>
+              {items?.map(item => <Testimonial key={item.mapKey} item={item} />)}
+            </Slider>
+          </div>
         </div>
-        <div className={styles.sliderContainer}>
-          <Slider {...settings}>
-            {items?.map(item => <Testimonial key={item.mapKey} item={item} />)}
-          </Slider>
-        </div>
-      </div>
+      </EntryMotion>
     </div>
   )
 };
@@ -73,7 +76,7 @@ const Testimonial = ({item}: {item: ITestimonial}) => {
             <p className={styles.title}>{item.title}</p>
             {item.clientObject?.logo && 
               <div className="flex mt-2">
-                <LogoImage index={0} {...logoProps}/>
+                <LogoImage {...logoProps}/>
               </div>
             }
             {!item.clientObject?.logo && 
