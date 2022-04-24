@@ -30,7 +30,7 @@ const FloatCard: React.FC<IFloatCardProps> = forwardRef((props, ref: Ref<HTMLDiv
             
             {item.clientObject?.logo && 
               <div className="flex mt-1">
-                <LogoImage index={0} {...logoProps} size="sm"/>
+                <LogoImage {...logoProps} size="sm"/>
               </div>
             }
             {!item.clientObject?.logo && 
