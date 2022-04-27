@@ -4,12 +4,13 @@ import TypeSpan from "../../components/type-span";
 import styles from "../../styles/header.module.scss";
 import EntryMotion, { fadeInProps, fadeDown } from "../../components/entry-motion/entry-motion";
 
+const VISIBLE_POSITION = -50;
+
 function HeaderSection(){
   const [isFinished, setFinished] = useState(false);
-  
+
   return (
     <div id="header" className={`w-full relative p-0 md:px-6 ${styles.header}`}>
-      {/* <div className={styles.headerBg} /> */}
       <div className="flex">
         <EntryMotion {...fadeInProps}>
           <Image priority src="/assets/images/headshot-bw-2x3.jpg" alt="Meghan Rabbitt" height={600} width={400} objectFit="cover"/>
