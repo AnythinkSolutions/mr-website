@@ -4,8 +4,6 @@ import TypeSpan from "../../components/type-span";
 import styles from "../../styles/header.module.scss";
 import EntryMotion, { fadeInProps, fadeDown } from "../../components/entry-motion/entry-motion";
 
-const VISIBLE_POSITION = -50;
-
 function HeaderSection(){
   const [isFinished, setFinished] = useState(false);
 

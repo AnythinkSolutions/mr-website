@@ -41,13 +41,13 @@ function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonia
     <div className="w-full">
       <EntryMotion duration={0.9}>
         <div className="my-8 p-4 py-0 flex-col">
-          <div className="container">
+          {/* <div className="container"> */}
             <div className="flex flex-col items-center justify-center my-4 ml-4 section-header">
               <h2>What my clients say</h2>
               <div className="gradient_line lg" />
             </div>
 
-          </div>
+          {/* </div> */}
           <div className={styles.sliderContainer}>
             <Slider {...settings}>
               {items?.map(item => <Testimonial key={item.mapKey} item={item} />)}
@@ -88,28 +88,3 @@ const Testimonial = ({item}: {item: ITestimonial}) => {
     </div>
   );
 }
-
-// function BackArrow(props:any) {
-//   const { className, style, onClick } = props;
-//   return (
-//     <div
-//       className={className}
-//       style={{ ...style, display: "block" }}
-//       onClick={onClick}
-//     >
-//       <Image src="/assets/images/arrow-back.png" height={48} width={48} alt="Previous Arrow"/>
-//     </div>
-//   );
-// }
-// function ForwardArrow(props:any) {
-//   const { className, style, onClick } = props;
-//   return (
-//     <div
-//       className={className}
-//       style={{ ...style, display: "block"}}
-//       onClick={onClick}
-//     >
-//       <Image src="/assets/images/arrow-forward.png" height={48} width={48} alt="Next Arrow"/>
-//     </div>
-//   );
-// }

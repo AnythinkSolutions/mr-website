@@ -6,6 +6,7 @@ import { onlyUniqueFilter } from "../../utilities/string-utilities";
 import FloatCard from "../../components/float-card/float-card";
 import { useWindowSize } from "../../utilities/app-hooks";
 import EntryMotion from "../../components/entry-motion/entry-motion";
+import { useInView } from "react-intersection-observer";
 
 const WIDESCREEN = 1375;
 
@@ -15,8 +16,7 @@ export interface IPortfolioProps {
 }
 
 const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
-  let index = 0;
-  let index2 = 0;
+  const [ref, inView] = useInView({triggerOnce: true, threshold: 0.33});
   const [category, setCategory] = useState<string>("All");  
   const { width } = useWindowSize();
   const [itemCount, setItemCount] = useState( width > 1280 ? 12 : 9);
@@ -82,17 +82,17 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
   return (
     <div className="flex flex-col">
       <EntryMotion threshold={0} duration={0.75} hidden={{opacity: 0, translateY: 50}}>
-        <div className="flex flex-col items-center my-8 p-4 py-0">        
+        <div className="flex flex-col items-center my-8 p-4 py-0" ref={ref}>        
 
-            <div className="flex flex-col items-center justify-center my-4 ml-4 section-header">
+            <div className="w-full flex flex-col items-center justify-center my-4 ml-4 section-header">
               <h2>Recent Highlights</h2>
               <div className="gradient_line lg" />
             </div>
             
             <div className="flex flex-col">
               <div className="flex justify-center gap-y-4 px-4 py-2">
-                {categories.map(cat => (
-                  <div key={index2++} className={`uppercase slide-up-sm mx-2 ${cat === category ? 'text-sky-500' : ' cursor-pointer hover:text-sky-300'}`} onClick={() => setCategory(cat)}>{cat}</div>
+                {categories.map((cat, idx) => (
+                  <div key={idx} className={`uppercase slide-up-sm mx-2 ${cat === category ? 'text-sky-500' : ' cursor-pointer hover:text-sky-300'}`} onClick={() => setCategory(cat)}>{cat}</div>
                 ))}
               </div>
             </div>
@@ -101,7 +101,7 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
               <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
                 {displayedItems.map((item, index) => (
                   <div key={item.url}>
-                    <EntryMotion delay={index * 0.1} threshold={0}>
+                    <EntryMotion delay={index * 0.1} threshold={0} immediate={inView}>
                       <FloatCard key={item.url} index={index++} item={item}/>
                     </EntryMotion>
                   </div>

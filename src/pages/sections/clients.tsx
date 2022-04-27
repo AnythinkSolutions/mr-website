@@ -3,6 +3,7 @@ import { IClient } from "../../utilities/app-types";
 import LogoImage, { clientToImageProps, IImageProps } from "../../components/logo-image/logo-image";
 import EntryMotion from "../../components/entry-motion/entry-motion";
 import { useInView } from "react-intersection-observer";
+import styles from "../../styles/clients.module.scss";
 
 function ClientsSection({data}: {data: IClient[]}){
   const [ref, inView] = useInView({triggerOnce: true, threshold: 0.25});
@@ -22,9 +23,11 @@ function ClientsSection({data}: {data: IClient[]}){
             </div>
             <div className="flex flex-wrap p-4 gap-x-6 gap-y-6">
               {magazineClients?.map((client, index) => 
-                <EntryMotion key={index} delay={index * 0.1} immediate={inView}>
-                  <LogoImage {...client} hoverAnimation={true}/>
-                </EntryMotion>
+                // <div key={index} className={styles.clientDiv}>
+                  <EntryMotion key={index} delay={index * 0.1} immediate={inView}>
+                    <LogoImage {...client} hoverAnimation={true}/>
+                  </EntryMotion>
+                // </div>
               )}
             </div>
           </div>

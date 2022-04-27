@@ -4,15 +4,16 @@ import Head from 'next/head'
 import Image from 'next/image'
 import NavBar from "../components/navbar/navbar";
 
+import { IArticle, IClient, IService, ITestimonial } from "../utilities/app-types";
 import HeaderSection from "./sections/header";
 import ClientsSection from "./sections/clients";
 import PortfolioSection from "./sections/portfolio";
 import TestimonialsSection from "./sections/testimonials";
+import ServicesSection from "./sections/services";
+import ContactSection from "./sections/contact";
 import { getClientData, getPortfolioData, getServiceData, getTestimonialData } from "./api/google-sheet-api";
 
 import styles from '../styles/Home.module.scss'
-import { IArticle, IClient, IService, ITestimonial } from "../utilities/app-types";
-import ServicesSection from "./sections/services";
 
 interface IPageProps {
   portfolioData: IArticle[];
@@ -51,6 +52,10 @@ const Home: NextPage<IPageProps> = (props) => {
         <div className={`${styles.section_gray}`}>
           <div id="testimonials" className="scroll-anchor" />
           <TestimonialsSection testimonials={testimonialData} clients={clientData}/>
+        </div>
+        <div className={`${styles.section}`}>
+          <div id="contact" className="scroll-anchor" />
+          <ContactSection />
         </div>
       </main>
 

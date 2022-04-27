@@ -46,13 +46,17 @@ const NavBar : React.FC<INavBarProps> = () => {
           <div className="navbar-inner w-full flex justify-between center-content p-4 pb-0">
           
             <div className={`${styles.logo} hidden sm:flex`}>
-              <Link href="/" passHref>
-                <Image className="" src="/assets/images/mr-logo.png" alt="Meghan Rabbitt Logo" height={72} width={243}/>
+              <Link href="/">
+                <a>
+                  <Image className="" src="/assets/images/mr-logo.png" alt="Meghan Rabbitt Logo" height={72} width={243}/>
+                </a>
               </Link>
             </div>
             <div className={`${styles.logo} flex sm:hidden`}>
-              <Link href="/" passHref>
-                <Image className="flex sm:hidden" src="/assets/images/mr-logo.png" alt="Meghan Rabbitt Logo" height={48} width={162}/>
+              <Link href="/">
+                <a>
+                  <Image className="flex sm:hidden" src="/assets/images/mr-logo.png" alt="Meghan Rabbitt Logo" height={48} width={162}/>
+                </a>
               </Link>
             </div>
             <div className="hidden sm:flex flex-col justify-center ">

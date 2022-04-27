@@ -23,7 +23,7 @@ const ServicesSection: React.FC<IServicesProps> = ({serviceData}) => {
       <EntryMotion duration={0.9}>
         <div className="flex flex-col items-center my-8 p-4 py-0">
 
-            <div className="flex flex-col items-center justify-center my-4 ml-4 section-header">
+            <div className="w-full flex flex-col items-center justify-center my-4 ml-4 section-header">
               <h2>Services</h2>
               <div className="gradient_line" />
             </div>
