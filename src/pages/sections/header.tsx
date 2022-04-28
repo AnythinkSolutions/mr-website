@@ -21,7 +21,7 @@ function HeaderSection(){
             <span className={`${styles.line} mb-2 sm:mb-4`}/>
           </EntryMotion>
           <div className={`text-base sm:text-2xl ${styles.typespanContainer}`}>
-            <TypeSpan startDelay={500} speed={40} withCursor cursorDelay={1250} onFinish={() => setFinished(true)}>Writer, Editor, Content Strategist</TypeSpan>
+            <TypeSpan startDelay={750} speed={40} withCursor cursorDelay={1250} onFinish={() => setFinished(true)}>Writer, Editor, Content Strategist</TypeSpan>
           </div>
           {isFinished && 
             <div className={`${styles.contactLink} ${isFinished ? styles.ready: ""}`}>

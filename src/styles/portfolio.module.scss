@@ -1,0 +1,33 @@
+.fullSizeImage {
+  span {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.headerContainer {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  > div {
+    min-height: 185px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .headerContainer {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+.typeFilter {
+
+}
+
+.typeFilterItem {
+  width: 150px;
+  cursor: pointer;
+}

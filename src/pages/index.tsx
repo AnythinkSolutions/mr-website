@@ -1,16 +1,17 @@
 import React from "react";
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
+// import Image from 'next/image'
 import NavBar from "../components/navbar/navbar";
 
 import { IArticle, IClient, IService, ITestimonial } from "../utilities/app-types";
 import HeaderSection from "./sections/header";
 import ClientsSection from "./sections/clients";
-import PortfolioSection from "./sections/portfolio";
+import PortfolioSection from "./sections/portfolio-section";
 import TestimonialsSection from "./sections/testimonials";
 import ServicesSection from "./sections/services";
 import ContactSection from "./sections/contact";
+import Footer from "../components/footer/footer";
 import { getClientData, getPortfolioData, getServiceData, getTestimonialData } from "./api/google-sheet-api";
 
 import styles from '../styles/Home.module.scss'
@@ -59,14 +60,7 @@ const Home: NextPage<IPageProps> = (props) => {
         </div>
       </main>
 
-      <footer className={styles.footer}>
-        <div className="container flex center-items">
-          <a href="https://www.anythinksolutions.com" target="_blank" rel="noopener noreferrer">
-            Created by{' '}
-            <Image src="/assets/images/logos/anythink.svg" alt="Anythink Solutions Logo" width={216} height={48} />            
-          </a>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

@@ -7,6 +7,7 @@ import FloatCard from "../../components/float-card/float-card";
 import { useWindowSize } from "../../utilities/app-hooks";
 import EntryMotion from "../../components/entry-motion/entry-motion";
 import { useInView } from "react-intersection-observer";
+import Link from "next/link";
 
 const WIDESCREEN = 1375;
 
@@ -109,6 +110,18 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
               </FlipMove>
             </div>
 
+            <Link href="/portfolio">
+              <a className="text-xl font-light mb-4 text-sky-400 mt-4">
+                <span>
+                  See all my work
+                  <svg className="ml-1 inline align-top" height="24px" width="24px" fill="#38bdf8">
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                  </svg>
+                </span>
+                {/* <Image src="/assets/images/arrow-forward.svg" height={24} width={24} alt="arrow forward"/>  */}
+              </a>
+            </Link>
         </div>
       </EntryMotion>
     </div>

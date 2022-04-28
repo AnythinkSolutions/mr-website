@@ -6,10 +6,10 @@ interface IControlProps {
   initialText?: string;
   speed?: number;
   pauseOnComma?: boolean;
-  startDelay?: number;
+  startDelay?: number;    //how long to wait before starting
   onFinish?: () => void;
   withCursor?: boolean;
-  cursorDelay?: number;
+  cursorDelay?: number;   //how long the cursor should blink before starting
   textStyle?: string;
 }
 

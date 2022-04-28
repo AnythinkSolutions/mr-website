@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./navbar.module.scss"
@@ -15,6 +15,7 @@ const NavBar : React.FC<INavBarProps> = () => {
   const [paths, setPaths] = useState({home: '', about: '/about'});
   const { asPath } = useRouter();
   const [isSticky, setSticky] = useState(false);
+  const isHome = useMemo(() => ["/about", "/portfolio"].indexOf(asPath) < 0, [asPath]);
 
   useScrollPosition(
     ({ currPos }) => {
@@ -31,7 +32,12 @@ const NavBar : React.FC<INavBarProps> = () => {
         setPaths({home: "/", about: "#"});
         break;
 
+      case "/portfolio":
+        setPaths({home: "/", about: "/about"});
+        break;
+  
       case "/":
+      default:
         setPaths({home: "", about: "/about"});
         break;
     }
@@ -61,8 +67,13 @@ const NavBar : React.FC<INavBarProps> = () => {
             </div>
             <div className="hidden sm:flex flex-col justify-center ">
               <ul className="inline-flex items-center">
+                {!isHome && 
+                  <li className="px-3 slide-up-sm">
+                    <Link scroll={true} href={`/`}><a>Home</a></Link>
+                  </li>
+                }
                 <li className="px-3 slide-up-sm">
-                  <Link scroll={true} href={`${paths.home}#clients`}>Clients</Link>
+                  <Link scroll={true} href={`${paths.home}#clients`}><a>Clients</a></Link>
                 </li>
                 <li className="px-3 slide-up-sm">
                   <Link scroll={true} href={`${paths.home}#services`}><a>Services</a></Link>
@@ -71,10 +82,13 @@ const NavBar : React.FC<INavBarProps> = () => {
                   <Link scroll={true} href={`${paths.home}#work`}><a>Work</a></Link>
                 </li>
                 <li className="px-3 slide-up-sm">
-                  <Link scroll={true} href={`${paths.home}#testimonials`}>Testimonials</Link>
+                  <Link scroll={true} href={`${paths.home}#testimonials`}><a>Testimonials</a></Link>
                 </li>
                 <li className="px-3 slide-up-sm">
-                  <Link href={`${paths.about}`}>About Me</Link>
+                  <Link href={`${paths.about}`}><a>About Me</a></Link>
+                </li>
+                <li className="px-3 slide-up-sm">
+                  <Link scroll={true} href={`${paths.home}#contact`}><a>Contact Me</a></Link>
                 </li>
                 <li className="px-3 h-full hidden md:flex">
                   <div className={styles.vline} />
