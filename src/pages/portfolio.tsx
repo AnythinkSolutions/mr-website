@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -11,13 +11,24 @@ import EntryMotion from "../components/entry-motion/entry-motion";
 import FloatCard from "../components/float-card/float-card";
 
 import styles from "../styles/portfolio.module.scss";
+import FilterBar, { ITabItem } from "../components/filter-bar/filter-bar";
+import { onlyUniqueFilter } from "../utilities/string-utilities";
 
 export interface IPortfolioProps {
   portfolioData: IArticle[];
   clientData: IClient[];
- }
+}
+
+const filters : ITabItem[] = [
+  {id: "cat", label: "By Category" },
+  {id: "cli", label: "By Client" },
+];
 
 const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
+  const [filter, setFilter] = useState(0);
+
+  const [category, setCategory] = useState<string>("All");  
+  
 
   const writings = useMemo<IArticle[]>(() => {
     if(!portfolioData || !clientData) return [];
@@ -33,6 +44,24 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
 
     return result;
   }, [portfolioData, clientData]);
+
+  
+  const categories = useMemo<string[]>(() => {
+    if(!writings || writings.length === 0) return ["All"];
+    const cats = writings.flatMap(i => i.category ?? []).filter(onlyUniqueFilter);
+    return ["All", ...cats];
+  }, [writings]);
+
+  
+  const displayedItems = useMemo<IArticle[]>(() => {
+    let result: IArticle[] = [];
+    result = category === "All" ? writings : writings.filter(i => i.category?.includes(category));
+    return result;
+  }, [writings, category]);
+
+  const onFilterChange = (item: ITabItem, index: number) => {
+    setFilter(index);
+  }
 
   return (
     <div id="portfolio-page">
@@ -55,7 +84,7 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
 
           <div className={`relative container -mt-20 lg:-mt-30 ${styles.headerContainer}`}>
             <div className="relative bg-white p-8 rounded-[40px] shadow-2xl flex flex-col items-center">
-              <h1 className="text-4xl mb-4">Health Writing</h1>
+              <h1 className="text-4xl mb-4">Journalism</h1>
               <p className="text-lg font-light">
                 Health writing is like a box of chocolates. You never know what you&apos;re going to get. But you keep eating because your mouth wants more, even when your belly tries to tell you that you need to stop.
               </p>              
@@ -64,19 +93,18 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
 
         </div> 
 
-        {/* The filter bar with 'by category' or 'by client' (maybe a search?) */}
-        {/* And then a category / client list to do the flip-move stuff */}
-        {/* And maybe a search and sort */}
-        <div className="mt-8">
-          <div className={`flex gap-4 py-2 px-8 relative bg-slate-100 shadow-inner ${styles.typeFilter}`}>
-            <div className={`${styles.typeFilterItem} text-center py-2 px-4 rounded-[8px] bg-white`}>By Category</div>
-            <div className={`${styles.typeFilterItem} text-center py-2 px-4 rounded-[8px] bg-white`}>By Client</div>
+        <div className="mt-8 flex flex-col items-center ">
+          <FilterBar items={filters} onChange={onFilterChange} selectedIndex={filter}/>
+          <div className="flex justify-center gap-y-4 px-4 py-2">
+            {categories.map((cat, idx) => (
+              <div key={idx} className={`uppercase slide-up-sm mx-2 ${cat === category ? 'text-sky-500' : ' cursor-pointer hover:text-sky-300'}`} onClick={() => setCategory(cat)}>{cat}</div>
+            ))}
           </div>
         </div>
 
         <div className={`flex flex-wrap p-4 justify-center ${styles["work-container"]}`}>
           <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
-            {writings.map((item, index) => (
+            {displayedItems.map((item, index) => (
               <div key={item.url}>
                 <EntryMotion delay={index * 0.1} threshold={0} immediate={true}>
                   <FloatCard key={item.url} index={index++} item={item}/>

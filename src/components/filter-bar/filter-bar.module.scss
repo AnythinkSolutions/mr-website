@@ -1,0 +1,24 @@
+
+.typeFilter {
+
+}
+
+.typeFilterItem {
+  width: 150px;
+  cursor: pointer;
+  flex-wrap: nowrap;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.typeFilterHighlight {
+  width: 150px;
+  height: 40px;
+  position: absolute;
+  // left: 2rem;
+  background-color: #0ea5e9;
+  opacity: 0.25;
+  z-index: 1;
+  border: 1px solid #0369a1;
+  transition: all 0.33s ease-in-out;
+}
