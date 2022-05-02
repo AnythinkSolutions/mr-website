@@ -10,6 +10,7 @@ import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 
 const WIDESCREEN = 1375;
+const itemCounts = {default: 6, widescreen: 8 };
 
 export interface IPortfolioProps {
   articles: IArticle[];
@@ -20,7 +21,7 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
   const [ref, inView] = useInView({triggerOnce: true, threshold: 0.33});
   const [category, setCategory] = useState<string>("All");  
   const { width } = useWindowSize();
-  const [itemCount, setItemCount] = useState( width > 1280 ? 12 : 9);
+  const [itemCount, setItemCount] = useState( width >= WIDESCREEN ? itemCounts.widescreen : itemCounts.default);
 
   const itemsWithClient = useMemo<IArticle[]>(() => {
     if(!articles || !clients) return [];
@@ -72,11 +73,11 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
   //== This effect changes the # of items based on the width of the window
   // to try to keep 3 rows of items for med and lg width.
   useEffect(() => {
-    if(width < WIDESCREEN && itemCount !== 9){
-      setItemCount(9);
+    if(width < WIDESCREEN && itemCount !== itemCounts.default){
+      setItemCount(itemCounts.default);
     }
-    else if(width >= WIDESCREEN && itemCount !== 12){
-      setItemCount(12);
+    else if(width >= WIDESCREEN && itemCount !== itemCounts.widescreen){
+      setItemCount(itemCounts.widescreen);
     }
   }, [width, itemCount]);
 
@@ -103,7 +104,7 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
                 {displayedItems.map((item, index) => (
                   <div key={item.url}>
                     <EntryMotion delay={index * 0.1} threshold={0} immediate={inView}>
-                      <FloatCard key={item.url} index={index++} item={item}/>
+                      <FloatCard key={item.url} item={item}/>
                     </EntryMotion>
                   </div>
                 ))}

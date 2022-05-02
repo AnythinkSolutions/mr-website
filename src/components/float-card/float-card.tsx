@@ -6,12 +6,12 @@ import styles from "./float-card.module.scss";
 
 interface IFloatCardProps{
   item: IArticle;
-  index: number;
+  // index: number;
   size?: "sm" | "md" | "lg";
 }
 
 const FloatCard: React.FC<IFloatCardProps> = forwardRef((props, ref: Ref<HTMLDivElement>) => {
-  const {item, size} = props;
+  const {item, size: size} = props;
   const path = useMemo(() => getImgSrc(item.src), [item.src]);
   const logoProps = useMemo(() => clientToImageProps(item?.clientObject), [item?.clientObject]);
 

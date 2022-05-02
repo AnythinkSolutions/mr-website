@@ -10,10 +10,11 @@ export interface IEntryMotionProps {
   visible?: Record<string, any>;
   hidden?: Record<string, any>;
   immediate?: boolean;
+  fullSize?: boolean;
 }
 
 const EntryMotion : React.FC<IEntryMotionProps> = (props) => {
-  const {duration, delay, triggerOnce, threshold, visible, hidden, immediate, children} = props;
+  const {duration, delay, triggerOnce, threshold, visible, hidden, immediate, fullSize, children} = props;
 
   const controls = useAnimation();
   const [ref, inView] = useInView({triggerOnce, threshold});
@@ -34,6 +35,7 @@ const EntryMotion : React.FC<IEntryMotionProps> = (props) => {
       animate={controls}
       initial="hidden"
       variants={motionVariants}
+      style={fullSize ? {height: "100%", width: "100%"} : {}}
       >
         {children}
     </motion.div>
@@ -82,5 +84,19 @@ export const fadeDown = (yDistanceAbsolute: number) => {
   return {
     visible: { opacity: 1, translateY: 0 },
     hidden: {opacity: 0, translateY: -yDistanceAbsolute }
+  };
+}
+
+export const fadeDownRight = (yDistanceAbsolute: number, xDistanceAbsolute: number) => {
+  return {
+    visible: { opacity: 1, translateY: 0, translateX: 0},
+    hidden: {opacity: 0, translateY: -yDistanceAbsolute, translateX: -xDistanceAbsolute }
+  };
+}
+
+export const fadeDownGrowRight = (yDistanceAbsolute: number = 50, xDistanceAbsolute: number = 50, startScale: number = 0.5) => {
+  return {
+    visible: { opacity: 1, translateY: 0, translateX: 0, scaleX: 1, scaleY: 1},
+    hidden: {opacity: 0, translateY: -yDistanceAbsolute, translateX: -xDistanceAbsolute, scaleX: startScale, scaleY: startScale }
   };
 }

@@ -9,6 +9,7 @@ import Footer from "../components/footer/footer";
 import NavBar from "../components/navbar/navbar";
 import EntryMotion from "../components/entry-motion/entry-motion";
 import FloatCard from "../components/float-card/float-card";
+import Showcase from "../components/showcase/showcase";
 
 import styles from "../styles/portfolio.module.scss";
 import FilterBar, { ITabItem } from "../components/filter-bar/filter-bar";
@@ -26,7 +27,6 @@ const filters : ITabItem[] = [
 
 const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
   const [filter, setFilter] = useState(0);
-
   const [category, setCategory] = useState<string>("All");  
   
 
@@ -73,31 +73,19 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
 
       <main className={`pb-0`}>
         <NavBar />
-
-        <div className="w-screen px-4 mt-8 max-w-full 2xl:max-w-screen-2xl mx-auto">
-          
-          <div className="rounded-3xl relative overflow-hidden aspect-w-16 aspect-h-12 sm:aspect-h-6 xl:aspect-h-5">
-            <div className={`inset-0 ${styles.fullSizeImage}`}>
-              <Image src="/assets/images/portfolio/pine.jpg" height={720} width={2048} alt="pine" objectFit="cover"/>
-            </div>
+        <div className="flex justify-center mt-8">
+          <div className="w-full h-1/3 px-8">
+            <Showcase articles={writings}/>
           </div>
-
-          <div className={`relative container -mt-20 lg:-mt-30 ${styles.headerContainer}`}>
-            <div className="relative bg-white p-8 rounded-[40px] shadow-2xl flex flex-col items-center">
-              <h1 className="text-4xl mb-4">Journalism</h1>
-              <p className="text-lg font-light">
-                Health writing is like a box of chocolates. You never know what you&apos;re going to get. But you keep eating because your mouth wants more, even when your belly tries to tell you that you need to stop.
-              </p>              
-            </div>
-          </div>
-
-        </div> 
+        </div>
 
         <div className="mt-8 flex flex-col items-center ">
-          <FilterBar items={filters} onChange={onFilterChange} selectedIndex={filter}/>
-          <div className="flex justify-center gap-y-4 px-4 py-2">
-            {categories.map((cat, idx) => (
-              <div key={idx} className={`uppercase slide-up-sm mx-2 ${cat === category ? 'text-sky-500' : ' cursor-pointer hover:text-sky-300'}`} onClick={() => setCategory(cat)}>{cat}</div>
+          {/* <FilterBar items={filters} onChange={onFilterChange} selectedIndex={filter}/> */}
+          <div className="grid grid-cols-6 grid-rows-1 justify-center w-3/4 gap-x-8 py-6">
+            {categories.slice(0, 6).map((cat, idx) => (
+              <div key={idx} className="h-40 rounded border bg-slate-50 flex items-center justify-center text-center" onClick={() => setCategory(cat)}>
+                <span className={`uppercase slide-up-sm ${cat === category ? 'text-sky-500' : ' cursor-pointer hover:text-sky-300'}`}>{cat}</span>
+              </div>
             ))}
           </div>
         </div>
@@ -107,7 +95,7 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
             {displayedItems.map((item, index) => (
               <div key={item.url}>
                 <EntryMotion delay={index * 0.1} threshold={0} immediate={true}>
-                  <FloatCard key={item.url} index={index++} item={item}/>
+                  <FloatCard key={item.url} item={item}/>
                 </EntryMotion>
               </div>
             ))}
