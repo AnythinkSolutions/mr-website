@@ -1,3 +1,4 @@
+
 export interface IArticle {
   isHidden?: boolean;
   isHighlighted?: boolean;

@@ -104,28 +104,3 @@ export function useWindowSize(): WindowSize {
 
   return windowSize
 }
-
-// export type ArticleSize = "md" | "lg";
-// export function useArticleSize() : ArticleSize {
-//   const [breakpoint, setBreakpoint] = useState<WindowSize>({
-//     width: 0,
-//     height: 0,
-//   })
-
-//   const handleSize = () => {
-//     setWindowSize({
-//       width: window.innerWidth,
-//       height: window.innerHeight,
-//     })
-//   }
-
-//   useEventListener('resize', handleSize)
-
-//   // Set size at the first client-side load
-//   useIsomorphicLayoutEffect(() => {
-//     handleSize()
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, [])
-
-//   return windowSize
-// }

@@ -1,0 +1,22 @@
+.hoverFloat {
+  // border-radius: 3px;
+  transition: all 0.33s ease-in-out !important;
+  
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    transform: translate(0, -2.5px);
+  }
+
+  &.sm {
+    height: 360px;
+    width: 270px;
+  }
+  &.md {
+    height: 400px;
+    width: 300px;
+  }
+  &.lg {
+    height: 466px;
+    width: 350px;
+  }
+}

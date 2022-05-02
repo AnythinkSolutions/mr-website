@@ -1,30 +1,38 @@
 import { useMemo, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
+// import Image from "next/image";
 import FlipMove from "react-flip-move";
 import { IArticle, IClient } from "../utilities/app-types";
 import { getClientData, getPortfolioData } from "./api/google-sheet-api";
 import Footer from "../components/footer/footer";
 import NavBar from "../components/navbar/navbar";
-import EntryMotion from "../components/entry-motion/entry-motion";
+// import EntryMotion from "../components/entry-motion/entry-motion";
+// import FlatCard from "../components/flat-card/flat-card";
 import FloatCard from "../components/float-card/float-card";
 import Showcase from "../components/showcase/showcase";
 
 import styles from "../styles/portfolio.module.scss";
 import FilterBar, { ITabItem } from "../components/filter-bar/filter-bar";
 import { onlyUniqueFilter } from "../utilities/string-utilities";
+// import Card from "../components/card/card";
 
 export interface IPortfolioProps {
   portfolioData: IArticle[];
   clientData: IClient[];
 }
 
-const filters : ITabItem[] = [
-  {id: "cat", label: "By Category" },
-  {id: "cli", label: "By Client" },
-];
+// const filters : ITabItem[] = [
+//   {id: "cat", label: "By Category" },
+//   {id: "cli", label: "By Client" },
+// ];
 
+const allTabItem : ITabItem = {id: 0, label: "All"};
+const catSource : Record<string, string> = {
+  all: "/assets/images/portfolio/globe.jpg",
+  health: "/assets/images/portfolio/health.jpg",
+}
+    
 const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
   const [filter, setFilter] = useState(0);
   const [category, setCategory] = useState<string>("All");  
@@ -46,10 +54,14 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
   }, [portfolioData, clientData]);
 
   
-  const categories = useMemo<string[]>(() => {
-    if(!writings || writings.length === 0) return ["All"];
-    const cats = writings.flatMap(i => i.category ?? []).filter(onlyUniqueFilter);
-    return ["All", ...cats];
+  const categories = useMemo<ITabItem[]>(() => {
+    if(!writings || writings.length === 0) return [allTabItem];
+    const cats = writings.flatMap(i => i.category ?? []).filter(onlyUniqueFilter).slice(0, 5);
+    const catTabs : ITabItem[] = cats.map((cat, index) => ({id: index + 1, label: cat}));
+    return [
+      // allTabItem, 
+      ...catTabs,
+    ] as ITabItem[];
   }, [writings]);
 
   
@@ -61,6 +73,7 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
 
   const onFilterChange = (item: ITabItem, index: number) => {
     setFilter(index);
+    setCategory(item.label);
   }
 
   return (
@@ -73,30 +86,42 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
 
       <main className={`pb-0`}>
         <NavBar />
+
         <div className="flex justify-center mt-8">
           <div className="w-full h-1/3 px-8">
-            <Showcase articles={writings}/>
+            <Showcase articles={writings} delayStart={0.33}/>
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col items-center ">
-          {/* <FilterBar items={filters} onChange={onFilterChange} selectedIndex={filter}/> */}
-          <div className="grid grid-cols-6 grid-rows-1 justify-center w-3/4 gap-x-8 py-6">
-            {categories.slice(0, 6).map((cat, idx) => (
-              <div key={idx} className="h-40 rounded border bg-slate-50 flex items-center justify-center text-center" onClick={() => setCategory(cat)}>
-                <span className={`uppercase slide-up-sm ${cat === category ? 'text-sky-500' : ' cursor-pointer hover:text-sky-300'}`}>{cat}</span>
+        <div className="w-full flex flex-col items-center justify-center my-4 mt-8 ml-4 section-header">
+          <h2>My Writing</h2>
+          <div className="gradient_line lg" />
+        </div>
+
+        <div className="mt-8 flex justify-center bg-slate-200 shadow-inner px-8 text-sm uppercase">
+          <FilterBar items={categories} onChange={onFilterChange} selectedIndex={filter}/>
+          {/* <div className="grid grid-cols-6 grid-rows-1 justify-center w-3/4 gap-x-4 py-6">
+            {categories.map((cat, idx) => (              
+              <div key={idx} className="h-28 rounded border bg-slate-50 flex items-center justify-center text-center" onClick={() => setCategory(cat)}>
+                <Card key={idx} alt="category" src={catSource[cat.toLowerCase()] ?? catSource["all"]} onClick={() => setCategory(cat)}>
+                  <div className="w-full h-full flex items-center justify-center text-sm">
+                    <div className="bg-black/30 backdrop-blur-sm p-1 rounded-lg">
+                      <span className={`uppercase font-semibold ${cat === category ? 'text-sky-300' : ' cursor-pointer text-white'}`}>{cat}</span>
+                    </div>
+                  </div>
+                </Card>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
 
         <div className={`flex flex-wrap p-4 justify-center ${styles["work-container"]}`}>
           <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
             {displayedItems.map((item, index) => (
               <div key={item.url}>
-                <EntryMotion delay={index * 0.1} threshold={0} immediate={true}>
+                {/* <EntryMotion delay={index * 0.1} threshold={0} immediate={true}> */}
                   <FloatCard key={item.url} item={item}/>
-                </EntryMotion>
+                {/* </EntryMotion> */}
               </div>
             ))}
           </FlipMove>
