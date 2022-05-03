@@ -13,30 +13,17 @@ import FloatCard from "../components/float-card/float-card";
 import Showcase from "../components/showcase/showcase";
 
 import styles from "../styles/portfolio.module.scss";
-import FilterBar, { ITabItem } from "../components/filter-bar/filter-bar";
 import { onlyUniqueFilter } from "../utilities/string-utilities";
+import PortfolioCard from "../components/portfolio-card/portfolio-card";
 // import Card from "../components/card/card";
 
 export interface IPortfolioProps {
   portfolioData: IArticle[];
   clientData: IClient[];
 }
-
-// const filters : ITabItem[] = [
-//   {id: "cat", label: "By Category" },
-//   {id: "cli", label: "By Client" },
-// ];
-
-const allTabItem : ITabItem = {id: 0, label: "All"};
-const catSource : Record<string, string> = {
-  all: "/assets/images/portfolio/globe.jpg",
-  health: "/assets/images/portfolio/health.jpg",
-}
     
 const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
-  const [filter, setFilter] = useState(0);
-  const [category, setCategory] = useState<string>("All");  
-  
+  const [category, setCategory] = useState<string>("All");    
 
   const writings = useMemo<IArticle[]>(() => {
     if(!portfolioData || !clientData) return [];
@@ -53,28 +40,28 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
     return result;
   }, [portfolioData, clientData]);
 
+  const showcaseItems = useMemo(() => {
+    const items = writings.filter(art => art.isHighlighted);
+    return items;
+  }, [writings]);
+
+  const nonShowcaseItems = useMemo(() => {
+    const items = writings.filter(a => !showcaseItems.includes(a));
+    return items;
+  }, [writings, showcaseItems])
   
-  const categories = useMemo<ITabItem[]>(() => {
-    if(!writings || writings.length === 0) return [allTabItem];
+  const categories = useMemo<string[]>(() => {
+    if(!writings || writings.length === 0) return ["All"]; //[allTabItem];
     const cats = writings.flatMap(i => i.category ?? []).filter(onlyUniqueFilter).slice(0, 5);
-    const catTabs : ITabItem[] = cats.map((cat, index) => ({id: index + 1, label: cat}));
-    return [
-      // allTabItem, 
-      ...catTabs,
-    ] as ITabItem[];
+    return ["All", ...cats];
   }, [writings]);
 
   
   const displayedItems = useMemo<IArticle[]>(() => {
     let result: IArticle[] = [];
-    result = category === "All" ? writings : writings.filter(i => i.category?.includes(category));
+    result = category === "All" ? nonShowcaseItems : nonShowcaseItems.filter(i => i.category?.includes(category));
     return result;
-  }, [writings, category]);
-
-  const onFilterChange = (item: ITabItem, index: number) => {
-    setFilter(index);
-    setCategory(item.label);
-  }
+  }, [nonShowcaseItems, category]);
 
   return (
     <div id="portfolio-page">
@@ -89,39 +76,28 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
 
         <div className="flex justify-center mt-8">
           <div className="w-full h-1/3 px-8">
-            <Showcase articles={writings} delayStart={0.33}/>
+            <Showcase articles={showcaseItems} delayStart={0.33}/>
           </div>
         </div>
 
-        <div className="w-full flex flex-col items-center justify-center my-4 mt-8 ml-4 section-header">
+        <div className="w-full flex flex-col items-center justify-center my-4 mt-8 section-header">
           <h2>My Writing</h2>
           <div className="gradient_line lg" />
         </div>
-
-        <div className="mt-8 flex justify-center bg-slate-200 shadow-inner px-8 text-sm uppercase">
-          <FilterBar items={categories} onChange={onFilterChange} selectedIndex={filter}/>
-          {/* <div className="grid grid-cols-6 grid-rows-1 justify-center w-3/4 gap-x-4 py-6">
-            {categories.map((cat, idx) => (              
-              <div key={idx} className="h-28 rounded border bg-slate-50 flex items-center justify-center text-center" onClick={() => setCategory(cat)}>
-                <Card key={idx} alt="category" src={catSource[cat.toLowerCase()] ?? catSource["all"]} onClick={() => setCategory(cat)}>
-                  <div className="w-full h-full flex items-center justify-center text-sm">
-                    <div className="bg-black/30 backdrop-blur-sm p-1 rounded-lg">
-                      <span className={`uppercase font-semibold ${cat === category ? 'text-sky-300' : ' cursor-pointer text-white'}`}>{cat}</span>
-                    </div>
-                  </div>
-                </Card>
-              </div>
+        
+        <div className="flex flex-col">
+          <div className="flex justify-center gap-y-4 px-4 py-2 font-light">
+            {categories.map((cat, idx) => (
+              <div key={idx} className={`uppercase slide-up-sm mx-2 ${cat === category ? 'text-sky-500' : ' cursor-pointer hover:text-sky-300'}`} onClick={() => setCategory(cat)}>{cat}</div>
             ))}
-          </div> */}
+          </div>
         </div>
 
-        <div className={`flex flex-wrap p-4 justify-center ${styles["work-container"]}`}>
+        <div className={`grid lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-6 p-4 mt-8 justify-center ${styles["work-container"]}`}>
           <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
             {displayedItems.map((item, index) => (
-              <div key={item.url}>
-                {/* <EntryMotion delay={index * 0.1} threshold={0} immediate={true}> */}
-                  <FloatCard key={item.url} item={item}/>
-                {/* </EntryMotion> */}
+              <div key={item.url} >
+                <PortfolioCard key={item.url} article={item}/>
               </div>
             ))}
           </FlipMove>
