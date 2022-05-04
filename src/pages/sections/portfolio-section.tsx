@@ -2,12 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import FlipMove from "react-flip-move";
 import styles from "../../styles/work.module.scss";
 import { IArticle, IClient } from "../../utilities/app-types";
-import { onlyUniqueFilter } from "../../utilities/string-utilities";
 import FloatCard from "../../components/float-card/float-card";
 import { useWindowSize } from "../../utilities/app-hooks";
 import EntryMotion from "../../components/entry-motion/entry-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
+import CategoryFilter from "../../components/category-filter/category-filter";
 
 const WIDESCREEN = 1375;
 const itemCounts = {default: 6, widescreen: 8 };
@@ -43,12 +43,6 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
     const result = itemsWithClient.filter(d => d.isHighlighted);
     return result;
   }, [itemsWithClient]); 
-
-  const categories = useMemo<string[]>(() => {
-    if(!highlights || highlights.length === 0) return ["All"];
-    const cats = highlights.flatMap(i => i.category ?? []).filter(onlyUniqueFilter);
-    return ["All", ...cats];
-  }, [highlights]);
   
   const displayedItems = useMemo<IArticle[]>(() => {
     let result: IArticle[] = [];
@@ -86,18 +80,12 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
       <EntryMotion threshold={0} duration={0.75} hidden={{opacity: 0, translateY: 50}}>
         <div className="flex flex-col items-center my-8 p-4 py-0" ref={ref}>        
 
-            <div className="w-full flex flex-col items-center justify-center my-4 ml-4 section-header">
+            <div className="w-full flex flex-col items-center text-center justify-center my-4 ml-4 section-header">
               <h2>Recent Highlights</h2>
               <div className="gradient_line lg" />
             </div>
             
-            <div className="flex flex-col">
-              <div className="flex justify-center gap-y-4 px-4 py-2">
-                {categories.map((cat, idx) => (
-                  <div key={idx} className={`uppercase slide-up-sm mx-2 ${cat === category ? 'text-sky-500' : ' cursor-pointer hover:text-sky-300'}`} onClick={() => setCategory(cat)}>{cat}</div>
-                ))}
-              </div>
-            </div>
+            <CategoryFilter articles={highlights} onChange={(item) => setCategory(item)} />
 
             <div className={`flex flex-wrap p-4 justify-center ${styles["work-container"]}`}>
               <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
@@ -120,7 +108,6 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
                     <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
                   </svg>
                 </span>
-                {/* <Image src="/assets/images/arrow-forward.svg" height={24} width={24} alt="arrow forward"/>  */}
               </a>
             </Link>
         </div>

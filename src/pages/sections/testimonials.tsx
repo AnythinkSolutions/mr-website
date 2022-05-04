@@ -42,7 +42,7 @@ function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonia
       <EntryMotion duration={0.9}>
         <div className="my-8 p-4 py-0 flex-col">
           {/* <div className="container"> */}
-            <div className="flex flex-col items-center justify-center my-4 ml-4 section-header">
+            <div className="flex flex-col items-center justify-center text-center my-4 ml-4 section-header">
               <h2>What my clients say</h2>
               <div className="gradient_line lg" />
             </div>

@@ -1,21 +1,16 @@
 import { useMemo, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-// import Image from "next/image";
 import FlipMove from "react-flip-move";
 import { IArticle, IClient } from "../utilities/app-types";
 import { getClientData, getPortfolioData } from "./api/google-sheet-api";
 import Footer from "../components/footer/footer";
 import NavBar from "../components/navbar/navbar";
-// import EntryMotion from "../components/entry-motion/entry-motion";
-// import FlatCard from "../components/flat-card/flat-card";
-import FloatCard from "../components/float-card/float-card";
 import Showcase from "../components/showcase/showcase";
 
 import styles from "../styles/portfolio.module.scss";
-import { onlyUniqueFilter } from "../utilities/string-utilities";
 import PortfolioCard from "../components/portfolio-card/portfolio-card";
-// import Card from "../components/card/card";
+import CategoryFilter from "../components/category-filter/category-filter";
 
 export interface IPortfolioProps {
   portfolioData: IArticle[];
@@ -49,14 +44,7 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
     const items = writings.filter(a => !showcaseItems.includes(a));
     return items;
   }, [writings, showcaseItems])
-  
-  const categories = useMemo<string[]>(() => {
-    if(!writings || writings.length === 0) return ["All"]; //[allTabItem];
-    const cats = writings.flatMap(i => i.category ?? []).filter(onlyUniqueFilter).slice(0, 5);
-    return ["All", ...cats];
-  }, [writings]);
-
-  
+    
   const displayedItems = useMemo<IArticle[]>(() => {
     let result: IArticle[] = [];
     result = category === "All" ? nonShowcaseItems : nonShowcaseItems.filter(i => i.category?.includes(category));
@@ -85,13 +73,7 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
           <div className="gradient_line lg" />
         </div>
         
-        <div className="flex flex-col">
-          <div className="flex justify-center gap-y-4 px-4 py-2 font-light">
-            {categories.map((cat, idx) => (
-              <div key={idx} className={`uppercase slide-up-sm mx-2 ${cat === category ? 'text-sky-500' : ' cursor-pointer hover:text-sky-300'}`} onClick={() => setCategory(cat)}>{cat}</div>
-            ))}
-          </div>
-        </div>
+        <CategoryFilter articles={writings} onChange={(item) => setCategory(item)} />
 
         <div className={`grid lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-6 p-4 mt-8 justify-center ${styles["work-container"]}`}>
           <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
