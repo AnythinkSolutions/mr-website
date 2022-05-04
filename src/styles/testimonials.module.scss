@@ -20,19 +20,21 @@
     color: rgba(0, 0, 0, 0.6);
 }
 
-// .quoteDiv {
-//   position: relative;
-// }
-// .quoteDiv:after{
-//   font-size: 200px;
-//   // line-height: 1;
-//   content: "”"; //"&rdquo;";
-//   font-family: auto; //didot, "old standard tt";
-//   position: absolute;
-//   top: 60px;
-//   right: -50px;
-//   color: rgba(0, 0, 0, 0.6);
-// }
+@media(max-width: 640px){
+  .innerCard {
+    padding-left: 24px;
+  }
+  .innerCard:before {
+    font-size: 48px;
+    top: 0;
+  }
+
+  // .sliderContainer {
+  //   .slick-slider .slick-list {
+  //     padding: 0 1rem;
+  //   }
+  // }
+}
 
 .quote {
   font-size: 18px;

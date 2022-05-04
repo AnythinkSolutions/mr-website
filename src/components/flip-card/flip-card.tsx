@@ -10,7 +10,7 @@ export interface IFlipCardProps {
 
 const FlipCard: React.FC<IFlipCardProps> = ({title, description, backColor, children}) => {
   return (
-    <div className={`${styles.flipCard}`}>
+    <div className={`${styles.flipCard} h-full w-full`}>
       <div className={`${styles.innerCard}`}>
         <div className={`${styles.cardFront}`}>
           <div className={`${styles.backgroundImage}`}>

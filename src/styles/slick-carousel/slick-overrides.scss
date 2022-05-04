@@ -35,3 +35,12 @@ ul.slick-dots {
   color: rgba(0,0,0,0.8);
   font-size: 35px;
 }
+
+@media(max-width: 640px){
+  .slick-slider .slick-list {
+    padding: 0 8px;
+  }
+  .slick-arrow {
+    display: none !important;
+  }
+}

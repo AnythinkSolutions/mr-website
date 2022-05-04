@@ -41,18 +41,17 @@ function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonia
     <div className="w-full">
       <EntryMotion duration={0.9}>
         <div className="my-8 p-4 py-0 flex-col">
-          {/* <div className="container"> */}
-            <div className="flex flex-col items-center justify-center text-center my-4 ml-4 section-header">
-              <h2>What my clients say</h2>
-              <div className="gradient_line lg" />
-            </div>
+          <div className="flex flex-col items-center justify-center text-center my-4 ml-4 section-header">
+            <h2>What my clients say</h2>
+            <div className="gradient_line lg" />
+          </div>
 
-          {/* </div> */}
           <div className={styles.sliderContainer}>
             <Slider {...settings}>
               {items?.map(item => <Testimonial key={item.mapKey} item={item} />)}
             </Slider>
           </div>
+
         </div>
       </EntryMotion>
     </div>
@@ -67,16 +66,16 @@ const Testimonial = ({item}: {item: ITestimonial}) => {
   return (
     <div className={styles.testimonialCard}>
       <div className={styles.innerCard}>
-        <div className="flex flex-row gap-x-8">
+        <div className="flex flex-col md:flex-row gap-x-8">
           <div className={`basis-3/5 ${styles.quoteDiv}`}>
             <p className={styles.quote}>{item.quote}</p>
           </div>
-          <div className="basis-2/5 flex flex-col pl-12">
+          <div className="basis-2/5 flex flex-col pl-12 mt-12 md:mt-0">
             <p className={styles.name}>{item.name}</p>
             <p className={styles.title}>{item.title}</p>
             {item.clientObject?.logo && 
-              <div className="flex mt-2">
-                <LogoImage {...logoProps}/>
+              <div className="flex mt-2 h-12 w-36">
+                <LogoImage {...logoProps} size="auto"/>
               </div>
             }
             {!item.clientObject?.logo && 

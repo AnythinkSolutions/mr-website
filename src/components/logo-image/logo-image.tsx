@@ -5,14 +5,12 @@ import styles from "./logo-image.module.scss";
 
 export interface IImageProps {
   src: string;
-  // height?: number;
-  // width?: number;
   alt: string;
   url?: string;
   noLink?: boolean;
 }
 export interface ILogoImageProps extends IImageProps {
-  size?: "sm" | "md" | "lg";    //default to md;
+  size?: "sm" | "md" | "lg" | "auto";    //default to md;
   hoverAnimation?: boolean;
   hoverGrayscale?: boolean;
 }
@@ -20,25 +18,30 @@ export interface ILogoImageProps extends IImageProps {
 const sizeFactor = {
   sm: 0.7,
   md: 1.0,
-  lg: 1.25
+  lg: 1.25,
+  auto: 1,
 };
 
 const LogoImage: React.FC<ILogoImageProps> = ({src, alt, url, hoverAnimation, size, hoverGrayscale, noLink}) => {
-  const animation = hoverAnimation ? "fade-in" : null;
-
+  const isAuto = useMemo(() => size === "auto", [size]);
+  const containerStyles = useMemo(() => isAuto ? "relative h-full w-full" : "", [isAuto]);
   const imageHeight = useMemo(() => 40 * sizeFactor[size ?? "md"], [size]);
   const imageWidth = useMemo(() => 132 * sizeFactor[size ?? "md"], [size]);
   const effects = useMemo(() => `${hoverAnimation ? styles.animateHover : ""} ${hoverGrayscale ? styles.grayEffect : ""}`, [hoverAnimation, hoverGrayscale]);
   
   return (
-    <div className={`${styles.logoBox} ${effects}`}>
+    <div className={`${styles.logoBox} ${effects} ${containerStyles}`}>
       {url && !noLink &&
         <a href={url} target="_blank" rel="noreferrer">
-          <Image className={styles.clientLogo} src={src} alt={alt} height={imageHeight} width={imageWidth}/>
+          {isAuto && <Image className={styles.clientLogo} src={src} alt={alt} layout="fill" objectFit="contain"/>}
+          {!isAuto && <Image className={styles.clientLogo} src={src} alt={alt} height={imageHeight} width={imageWidth}/>}
         </a>
       }
       {(!url || noLink) && 
-        <Image className={styles.clientLogo} src={src} alt={alt} height={imageHeight} width={imageWidth} objectFit="contain" />
+        <>
+          {isAuto && <Image className={styles.clientLogo} src={src} alt={alt} layout="fill" objectFit="contain" />}
+          {!isAuto && <Image className={styles.clientLogo} src={src} alt={alt} height={imageHeight} width={imageWidth} objectFit="contain" />}
+        </>
       }
       
     </div>

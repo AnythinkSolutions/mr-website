@@ -28,12 +28,14 @@ const ServicesSection: React.FC<IServicesProps> = ({serviceData}) => {
               <div className="gradient_line" />
             </div>
 
-            <div className="flex flex-row flex-wrap gap-8 mt-6 justify-center">
+            <div className="flex flex-wrap gap-8 mt-6 justify-center">
               {services.map((svc, index) => (
                 <EntryMotion key={svc.key} delay={index * 0.2}>
-                  <FlipCard title={svc.title} description={svc.description} backColor="sky-200">
-                    <Image src={svc.image} alt={svc.title} height={imgHeight} width={imgWidth} objectFit="cover"/>
-                  </FlipCard>  
+                  <div className="h-full w-full" style={{minHeight: 270, minWidth: 325}}>
+                    <FlipCard title={svc.title} description={svc.description} backColor="sky-200">
+                      <Image src={svc.image} alt={svc.title} layout="fill" objectFit="cover"/>
+                    </FlipCard>  
+                  </div>
                   </EntryMotion>
                 ))}
             </div>

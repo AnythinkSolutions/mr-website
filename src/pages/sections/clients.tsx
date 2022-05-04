@@ -16,28 +16,32 @@ function ClientsSection({data}: {data: IClient[]}){
         <div className="flex flex-col items-center my-8 p-4 py-0" ref={ref}>
 
           <div>
-            <div className=" flex items-center mt-4 section-header" >
-              <h1 className="cinzel">You&apos;ve seen my work in</h1>
-              <span />
+            <div className="flex justify-center md:justify-start items-center mt-4 section-header" >
+              <h1>You&apos;ve seen my work in</h1>
+              <span className="hidden md:inline-block" />
             </div>
-            <div className="flex flex-wrap p-4 gap-x-6 gap-y-6">
+            <div className="flex flex-wrap justify-center md:justify-start p-2 pt-4 md:p-4 gap-4 md:gap-6">
               {magazineClients?.map((client, index) => 
                 <EntryMotion key={index} delay={index * 0.1} immediate={inView}>
-                  <LogoImage {...client} hoverAnimation={true}/>
+                  <div className="h-10 w-28">
+                    <LogoImage {...client} hoverAnimation={true} size="auto"/>
+                  </div>
                 </EntryMotion>
               )}
             </div>
           </div>
 
           <div>
-            <div className=" flex items-center mt-4 section-header header-right">
-              <span />
-              <h1 className="cinzel">And I work with</h1>
+            <div className=" flex justify-center md:justify-start items-center mt-4 section-header header-right">
+              <span className="hidden md:inline-block" />
+              <h1>And I work with</h1>
             </div>
-            <div className="flex flex-wrap p-4 gap-x-6 gap-y-6">
+            <div className="flex flex-wrap justify-center md:justify-start p-2 pt-4 md:p-4 gap-4 md:gap-6">
               {contentClients?.map((client, index) => 
                   <EntryMotion key={index} delay={index * 0.1} immediate={inView}>
-                    <LogoImage {...client} hoverAnimation={true}/>
+                    <div className="h-10 w-28 relative">
+                      <LogoImage {...client} hoverAnimation={true} size="auto"/>
+                    </div>
                   </EntryMotion>
                 )}
             </div>

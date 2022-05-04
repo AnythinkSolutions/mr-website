@@ -3,6 +3,10 @@
   transition: all 0.33s ease-in-out; 
 }
 
+.headerContainer {
+
+}
+
 .line {
   width: 60px;
   height: 4px;
@@ -41,7 +45,13 @@
   100% {opacity:1;}
 }
 
-// @media (max-width: ) {
-  
-// }
+@media (max-width: 640px) {
+  .headerContainer {
+    height: 90vh;    
+
+    // .contactLink {
+    //   position: relative;
+    // }
+  }   
+}
 
