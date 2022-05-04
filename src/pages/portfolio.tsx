@@ -62,18 +62,20 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
       <main className={`pb-0`}>
         <NavBar />
 
+        <div className="w-full flex flex-col items-center justify-center my-4 mt-8 section-header">
+          <h2>My Clips</h2>
+          <div className="gradient_line lg" />
+        </div>
+
         <div className="flex justify-center mt-8">
           <div className="w-full h-1/3 px-8">
             <Showcase articles={showcaseItems} delayStart={0.33}/>
           </div>
         </div>
-
-        <div className="w-full flex flex-col items-center justify-center my-4 mt-8 section-header">
-          <h2>My Writing</h2>
-          <div className="gradient_line lg" />
-        </div>
         
-        <CategoryFilter articles={writings} onChange={(item) => setCategory(item)} />
+        <div className="my-8">
+          <CategoryFilter articles={writings} onChange={(item) => setCategory(item)} />
+        </div>
 
         <div className={`grid lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-6 p-4 mt-8 justify-center ${styles["work-container"]}`}>
           <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
