@@ -16,13 +16,13 @@ const PortfolioCard : React.FC<IPortfolioCardProps> = ({article}) => {
   const logoProps = useMemo(() => clientToImageProps(article?.clientObject), [article?.clientObject]);
 
   return (
-    <div className={`rounded-lg relative w-full h-28 overflow-hidden border border-slate-100 ${styles.hoverFloat}`}>
+    <div className={`rounded-lg relative w-full h-28 overflow-hidden border border-slate-200 bg-slate-50 ${styles.hoverFloat}`}>
       <a href={article.url} target="_blank" rel="noreferrer">
-        <div className="w-full h-full grid grid-cols-4 grid-rows-4 gap-1">
-          <div className="row-span-4 rounded-lg relative">
+        <div className="w-full h-full grid grid-cols-4 grid-rows-3 gap-1">
+          <div className="row-span-3 rounded-lg relative">
             <Image priority={false} src={article.src} alt={article.alt} layout="fill" objectFit="cover" />
           </div>
-          <div className="col-span-3 row-span-3 p-2 overflow-hidden">
+          <div className="col-span-3 row-span-2 p-2 overflow-hidden">
             <span className="font-light">{article.title}</span>
           </div>
           <div className="col-span-3 p-2 flex center-items justify-end">
