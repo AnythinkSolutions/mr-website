@@ -9,8 +9,9 @@ import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import CategoryFilter from "../../components/category-filter/category-filter";
 
+const MOBILESCREEN = 640;
 const WIDESCREEN = 1375;
-const itemCounts = {default: 6, widescreen: 8 };
+const itemCounts = {default: 6, widescreen: 8, mobile: 3 };
 
 export interface IPortfolioProps {
   articles: IArticle[];
@@ -67,11 +68,14 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
   //== This effect changes the # of items based on the width of the window
   // to try to keep 3 rows of items for med and lg width.
   useEffect(() => {
-    if(width < WIDESCREEN && itemCount !== itemCounts.default){
-      setItemCount(itemCounts.default);
+    if(width < MOBILESCREEN){
+      if(itemCount !== itemCounts.mobile) setItemCount(itemCounts.mobile);
     }
-    else if(width >= WIDESCREEN && itemCount !== itemCounts.widescreen){
-      setItemCount(itemCounts.widescreen);
+    else if(width < WIDESCREEN){
+      if(itemCount !== itemCounts.default) setItemCount(itemCounts.default);
+    }
+    else if(width >= WIDESCREEN){
+      if(itemCount !== itemCounts.widescreen) setItemCount(itemCounts.widescreen);
     }
   }, [width, itemCount]);
 
