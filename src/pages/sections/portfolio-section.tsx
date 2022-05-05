@@ -8,9 +8,8 @@ import EntryMotion from "../../components/entry-motion/entry-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import CategoryFilter from "../../components/category-filter/category-filter";
+import { SCREEN_WIDTHS } from "../../utilities/app-utilities";
 
-const MOBILESCREEN = 640;
-const WIDESCREEN = 1375;
 const itemCounts = {default: 6, widescreen: 8, mobile: 3 };
 
 export interface IPortfolioProps {
@@ -22,7 +21,7 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
   const [ref, inView] = useInView({triggerOnce: true, threshold: 0.33});
   const [category, setCategory] = useState<string>("All");  
   const { width } = useWindowSize();
-  const [itemCount, setItemCount] = useState( width >= WIDESCREEN ? itemCounts.widescreen : itemCounts.default);
+  const [itemCount, setItemCount] = useState( width >= SCREEN_WIDTHS.wide ? itemCounts.widescreen : itemCounts.default);
 
   const itemsWithClient = useMemo<IArticle[]>(() => {
     if(!articles || !clients) return [];
@@ -68,13 +67,13 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
   //== This effect changes the # of items based on the width of the window
   // to try to keep 3 rows of items for med and lg width.
   useEffect(() => {
-    if(width < MOBILESCREEN){
+    if(width < SCREEN_WIDTHS.mobile){
       if(itemCount !== itemCounts.mobile) setItemCount(itemCounts.mobile);
     }
-    else if(width < WIDESCREEN){
+    else if(width < SCREEN_WIDTHS.wide){
       if(itemCount !== itemCounts.default) setItemCount(itemCounts.default);
     }
-    else if(width >= WIDESCREEN){
+    else if(width >= SCREEN_WIDTHS.wide){
       if(itemCount !== itemCounts.widescreen) setItemCount(itemCounts.widescreen);
     }
   }, [width, itemCount]);

@@ -3,12 +3,30 @@ import { IClient } from "../../utilities/app-types";
 import LogoImage, { clientToImageProps, IImageProps } from "../../components/logo-image/logo-image";
 import EntryMotion from "../../components/entry-motion/entry-motion";
 import { useInView } from "react-intersection-observer";
+import { useWindowSize } from "../../utilities/app-hooks";
+import { SCREEN_WIDTHS } from "../../utilities/app-utilities";
+
+const mobileCount = 10; //number of items to show on mobile
+const defaultCount = 14;  //number of items to show normally
 
 function ClientsSection({data}: {data: IClient[]}){
   const [ref, inView] = useInView({triggerOnce: true, threshold: 0.25});
+  const { width } = useWindowSize();
+  const itemCount = useMemo(() => width <= SCREEN_WIDTHS.mobile ? mobileCount : defaultCount, [width]);
+  
+  const magazineClients = useMemo<IImageProps[]>(() => {
+    const logos = data?.filter(c => !c.isHidden && c.category === "magazine")
+      .slice(0, itemCount)
+      .map(c => clientToImageProps(c)) as IImageProps[];
+    return logos;
+  }, [data, itemCount]);
 
-  const magazineClients = useMemo<IImageProps[]>(() => data?.filter(c => !c.isHidden && c.category === "magazine").slice(0, 14).map(c => clientToImageProps(c)) as IImageProps[], [data]);
-  const contentClients = useMemo<IImageProps[]>(() => data?.filter(c => !c.isHidden && c.category === "content").slice(0, 14).map(c => clientToImageProps(c)) as IImageProps[], [data]);
+  const contentClients = useMemo<IImageProps[]>(() => {
+    const logos = data?.filter(c => !c.isHidden && c.category === "content")
+      .slice(0, itemCount)
+      .map(c => clientToImageProps(c)) as IImageProps[];
+    return logos;
+  }, [data, itemCount]);
   
   return (
     <div className="flex flex-col w-full">

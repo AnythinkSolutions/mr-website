@@ -5,6 +5,7 @@ export interface IContactSectionProps {
 }
 
 const ContactSection: React.FC<IContactSectionProps> = () => {
+  
   return (
     <div className="w-full">
       <EntryMotion duration={0.9}>
@@ -16,10 +17,12 @@ const ContactSection: React.FC<IContactSectionProps> = () => {
           </div>
 
           <div className="flex flex-col justify-center items-center">
-            <p className="text-2xl font-light mb-6">Please get in touch, I&apos;d love to hear from you.</p>
-            <Image src="/assets/images/mr-logo-initials.gif" alt="Meghan Rabbitt Logo" height={250} width={250} objectFit="cover" />
-            <h3 className="text-3xl mb-4 font-light text-sky-400 mt-4"><a href="mailto:hello@meghanrabbitt.com">hello@meghanrabbitt.com</a></h3>
-            <h3 className="text-3xl mb-4 font-light font-light">Boston, MA USA</h3>
+            <p className="text-center text-lg sm:text-2xl font-light mb-6">Please get in touch, I&apos;d love to hear from you.</p>
+            <div className="relative h-24 w-24 sm:w-48 sm:h-48">
+              <Image src="/assets/images/mr-logo-initials.gif" alt="Meghan Rabbitt Logo" layout="fill" objectFit="cover" />
+            </div>
+            <h3 className="text-lg sm:text-3xl mb-4 font-light text-sky-400 mt-4"><a href="mailto:hello@meghanrabbitt.com">hello@meghanrabbitt.com</a></h3>
+            <h3 className="text-lg sm:text-3xl mb-4 font-light font-light">Boston, MA USA</h3>
           </div>
         </div>
       </EntryMotion>

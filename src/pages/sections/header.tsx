@@ -20,11 +20,11 @@ function HeaderSection(){
           <EntryMotion delay={0.35} {...fadeInProps}>
             <span className={`${styles.line} mb-2 sm:mb-4`}/>
           </EntryMotion>
-          <div className={`text-xl sm:text-2xl ${styles.typespanContainer}`}>
+          <div className={`text-base sm:text-2xl ${styles.typespanContainer}`}>
             <TypeSpan startDelay={750} speed={40} withCursor cursorDelay={1250} onFinish={() => setFinished(true)}>Writer, Editor, Content Strategist</TypeSpan>
           </div>
           {isFinished && 
-            <div className={`${styles.contactLink} ${isFinished ? styles.ready: ""}`}>
+            <div className={`${styles.contactLink} ${isFinished ? styles.ready: ""} sm:mt-1`}>
               <div className="relative slide-up-sm">
                 <a className="text-sm sm:text-base" href="#contact">Contact Me</a>
               </div>
