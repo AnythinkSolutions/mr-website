@@ -17,7 +17,7 @@ const ContactSection: React.FC<IContactSectionProps> = () => {
           </div>
 
           <div className="flex flex-col justify-center items-center">
-            <p className="text-center text-lg sm:text-2xl font-light mb-6">Please get in touch, I&apos;d love to hear from you.</p>
+            <p className="text-center text-lg sm:text-2xl font-light mb-6">I&apos;d love to hear from you.</p>
             <div className="relative h-24 w-24 sm:w-48 sm:h-48">
               <Image src="/assets/images/mr-logo-initials.gif" alt="Meghan Rabbitt Logo" layout="fill" objectFit="cover" />
             </div>
