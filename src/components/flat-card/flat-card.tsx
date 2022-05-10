@@ -28,14 +28,13 @@ const ShowcaseCard : React.FC<IShowcaseCardProps> = ({config, url, onClick, size
       <LinkOrButtonWrapper url={url} onClick={onClick}>
         <div className="w-full h-full">
           <Image priority={false} src={config.src} alt={config.alt} layout="fill" objectFit="cover" />
-          <div className="absolute bottom-0 right-0 h-1/3 w-full bg-black/30 backdrop-blur-sm">
-            <div className="flex flex-col justify-between items-center text-center h-full p-2">
+          <div className="absolute bottom-0 right-0 w-full bg-black/40 backdrop-blur-sm">
+            <div className="flex flex-col items-center text-center h-full p-2">
               <span className="text-white text-elipses max-h-12">{config.title}</span>
-              {(config.clientObject && size !== "sm") && <LogoImage {...logoProps} noLink={true}/>}
             </div>
           </div>
-          {(config.clientObject && size === "sm") && 
-            <div className="absolute top-0 right-0 bg-white/30 backdrop-blur-sm p-1 rounded-bl-lg rounded-tr-lg">
+          {(config.clientObject) && 
+            <div className="absolute top-0 right-0 bg-white/50 backdrop-blur-sm p-1 rounded-bl-lg rounded-tr-lg">
               <LogoImage {...logoProps} noLink={true} size="sm"/>
             </div>
           }
