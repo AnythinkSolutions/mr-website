@@ -30,7 +30,7 @@ const Home: NextPage<IPageProps> = (props) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Meghan Rabbitt - writer, editor, journalist, content producer</title>
+        <title>Meghan Rabbitt - writer, editor, journalist, content strategist</title>
         <meta name="description" content="Writer, Editor, Journalist, Content Strategist - Meghan Rabbitt" />
         <link rel="icon" href="/mr-initials-white.gif" />
       </Head>

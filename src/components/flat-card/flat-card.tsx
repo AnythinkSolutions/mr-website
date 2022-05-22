@@ -14,20 +14,21 @@ export interface ICardProps {
 
 export interface IShowcaseCardProps {
   config: ICardProps;
-  size?: "sm" | "md";
+  // size?: "sm" | "md";
   url?: string;   //url for a click item
   onClick?: (item: any) => void;
+  priority?: boolean;
 }
 
-const ShowcaseCard : React.FC<IShowcaseCardProps> = ({config, url, onClick, size = "md"}) => {
+const ShowcaseCard : React.FC<IShowcaseCardProps> = ({config, url, onClick, priority = false}) => {
 
   const logoProps = useMemo(() => clientToImageProps(config?.clientObject), [config?.clientObject]);
 
   return (
     <div className={`rounded-lg relative w-full h-full overflow-hidden border border-slate-100 ${styles.hoverFloat}`}>
       <LinkOrButtonWrapper url={url} onClick={onClick}>
-        <div className="w-full h-full">
-          <Image priority={false} src={config.src} alt={config.alt} layout="fill" objectFit="cover" />
+        <div className="w-full h-full relative">
+          <Image priority={priority} src={config.src} alt={config.alt} layout="fill" objectFit="cover" />
           <div className="absolute bottom-0 right-0 w-full bg-black/40 backdrop-blur-sm">
             <div className="flex flex-col items-center text-center h-full p-2">
               <span className="text-white text-elipses max-h-12">{config.title}</span>
@@ -47,7 +48,8 @@ const ShowcaseCard : React.FC<IShowcaseCardProps> = ({config, url, onClick, size
 export default ShowcaseCard;
 
 ShowcaseCard.defaultProps = {
-  size: "md",
+  // size: "md",
+  priority: false,
 };
 
 interface ILinkOrButtonProps {

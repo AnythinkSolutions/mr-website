@@ -30,11 +30,13 @@ const LogoImage: React.FC<ILogoImageProps> = ({src, alt, url, hoverAnimation, si
   const effects = useMemo(() => `${hoverAnimation ? styles.animateHover : ""} ${hoverGrayscale ? styles.grayEffect : ""}`, [hoverAnimation, hoverGrayscale]);
   
   return (
-    <div className={`${styles.logoBox} ${effects} ${containerStyles}`}>
+    <div className={`${styles.logoBox} ${effects} ${containerStyles} relative`}>
       {url && !noLink &&
-        <a href={url} target="_blank" rel="noreferrer">
-          {isAuto && <Image className={styles.clientLogo} src={src} alt={alt} layout="fill" objectFit="contain"/>}
-          {!isAuto && <Image className={styles.clientLogo} src={src} alt={alt} height={imageHeight} width={imageWidth}/>}
+        <a href={url} target="_blank" rel="noreferrer" className="h-full w-full">
+          <div className="relative h-full w-full">
+            {isAuto && <Image className={styles.clientLogo} src={src} alt={alt} layout="fill" objectFit="contain"/>}
+            {!isAuto && <Image className={styles.clientLogo} src={src} alt={alt} height={imageHeight} width={imageWidth}/>}
+          </div>
         </a>
       }
       {(!url || noLink) && 
