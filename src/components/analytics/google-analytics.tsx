@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Script from "next/script";
 import { useEffect } from "react";
-import * as gtag from './gtag';
+import * as gtag from '../../lib/gtag';
 
 const GoogleAnalytics: React.FC = () => {
   const router = useRouter();
@@ -21,7 +21,7 @@ const GoogleAnalytics: React.FC = () => {
 
   }, [router.events]);
 
-  // if(!gtag.GA_TRACKING_ID) return null;
+  if(!gtag.GA_TRACKING_ID && process.env.NODE_ENV === "production") console.error("GA_TRACKING_ID Missing");
 
   return (
     <>
