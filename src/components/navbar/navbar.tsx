@@ -17,6 +17,8 @@ const NavBar : React.FC<INavBarProps> = () => {
   const [isSticky, setSticky] = useState(false);
   const isHome = useMemo(() => ["/about", "/portfolio"].indexOf(asPath) < 0, [asPath]);
 
+  const isProduction = process.env.NODE_ENV === "production";
+
   useScrollPosition(
     ({ currPos }) => {
       const isVisible = currPos.y < VISIBLE_POSITION;
@@ -67,6 +69,9 @@ const NavBar : React.FC<INavBarProps> = () => {
             </div>
             <div className="hidden sm:flex flex-col justify-center ">
               <ul className="inline-flex items-center">
+                
+                {!isProduction && <li className="px-3 slide-up-sm text-red-500">Env: {process.env.NODE_ENV}</li>}
+
                 {!isHome && 
                   <li className="px-3 slide-up-sm">
                     <Link scroll={true} href={`/`}><a>Home</a></Link>
