@@ -1,7 +1,7 @@
 import { useEffect} from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-
+import { event } from "../../lib/gtag";
 export interface IEntryMotionProps {
   duration?: number;
   delay?: number;
@@ -11,10 +11,13 @@ export interface IEntryMotionProps {
   hidden?: Record<string, any>;
   immediate?: boolean;
   fullSize?: boolean;
+  eventAction?: string;     //for the gtag event - action (defaults to "reveal")
+  eventCategory?: string;    //for the gtag event - category (defaults to "section-viewed")
+  eventLabel?: string;    //for the gtag event - if not set, no event triggered
 }
 
 const EntryMotion : React.FC<IEntryMotionProps> = (props) => {
-  const {duration, delay, triggerOnce, threshold, visible, hidden, immediate, fullSize, children} = props;
+  const {duration, delay, triggerOnce, threshold, visible, hidden, immediate, fullSize, eventAction, eventCategory, eventLabel, children} = props;
 
   const controls = useAnimation();
   const [ref, inView] = useInView({triggerOnce, threshold});
@@ -22,7 +25,10 @@ const EntryMotion : React.FC<IEntryMotionProps> = (props) => {
   useEffect(() => {
     if(immediate) controls.start("visible");
     else if(inView) controls.start("visible");
-  }, [controls, immediate, inView]);
+
+    if(inView && eventLabel) event({action: eventAction, category: eventCategory, label: eventLabel, value: null});
+
+  }, [controls, immediate, inView, eventAction, eventCategory, eventLabel]);
 
   const motionVariants = {
     visible: { ...visible, transition: { duration, delay } },
@@ -52,6 +58,8 @@ EntryMotion.defaultProps = {
   visible: { opacity: 1, translateY: 0 },
   hidden: { opacity: 0, translateY: 35 },
   immediate: false,
+  eventAction: "reveal",
+  eventCategory: "section-viewed",
 };
 
 export const fadeInProps = {

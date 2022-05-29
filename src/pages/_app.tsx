@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   //TODO: REMOVE THIS
   // console.log("GA_TRACKING_ID: ", GA_TRACKING_ID, ", Direct from env: ", process.env.GA_TRACKING_ID, ", environment: ", process.env.NODE_ENV);
   // console.log("SS_NAME_ARTICLES: ", process.env.SS_NAME_ARTICLE);
+  if(!isProduction) console.log("skipping google analytics due to non-production environment.");
   
   return (
     <>

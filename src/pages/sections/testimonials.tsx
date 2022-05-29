@@ -39,7 +39,7 @@ function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonia
 
   return (
     <div className="w-full">
-      <EntryMotion duration={0.9}>
+      <EntryMotion duration={0.9} eventLabel="testimonials">
         <div className="my-8 p-4 py-0 flex-col">
           <div className="flex flex-col items-center justify-center text-center my-4 ml-4 section-header">
             <h2>What my clients say</h2>

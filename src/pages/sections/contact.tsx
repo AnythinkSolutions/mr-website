@@ -8,7 +8,7 @@ const ContactSection: React.FC<IContactSectionProps> = () => {
   
   return (
     <div className="w-full">
-      <EntryMotion duration={0.9}>
+      <EntryMotion duration={0.9} eventLabel="contact-me">
         <div className="flex flex-col items-center my-8 p-4 py-0">
           
           <div className="w-full flex flex-col items-center justify-center my-4 ml-4 section-header">

@@ -80,7 +80,7 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
 
   return (
     <div className="flex flex-col">
-      <EntryMotion threshold={0} duration={0.75} hidden={{opacity: 0, translateY: 50}}>
+      <EntryMotion threshold={0} duration={0.75} hidden={{opacity: 0, translateY: 50}} eventLabel="highlights">
         <div className="flex flex-col items-center my-8 p-4 py-0" ref={ref}>        
 
             <div className="w-full flex flex-col items-center text-center justify-center my-4 ml-4 section-header">

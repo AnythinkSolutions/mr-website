@@ -12,7 +12,10 @@ export const pageview = (url) => {
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/events
 export const event = ({ action, category, label, value }) => {
-  if(!GA_TRACKING_ID) return;
+  
+  console.log("gtag-event: ", action, category, label, value);
+  if(!GA_TRACKING_ID || !window.gtag) return;
+
   window.gtag('event', action, {
     event_category: category,
     event_label: label,

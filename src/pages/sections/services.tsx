@@ -9,8 +9,8 @@ export interface IServicesProps {
 }
 
 const ServicesSection: React.FC<IServicesProps> = ({serviceData}) => {
-  const imgHeight = 260;
-  const imgWidth = 380;
+  // const imgHeight = 260;
+  // const imgWidth = 380;
   
   const services = useMemo<IService[]>(() => {
     if(!serviceData) return [];
@@ -20,7 +20,7 @@ const ServicesSection: React.FC<IServicesProps> = ({serviceData}) => {
 
   return (
     <div className="flex flex-col w-full">
-      <EntryMotion duration={0.9}>
+      <EntryMotion duration={0.9} eventLabel="services">
         <div className="flex flex-col items-center my-8 p-4 py-0">
 
             <div className="w-full flex flex-col items-center justify-center my-4 ml-4 section-header">
