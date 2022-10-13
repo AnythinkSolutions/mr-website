@@ -22,6 +22,7 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
   const [category, setCategory] = useState<string>("All");  
   const { width } = useWindowSize();
   const [itemCount, setItemCount] = useState( width >= SCREEN_WIDTHS.wide ? itemCounts.widescreen : itemCounts.default);
+  const SafeFlipMove = FlipMove as any;   //TODO: upgrade versions
 
   const itemsWithClient = useMemo<IArticle[]>(() => {
     if(!articles || !clients) return [];
@@ -91,7 +92,7 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
             <CategoryFilter articles={highlights} onChange={(item) => setCategory(item)} />
 
             <div className={`flex flex-wrap p-4 justify-center relative ${styles["work-container"]}`}>
-              <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
+              <SafeFlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
                 {displayedItems.map((item, index) => (
                   <div key={item.url}>
                     <EntryMotion delay={index * 0.1} threshold={0} immediate={inView}>
@@ -99,7 +100,7 @@ const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
                     </EntryMotion>
                   </div>
                 ))}
-              </FlipMove>
+              </SafeFlipMove>
             </div>
 
             <Link href="/portfolio">

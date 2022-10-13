@@ -9,7 +9,8 @@ import GoogleAnalytics from '../components/analytics/google-analytics';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const isProduction = process.env.NODE_ENV === "production";
-  
+  const SafeComponent = Component as any;   //TODO: upgrade versions
+
   //TODO: REMOVE THIS
   // console.log("GA_TRACKING_ID: ", GA_TRACKING_ID, ", Direct from env: ", process.env.GA_TRACKING_ID, ", environment: ", process.env.NODE_ENV);
   // console.log("SS_NAME_ARTICLES: ", process.env.SS_NAME_ARTICLE);
@@ -18,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       { isProduction && <GoogleAnalytics /> }
-      <Component {...pageProps} />
+      <SafeComponent {...pageProps} />
     </>
   )
 }

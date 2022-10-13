@@ -1,6 +1,5 @@
-//For some reason, the tracking id doesn't pull from the environment variables.
-// is it because it's running client-side, not on the server
-export const GA_TRACKING_ID = process.env.GA_TRACKING_ID ?? "G-ZLW8SWYFFT"
+//Include a fallback in case env isn't setup. 
+export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID ?? "G-ZLW8SWYFFT"
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url) => {

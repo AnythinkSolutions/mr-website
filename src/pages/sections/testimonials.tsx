@@ -6,6 +6,7 @@ import LogoImage, { clientToImageProps } from "../../components/logo-image/logo-
 import EntryMotion from "../../components/entry-motion/entry-motion";
 
 function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonial[], clients: IClient[]}){
+  const SafeSlider = Slider as any;   //TODO: upgrade versions
 
   const items = useMemo(() => {
     if(testimonials && clients){
@@ -47,9 +48,9 @@ function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonia
           </div>
 
           <div className={styles.sliderContainer}>
-            <Slider {...settings}>
+            <SafeSlider {...settings}>
               {items?.map(item => <Testimonial key={item.mapKey} item={item} />)}
-            </Slider>
+            </SafeSlider>
           </div>
 
         </div>

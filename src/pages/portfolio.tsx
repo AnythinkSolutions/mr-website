@@ -19,6 +19,7 @@ export interface IPortfolioProps {
     
 const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
   const [category, setCategory] = useState<string>("All");    
+  const SafeFlipMove = FlipMove as any;   //TODO: upgrade versions
 
   const writings = useMemo<IArticle[]>(() => {
     if(!portfolioData || !clientData) return [];
@@ -78,13 +79,13 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
         </div>
 
         <div className={`grid lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-6 p-4 mt-8 justify-center relative ${styles["work-container"]}`}>
-          <FlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
+          <SafeFlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
             {displayedItems.map((item, index) => (
               <div key={item.url} >
                 <PortfolioCard key={item.url} article={item}/>
               </div>
             ))}
-          </FlipMove>
+          </SafeFlipMove>
         </div>
 
       </main>
