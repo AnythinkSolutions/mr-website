@@ -1,11 +1,12 @@
 # Website Info
 
-Website for Meghan Rabbitt, Inc.
+Custom Website for Meghan Rabbitt, Inc. with a Google Sheet as the CMS/Database.
 
 - Built in [Next.js](https://nextjs.org/)
 - Bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 - Built by Brian Schwalm at [Anythink Solutions](https://anythinksolutions.com)
 - Deployed to [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
+- Data served from a Google Sheet for a simple, no-config ad-hoc headless CMS
 
 ## Getting Started
 
