@@ -9,7 +9,7 @@ export interface IShowcaseProps {
   delayStart?: number;
 }
 
-const Showcase: React.FC<IShowcaseProps> = ({articles, delayStart = 0}) => {
+const Showcase = ({articles, delayStart = 0}: IShowcaseProps) => {
 
   const highlights = useMemo(() => {
     const items = articles.filter(art => art.isHighlighted);

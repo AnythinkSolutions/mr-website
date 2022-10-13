@@ -6,7 +6,7 @@ import LogoImage, { clientToImageProps } from "../../components/logo-image/logo-
 import EntryMotion from "../../components/entry-motion/entry-motion";
 
 function TestimonialsSection({testimonials, clients}: {testimonials: ITestimonial[], clients: IClient[]}){
-  const SafeSlider = Slider as any;   //TODO: upgrade versions
+  const SafeSlider = Slider as any;   //TODO: dependency isn't ready for React 18
 
   const items = useMemo(() => {
     if(testimonials && clients){

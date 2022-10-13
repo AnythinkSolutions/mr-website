@@ -8,9 +8,9 @@ export interface IServicesProps {
   serviceData: IService[],
 }
 
-const ServicesSection: React.FC<IServicesProps> = ({serviceData}) => {
-  // const imgHeight = 260;
-  // const imgWidth = 380;
+const ServicesSection = ({serviceData}: IServicesProps) => {
+  const minHeight = 270;
+  const minWidth = 325;
   
   const services = useMemo<IService[]>(() => {
     if(!serviceData) return [];
@@ -31,7 +31,7 @@ const ServicesSection: React.FC<IServicesProps> = ({serviceData}) => {
             <div className="flex flex-wrap gap-8 mt-6 justify-center">
               {services.map((svc, index) => (
                 <EntryMotion key={svc.key} delay={index * 0.2}>
-                  <div className="h-full w-full" style={{minHeight: 270, minWidth: 325}}>
+                  <div className="h-full w-full" style={{minHeight, minWidth}}>
                     <FlipCard title={svc.title} description={svc.description} backColor="sky-200">
                       <Image src={svc.image} alt={svc.title} layout="fill" objectFit="cover"/>
                     </FlipCard>  

@@ -8,7 +8,7 @@ export interface ICategoryFilterProps {
   onChange: (category: string) => void;
 }
 
-const CategoryFilter : React.FC<ICategoryFilterProps> = ({articles, maxCount = 6, onChange}) => {
+const CategoryFilter = ({articles, maxCount = 6, onChange}: ICategoryFilterProps) => {
   
   const categories = useMemo<string[]>(() => {
     if(!articles || articles.length === 0) return ["All"];

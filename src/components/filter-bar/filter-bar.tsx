@@ -14,7 +14,7 @@ export interface IFilterBarProps {
   selectedIndex: number;
 }
 
-const FilterBar : React.FC<IFilterBarProps> = ({items, onChange, selectedIndex}) => {
+const FilterBar = ({items, onChange, selectedIndex}: IFilterBarProps) => {
   const highlightStyle = useMemo(() => {
     const itemOffset = (itemSize * selectedIndex);
     const leftPos = `calc(2rem + ${itemOffset}px + ${selectedIndex}rem)`;

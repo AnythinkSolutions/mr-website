@@ -1,5 +1,5 @@
+import { ReactNode } from "react";
 import Image from "next/image";
-
 import styles from "./card.module.scss";
 
 export interface ICardProps {
@@ -7,9 +7,10 @@ export interface ICardProps {
   alt: string;
   url?: string;   //url for a click item
   onClick?: (item: any) => void;
+  children: ReactNode;
 }
 
-const Card : React.FC<ICardProps> = ({src, alt, url, onClick, children}) => {
+const Card = ({src, alt, url, onClick, children}: ICardProps) => {
 
   
   return (
@@ -34,9 +35,10 @@ interface ILinkOrButtonProps {
   url?: string;
   onClick?: (item: any) => void;
   className?: string;
+  children: ReactNode;
 }
 
-const LinkOrButtonWrapper : React.FC<ILinkOrButtonProps> = ({url, onClick, className, children}) => {
+const LinkOrButtonWrapper = ({url, onClick, className, children}: ILinkOrButtonProps) => {
 
   return (
     <>

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 import { IClient } from "../../utilities/app-types";
 import LogoImage, { clientToImageProps } from "../logo-image/logo-image";
 
@@ -20,7 +20,7 @@ export interface IShowcaseCardProps {
   priority?: boolean;
 }
 
-const ShowcaseCard : React.FC<IShowcaseCardProps> = ({config, url, onClick, priority = false}) => {
+const ShowcaseCard = ({config, url, onClick, priority = false}: IShowcaseCardProps) => {
 
   const logoProps = useMemo(() => clientToImageProps(config?.clientObject), [config?.clientObject]);
 
@@ -55,9 +55,10 @@ ShowcaseCard.defaultProps = {
 interface ILinkOrButtonProps {
   url?: string;
   onClick?: (item: any) => void;
+  children: ReactNode;
 }
 
-const LinkOrButtonWrapper : React.FC<ILinkOrButtonProps> = ({url, onClick, children}) => {
+const LinkOrButtonWrapper = ({url, onClick, children}: ILinkOrButtonProps) => {
 
   return (
     <>

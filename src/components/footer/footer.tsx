@@ -1,9 +1,7 @@
 import Image from 'next/image';
 import styles from './footer.module.scss'
 
-export interface IFooterProps {}
-
-const Footer : React.FC<IFooterProps> = () => {
+const Footer = () => {
 
   return (
     <footer className={`flex justify-between items-center p-8 border-t`}>

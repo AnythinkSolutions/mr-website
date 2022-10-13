@@ -10,7 +10,7 @@ interface IFloatCardProps{
   size?: "sm" | "md" | "lg";
 }
 
-const FloatCard: React.FC<IFloatCardProps> = forwardRef((props, ref: Ref<HTMLDivElement>) => {
+const FloatCard = forwardRef((props: IFloatCardProps, ref: Ref<HTMLDivElement>) => {
   const {item, size: size} = props;
   const path = useMemo(() => getImgSrc(item.src), [item.src]);
   const logoProps = useMemo(() => clientToImageProps(item?.clientObject), [item?.clientObject]);

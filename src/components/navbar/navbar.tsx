@@ -9,9 +9,7 @@ import EntryMotion from "../entry-motion/entry-motion";
 const VISIBLE_POSITION = -50;
 const hiddenState = { opacity: 0, translateY: -50 };
 
-export interface INavBarProps {}
-
-const NavBar : React.FC<INavBarProps> = () => {  
+const NavBar = () => {  
   const [paths, setPaths] = useState({home: '', about: '/about'});
   const { asPath } = useRouter();
   const [isSticky, setSticky] = useState(false);

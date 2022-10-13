@@ -1,4 +1,4 @@
-import { useEffect} from "react";
+import { ReactNode, useEffect} from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { event } from "../../lib/gtag";
@@ -14,9 +14,10 @@ export interface IEntryMotionProps {
   eventAction?: string;     //for the gtag event - action (defaults to "reveal")
   eventCategory?: string;    //for the gtag event - category (defaults to "section-viewed")
   eventLabel?: string;    //for the gtag event - if not set, no event triggered
+  children: ReactNode;
 }
 
-const EntryMotion : React.FC<IEntryMotionProps> = (props) => {
+const EntryMotion = (props: IEntryMotionProps) => {
   const {duration, delay, triggerOnce, threshold, visible, hidden, immediate, fullSize, eventAction, eventCategory, eventLabel, children} = props;
 
   const controls = useAnimation();

@@ -1,14 +1,14 @@
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 import styles from "./flip-card.module.scss";
 
 export interface IFlipCardProps {
   title: string;
   description?: string;
-  children: ReactElement;
   backColor: string;
+  children: ReactNode;
 }
 
-const FlipCard: React.FC<IFlipCardProps> = ({title, description, backColor, children}) => {
+const FlipCard = ({title, description, backColor, children}: IFlipCardProps) => {
   return (
     <div className={`${styles.flipCard} h-full w-full`}>
       <div className={`${styles.innerCard}`}>

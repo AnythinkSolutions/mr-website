@@ -22,7 +22,7 @@ const sizeFactor = {
   auto: 1,
 };
 
-const LogoImage: React.FC<ILogoImageProps> = ({src, alt, url, hoverAnimation, size, hoverGrayscale, noLink}) => {
+const LogoImage = ({src, alt, url, hoverAnimation, size, hoverGrayscale, noLink}: ILogoImageProps) => {
   const isAuto = useMemo(() => size === "auto", [size]);
   const containerStyles = useMemo(() => isAuto ? "relative h-full w-full" : "", [isAuto]);
   const imageHeight = useMemo(() => 40 * sizeFactor[size ?? "md"], [size]);

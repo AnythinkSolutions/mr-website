@@ -1,10 +1,7 @@
 import Image from "next/image";
 import EntryMotion from "../../components/entry-motion/entry-motion";
 
-export interface IContactSectionProps {
-}
-
-const ContactSection: React.FC<IContactSectionProps> = () => {
+const ContactSection = () => {
   
   return (
     <div className="w-full">

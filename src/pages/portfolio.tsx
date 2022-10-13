@@ -19,7 +19,7 @@ export interface IPortfolioProps {
     
 const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
   const [category, setCategory] = useState<string>("All");    
-  const SafeFlipMove = FlipMove as any;   //TODO: upgrade versions
+  const SafeFlipMove = FlipMove as any;      //TODO: dependency isn't ready for React 18
 
   const writings = useMemo<IArticle[]>(() => {
     if(!portfolioData || !clientData) return [];

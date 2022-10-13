@@ -11,7 +11,7 @@ export interface IPortfolioCardProps {
   // url?: string;   //url for a click item
 }
 
-const PortfolioCard : React.FC<IPortfolioCardProps> = ({article}) => {
+const PortfolioCard = ({article}: IPortfolioCardProps) => {
 
   const logoProps = useMemo(() => clientToImageProps(article?.clientObject), [article?.clientObject]);
 

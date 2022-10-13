@@ -17,12 +17,12 @@ export interface IPortfolioProps {
   clients: IClient[];
 }
 
-const PortfolioSection: React.FC<IPortfolioProps> = ({articles, clients}) => {
+const PortfolioSection = ({articles, clients}: IPortfolioProps) => {
   const [ref, inView] = useInView({triggerOnce: true, threshold: 0.33});
   const [category, setCategory] = useState<string>("All");  
   const { width } = useWindowSize();
   const [itemCount, setItemCount] = useState( width >= SCREEN_WIDTHS.wide ? itemCounts.widescreen : itemCounts.default);
-  const SafeFlipMove = FlipMove as any;   //TODO: upgrade versions
+  const SafeFlipMove = FlipMove as any;      //TODO: dependency isn't ready for React 18
 
   const itemsWithClient = useMemo<IArticle[]>(() => {
     if(!articles || !clients) return [];
