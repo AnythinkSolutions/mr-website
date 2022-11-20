@@ -12,7 +12,7 @@ export interface IShowcaseProps {
 const Showcase = ({articles, delayStart = 0}: IShowcaseProps) => {
 
   const highlights = useMemo(() => {
-    const items = articles.filter(art => art.isHighlighted);
+    const items = articles.filter(art => art.isHighlighted && !!art.url);
     return items;
   }, [articles]);
 

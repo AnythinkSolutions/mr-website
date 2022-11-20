@@ -3,10 +3,10 @@ import { IArticle } from "../../utilities/app-types";
 import Image from "next/image";
 import LogoImage, { clientToImageProps } from "../logo-image/logo-image";
 import styles from "./float-card.module.scss";
+import { getImgSrc } from "../../utilities/image-utilities";
 
 interface IFloatCardProps{
   item: IArticle;
-  // index: number;
   size?: "sm" | "md" | "lg";
 }
 
@@ -52,12 +52,12 @@ FloatCard.defaultProps = {
   size: "md",
 };
 
-const basePath = "/assets/images";
+// const basePath = "/assets/images";
 
-function getImgSrc(imgUrl: string){
-  if(!imgUrl) return `${basePath}/placeholder-3.jpg`;
-  else if(imgUrl.startsWith("https://res.cloudinary.com")){
-    return imgUrl;
-  }
-  else return imgUrl;
-}
+// function getImgSrc(imgUrl: string){
+//   if(!imgUrl) return `${basePath}/placeholder-3.jpg`;
+//   else if(imgUrl.startsWith("https://res.cloudinary.com")){
+//     return imgUrl;
+//   }
+//   else return imgUrl;
+// }

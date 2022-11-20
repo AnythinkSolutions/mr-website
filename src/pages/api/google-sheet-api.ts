@@ -8,7 +8,7 @@ export async function getPortfolioData() {
   const articles = await getSheetData(sheetName, mapRowToArticle);
 
   const ordered = articles
-    .filter(i => !i.isHidden)
+    .filter(i => !i.isHidden && !!i.url)
     .sort((a, b) => (a.order ?? 999)  - (b.order ?? 999));
 
   return ordered;

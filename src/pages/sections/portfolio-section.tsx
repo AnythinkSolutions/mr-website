@@ -94,9 +94,9 @@ const PortfolioSection = ({articles, clients}: IPortfolioProps) => {
             <div className={`flex flex-wrap p-4 justify-center relative ${styles["work-container"]}`}>
               <SafeFlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
                 {displayedItems.map((item, index) => (
-                  <div key={item.url}>
+                  <div key={index}>
                     <EntryMotion delay={index * 0.1} threshold={0} immediate={inView}>
-                      <FloatCard key={item.url} item={item}/>
+                      <FloatCard item={item}/>
                     </EntryMotion>
                   </div>
                 ))}

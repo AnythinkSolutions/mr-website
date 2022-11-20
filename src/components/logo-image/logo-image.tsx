@@ -54,8 +54,6 @@ export default LogoImage;
 
 LogoImage.defaultProps = {
   size: "md",
-  // height: 32,
-  // width: 108,
   hoverAnimation: false,
   hoverGrayscale: false,
 };
@@ -64,8 +62,6 @@ export function clientToImageProps(client?: IClient): IImageProps {
   return {
     src: client?.logo ?? "",
     alt: client?.name ?? "",
-    // height: client?.height ?? 32,
-    // width: client?.width ?? 108,
     url: client?.url ?? ""
   };
 }
