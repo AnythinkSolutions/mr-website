@@ -23,7 +23,7 @@ function BookSection(){
           </div>
 
           <Image src={bookAnnouncement} alt="Book Announcement" height={imageSize.height} width={imageSize.width} layout="fixed" objectFit="contain" />
-          <p className="font-normal mt-3 px-4">{bookBlurb}</p>
+          <p className="font-normal mt-4 px-4">{bookBlurb}</p>
         </div>
 
       </EntryMotion>
