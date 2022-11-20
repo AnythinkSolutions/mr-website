@@ -15,6 +15,7 @@ import Footer from "../components/footer/footer";
 import { getClientData, getPortfolioData, getServiceData, getTestimonialData } from "./api/google-sheet-api";
 
 import styles from '../styles/Home.module.scss'
+import BookSection from "./sections/book";
 
 interface IPageProps {
   portfolioData: IArticle[];
@@ -38,7 +39,10 @@ const Home: NextPage<IPageProps> = (props) => {
       <main className={styles.main}>
         <NavBar />
         <HeaderSection />
-        <div className={`${styles.section}`}>
+        <div className={styles.section_compact}>
+          <BookSection />
+        </div>
+        <div className={`!pt-0 ${styles.section}`}>
           <div id="clients" className="scroll-anchor" />
           <ClientsSection data={clientData}/>
         </div>
