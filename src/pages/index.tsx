@@ -16,6 +16,8 @@ import { getClientData, getPortfolioData, getServiceData, getTestimonialData } f
 
 import styles from '../styles/Home.module.scss'
 import BookSection from "./sections/book";
+import SubscriptionProvider from "../components/subscriptions/subscription-provider";
+import SubscribeForm from "../components/subscriptions/subscription-form";
 
 interface IPageProps {
   portfolioData: IArticle[];
@@ -36,35 +38,47 @@ const Home: NextPage<IPageProps> = (props) => {
         <link rel="icon" href="/mr-initials-white.gif" />
       </Head>
 
-      <main className={styles.main}>
-        <NavBar />
-        <HeaderSection />
-        <div className={styles.section_compact}>
-          <BookSection />
-        </div>
-        <div className={`!pt-0 ${styles.section}`}>
-          <div id="clients" className="scroll-anchor" />
-          <ClientsSection data={clientData}/>
-        </div>
-        <div className={`${styles.section_gray}`}>
-          <div id="services" className="scroll-anchor" />
-          <ServicesSection serviceData={serviceData} />
-        </div>
-        <div className={`${styles.section}`}>
-          <div id="work" className="scroll-anchor" />
-          <PortfolioSection articles={portfolioData} clients={clientData}/>
-        </div>
-        <div className={`${styles.section_gray}`}>
-          <div id="testimonials" className="scroll-anchor" />
-          <TestimonialsSection testimonials={testimonialData} clients={clientData}/>
-        </div>
-        <div className={`${styles.section}`}>
-          <div id="contact" className="scroll-anchor" />
-          <ContactSection />
-        </div>
-      </main>
+      <SubscriptionProvider>
+        <main className={styles.main}>
+          <NavBar />
+          <HeaderSection />
+          <div className={styles.section_compact}>
+            <BookSection />
+          </div>
+          
+          <div className={`${styles.section}`}>
+            <SubscribeForm />
+          </div>
+          
+          <div className={`!pt-0 ${styles.section}`}>
+            <div id="clients" className="scroll-anchor" />
+            <ClientsSection data={clientData}/>
+          </div>
+          <div className={`${styles.section_gray}`}>
+            <div id="services" className="scroll-anchor" />
+            <ServicesSection serviceData={serviceData} />
+          </div>
+          <div className={`${styles.section}`}>
+            <div id="work" className="scroll-anchor" />
+            <PortfolioSection articles={portfolioData} clients={clientData}/>
+          </div>
+          <div className={`${styles.section_gray}`}>
+            <div id="testimonials" className="scroll-anchor" />
+            <TestimonialsSection testimonials={testimonialData} clients={clientData}/>
+          </div>
 
-      <Footer />
+          <div className={`${styles.section}`}>
+            <SubscribeForm />
+          </div>
+
+          <div className={`${styles.section}`}>
+            <div id="contact" className="scroll-anchor" />
+            <ContactSection />
+          </div>
+        </main>
+
+        <Footer />
+      </SubscriptionProvider>
     </div>
   )
 }
