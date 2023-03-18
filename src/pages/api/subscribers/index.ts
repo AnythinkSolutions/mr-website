@@ -41,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 const createSubscriber = (body: any) : {email: string, data: Subscriber} | null => {
   
-  const { email, firstName, lastName } = body;
+  const { email, firstName, lastName, subscribedOn } = body;
 
   //email address is missing or invalid
   if(!isValidEmail(email)) return null;
@@ -52,7 +52,7 @@ const createSubscriber = (body: any) : {email: string, data: Subscriber} | null 
       email,
       firstName,
       lastName,
-      subscribedOn: (new Date().toUTCString()),
+      subscribedOn, //: (new Date().toUTCString()),
       source: "meghanrabbitt.com",
     }
   };

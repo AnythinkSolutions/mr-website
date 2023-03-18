@@ -4,4 +4,5 @@ export type Subscriber = {
   firstName?: string;
   lastName?: string;
   nonHumans?: string;
+  subscribedOn?: string;
 }

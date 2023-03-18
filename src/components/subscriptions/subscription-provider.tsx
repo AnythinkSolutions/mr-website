@@ -2,6 +2,7 @@ import { ChangeEvent, createContext, ReactNode, useCallback, useEffect, useState
 import cookieCutter from "cookie-cutter";
 import { Subscriber } from "./subscription-types";
 import { validateInputs } from "./subscription-utils";
+import { decodeCookie, encodeCookie } from "../../utilities/string-utilities";
 
 export type SubscriptionContext = {
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -37,7 +38,6 @@ const SubscriptionProvider = ({children}: ISubscriptionProviderProps) => {
     setError(null);
 
     if(values.email){
-
       const invalid = validateInputs(values);
       if(invalid){
         setError(invalid);
@@ -47,6 +47,7 @@ const SubscriptionProvider = ({children}: ISubscriptionProviderProps) => {
       setWorking(true);
 
       try{
+        values.subscribedOn = (new Date()).toISOString(); //track when they subscribed
         const result = await fetch(subscribeUrl, {
           method: "POST",
           body: JSON.stringify(values),
@@ -57,11 +58,12 @@ const SubscriptionProvider = ({children}: ISubscriptionProviderProps) => {
 
         //422 means this is a duplicate, so just show them we got it!
         if(result.status === 201 || result.status === 422){
+          const cookieData = values;
           setValues({email: "", firstName: "", lastName: ""});
           setError("");
           setSubscribed(true);
           //use a cookie to track that they're a subscriber
-          cookieCutter.set(subscribedCookie, new Date().toISOString());
+          cookieCutter.set(subscribedCookie, encodeCookie(cookieData));
         }
         else{
           console.error("Fetch error adding to subscriber list", result);
@@ -81,6 +83,10 @@ const SubscriptionProvider = ({children}: ISubscriptionProviderProps) => {
   useEffect(() => {
     const alreadySubscribed = cookieCutter.get(subscribedCookie);
     if(!!alreadySubscribed) setSubscribed(true);
+    if(!!alreadySubscribed) {
+      const data = decodeCookie(alreadySubscribed);
+      console.log("subscriber data", data);
+    }
   }, []);
 
   const ctx: SubscriptionContext= {

@@ -9,7 +9,7 @@ function SubscribeForm({title, sectionHeader}: ISubscribeFormProps){
   const { onInputChange, onSubscribe, values, error, isSubscribed, isWorking } = useSubscription();
 
   return (
-    <div className="flex flex-col w-full items-center"> {/* className="flex flex-col items-center content-center my-4 py-4 border rounded-lg bg-yellow-200"> */} 
+    <div className="flex flex-col w-full items-center">
       {!isSubscribed && sectionHeader && (
           <>
             <div className="w-full flex flex-col items-center justify-center my-4 ml-4 section-header">
@@ -48,7 +48,6 @@ function SubscribeForm({title, sectionHeader}: ISubscribeFormProps){
             <input id="lastName" value={values.lastName} placeholder="Last name" onChange={onInputChange} disabled={isWorking} className="border-2 rounded px-4 py-2 w-full text-xl"/>
           </div>
           <input id="nonHumans" value={values.nonHumans} placeholder="this is not for people" onChange={onInputChange} className="hidden" />
-          {/* <input id="name" value={values.name} placeholder="Enter your full name" onChange={onInputChange} disabled={isWorking} className="border-2 rounded px-4 py-2 w-full text-xl"/> */}
           <button onClick={onSubscribe} disabled={isWorking} className="border rounded bg-neutral-500 text-white text-2xl font-light py-2 min-w-[200px] mt-4">
             {isWorking ? "Working..." : "Subscribe"}
           </button>
