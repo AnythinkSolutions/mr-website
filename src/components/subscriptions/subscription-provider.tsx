@@ -1,5 +1,7 @@
-import { ChangeEvent, createContext, ReactNode, useCallback, useMemo, useState } from "react";
+import { ChangeEvent, createContext, ReactNode, useCallback, useEffect, useState } from "react";
+import cookieCutter from "cookie-cutter";
 import { Subscriber } from "./subscription-types";
+import { validateInputs } from "./subscription-utils";
 
 export type SubscriptionContext = {
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -17,12 +19,10 @@ export interface ISubscriptionProviderProps {
 }
 
 const subscribeUrl = "/api/subscribers";
-
-//TODO: add a cookie so we know when someone has already subscribed
+const subscribedCookie = "mr-subscribed";
 
 const SubscriptionProvider = ({children}: ISubscriptionProviderProps) => {
-
-  const [values, setValues] = useState<Subscriber>({ email: "", name: ""});
+  const [values, setValues] = useState<Subscriber>({ email: "", firstName: "", lastName: ""});
   const [error, setError] = useState<any>(null);
   const [isSubscribed, setSubscribed] = useState(false);
   const [isWorking, setWorking] = useState(false);
@@ -36,7 +36,14 @@ const SubscriptionProvider = ({children}: ISubscriptionProviderProps) => {
   const onSubscribe = useCallback(async () => {
     setError(null);
 
-    if(values.email && values.email.length > 3){
+    if(values.email){
+
+      const invalid = validateInputs(values);
+      if(invalid){
+        setError(invalid);
+        return;
+      }
+
       setWorking(true);
 
       try{
@@ -48,29 +55,40 @@ const SubscriptionProvider = ({children}: ISubscriptionProviderProps) => {
           }
         });
 
-        if(result.status === 201){
-          setValues({email: "", name: ""});
+        //422 means this is a duplicate, so just show them we got it!
+        if(result.status === 201 || result.status === 422){
+          setValues({email: "", firstName: "", lastName: ""});
+          setError("");
           setSubscribed(true);
-          //TODO: add a cookie so we know when they're returning?
+          //use a cookie to track that they're a subscriber
+          cookieCutter.set(subscribedCookie, new Date().toISOString());
         }
         else{
-          setError(result);
+          console.error("Fetch error adding to subscriber list", result);
+          setError(`Unfortunately, we had a problem adding you to our subscriber list. Please confirm your email address and try again.`);
         }
       }
-      catch(error){
-        setError(error);
+      catch(error: any){
+        console.error("Unhandled error adding to subscriber list", error);
+        setError(`Unfortunately, we had an unexpected problem adding you to our subscriber list. Please try again.`);
       }
 
       setWorking(false);
     }
   }, [values]);
 
+  //Check to see if they're already subscribed.
+  useEffect(() => {
+    const alreadySubscribed = cookieCutter.get(subscribedCookie);
+    if(!!alreadySubscribed) setSubscribed(true);
+  }, []);
+
   const ctx: SubscriptionContext= {
     onInputChange,
     onSubscribe,
     values,
     error,
-    isSubscribed,
+    isSubscribed: isSubscribed,
     isWorking,
   };
 

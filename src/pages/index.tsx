@@ -46,8 +46,10 @@ const Home: NextPage<IPageProps> = (props) => {
             <BookSection />
           </div>
           
-          <div className={`${styles.section}`}>
-            <SubscribeForm />
+          <div className={`${styles.section} flex justify-center`}>
+            <div className="flex flex-col items-center content-center my-4 py-4 border rounded-lg bg-yellow-200">
+              <SubscribeForm title="Stay up to date with the latest news and updates."/>
+            </div>
           </div>
           
           <div className={`!pt-0 ${styles.section}`}>
@@ -67,11 +69,11 @@ const Home: NextPage<IPageProps> = (props) => {
             <TestimonialsSection testimonials={testimonialData} clients={clientData}/>
           </div>
 
-          <div className={`${styles.section}`}>
-            <SubscribeForm />
+          <div className={`${styles.section} flex justify-center`}>
+            <SubscribeForm title="Subscribe" sectionHeader/>
           </div>
 
-          <div className={`${styles.section}`}>
+          <div className={`${styles.section_gray}`}>
             <div id="contact" className="scroll-anchor" />
             <ContactSection />
           </div>

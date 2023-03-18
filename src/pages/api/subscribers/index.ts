@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { Subscriber } from "../../../components/subscriptions/subscription-types";
 import firebaseService from "../../../lib/firebase";
+import { isValidEmail } from "../../../utilities/string-utilities";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   return new Promise<void>(resolve => {
@@ -8,21 +10,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       resolve();
     }
     else{
-      const { body } = req;
+      const { body } = req;      
+      
       saveData(body).then(result => {
-        if(result === true){
+        if(result === ""){
           res.statusCode = 201;
           res.end();
         }
+        else if(result === "duplicate"){
+          // res.json({error: "You are already subscribed!"});
+          res.status(422).end();
+        }
         else{
-          res.json({error: "invalid request, or error."});
-          res.status(400).end();
+          res.json({error: result});
+          res.statusCode = 400;
+          res.end();
         }
 
         resolve();
       })
       .catch(error => {
-        res.json(error);
+        res.json({error: error.toString()});
         res.status(500).end();
         resolve();
       });  
@@ -30,22 +38,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
 }
 
-const emailRegex = /^([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
 
-
-const createSubscriber = (body: any) => {
+const createSubscriber = (body: any) : {email: string, data: Subscriber} | null => {
   
-  const { email, name } = body;
+  const { email, firstName, lastName } = body;
 
-  if(!email || !emailRegex.test(email)){
-    return null;  //email address is missing or invalid
-  }
+  //email address is missing or invalid
+  if(!isValidEmail(email)) return null;
 
   const subscriber = {
     email,
     data: {
       email,
-      name,
+      firstName,
+      lastName,
       subscribedOn: (new Date().toUTCString()),
       source: "meghanrabbitt.com",
     }
@@ -54,12 +60,13 @@ const createSubscriber = (body: any) => {
   return subscriber;
 };
 
-
-const saveData = async (body: any) => {
+//-- Does the work of validating and saving the data.
+const saveData = async (body: any) : Promise<string> => {
+  
   const subscriber = createSubscriber(body);
-
-  if(!subscriber) return false;
-
+  if(!subscriber) return "invalid subscriber data";
+  if(await isAlreadySubscribed(subscriber)) return "duplicate";
+      
   try{
     const db = firebaseService().db;
 
@@ -69,10 +76,30 @@ const saveData = async (body: any) => {
 
     console.log("subscriber write response: ", result);
 
-    return true;
+    return "";
   }
   catch(ex){
-    console.error("error saving to firebase", ex);
+    console.error("error saving data", ex);
+    return "unexpected error";
+  }
+}
+
+//-- Checks to see if this email address is already subscribed.
+const isAlreadySubscribed = async (subscriber: Subscriber) => {
+  try{
+    const db = firebaseService().db;
+
+    const docRef = db.collection("/subscribers").doc(subscriber.email);
+    const docSnapshot = await docRef.get();
+    if(docSnapshot.exists){
+      console.log(`subscriber ${subscriber.email} attempted to re-subscribe.`);
+      return true;
+    }
+
     return false;
+  }
+  catch(ex){
+    console.error("error checking for dupe email", ex);
+    return "unexpected error";
   }
 }

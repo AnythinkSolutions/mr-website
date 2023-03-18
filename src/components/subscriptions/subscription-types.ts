@@ -1,5 +1,7 @@
 
 export type Subscriber = {
   email: string;
-  name: string;
+  firstName?: string;
+  lastName?: string;
+  nonHumans?: string;
 }
