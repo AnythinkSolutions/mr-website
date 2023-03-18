@@ -9,7 +9,7 @@ function SubscribeForm({title, sectionHeader}: ISubscribeFormProps){
   const { onInputChange, onSubscribe, values, error, isSubscribed, isWorking } = useSubscription();
 
   return (
-    <div className="flex flex-col w-full items-center">
+    <div className="flex flex-col w-full items-center px-2 sm:px-0">
       {!isSubscribed && sectionHeader && (
           <>
             <div className="w-full flex flex-col items-center justify-center my-4 ml-4 section-header">
@@ -21,9 +21,9 @@ function SubscribeForm({title, sectionHeader}: ISubscribeFormProps){
         )
       }
       {!isSubscribed && !sectionHeader && (
-          <div className="flex flex-col items-center w-3/5">
-            <span className="text-4xl text-center mb-4">{title}</span>
-            <span className="text-2xl font-light text-center mb-4">Be the first to get information about the book, my writing and other exciting news.</span>
+          <div className="flex flex-col items-center md:w-3/5">
+            <span className="text-3xl sm:text-4xl text-center mb-2 sm:mb-4">{title}</span>
+            <span className="text-xl sm:text-2xl font-light text-center mb-4">Be the first to get information about the book, my writing and other exciting news.</span>
           </div>
         )
       }
@@ -41,7 +41,7 @@ function SubscribeForm({title, sectionHeader}: ISubscribeFormProps){
       )}
       
       {!isSubscribed && (
-        <div className="flex flex-col my-2 w-1/2 gap-y-2 items-center">
+        <div className="flex flex-col my-2 md:w-1/2 gap-y-2 items-center">
           <input id="email" value={values.email} placeholder="Enter your email address*" onChange={onInputChange} disabled={isWorking} className="border-2 rounded px-4 py-2 w-full text-xl"/>
           <div className="flex justify-between w-full">
             <input id="firstName" value={values.firstName} placeholder="First name*" onChange={onInputChange} disabled={isWorking} className="border-2 rounded px-4 py-2 w-full text-xl mr-2"/>  
