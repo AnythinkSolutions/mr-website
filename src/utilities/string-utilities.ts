@@ -1,3 +1,4 @@
+import { Subscriber } from './../components/subscriptions/subscription-types';
 export function onlyUniqueFilter(value: any, index: number, self: any[]) {
   return self.map(v => v.toLowerCase()).indexOf(value.toLowerCase()) === index;
 }
@@ -30,8 +31,8 @@ export const encodeCookie = (obj: Record<string, any>) : string => {
   return enc;
 }
 
-export const decodeCookie = (encodedStr: string) : string => {
+export const decodeCookie = (encodedStr: string) : Partial<Subscriber> => {
   const dec = base64Decode(encodedStr);
-  const str = JSON.parse(dec);
-  return str;
+  const json = JSON.parse(dec);
+  return json;
 }

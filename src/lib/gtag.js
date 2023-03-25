@@ -21,3 +21,27 @@ export const event = ({ action, category, label, value }) => {
     value: value,
   });
 };
+
+export const subscriberVisit = () => {
+  event({
+    action: "subscriber-visit",
+    category: "subscriptions",
+    label: "email-list",
+  });
+}
+
+export const subscriberJoin = (isAlreadySubscribed = false) => {
+  event({
+    action: isAlreadySubscribed ? "re-subscribe" : "subscribe",
+    category: "subscriptions",
+    label: "email-list",
+  });
+}
+
+export const botSubscribe = () => {
+  event({
+    action: "bot-subscribe-attempt",
+    category: "subscriptions",
+    label: "email-list"
+  });
+}

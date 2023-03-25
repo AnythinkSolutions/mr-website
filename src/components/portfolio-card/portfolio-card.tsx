@@ -5,6 +5,7 @@ import LogoImage, { clientToImageProps } from "../logo-image/logo-image";
 
 import styles from "../flat-card/flat-card.module.scss";
 import { getImgSrc } from "../../utilities/image-utilities";
+import { event } from "../../lib/gtag";
 
 export interface IPortfolioCardProps {
   article: IArticle;
@@ -16,9 +17,13 @@ const PortfolioCard = ({article}: IPortfolioCardProps) => {
 
   if(!article || !article.url) return null;
 
+  const trackClick = () => {
+    event({action: "portfolio-clicked", category: "open-article", label: article.url, value: null});
+  }
+
   return (
     <div className={`rounded-lg relative w-full h-28 overflow-hidden border border-slate-200 bg-slate-50 ${styles.hoverFloat}`}>
-      <a href={article.url} target="_blank" rel="noreferrer">
+      <a href={article.url} target="_blank" rel="noreferrer" onClick={trackClick}>
         <div className="w-full h-full grid grid-cols-4 grid-rows-3 gap-1">
           <div className="row-span-3 rounded-lg relative">
             <Image priority={false} src={imagePath} alt={article.alt ?? "article image"} layout="fill" objectFit="cover" />

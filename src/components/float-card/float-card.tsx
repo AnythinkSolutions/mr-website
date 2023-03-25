@@ -4,6 +4,7 @@ import Image from "next/image";
 import LogoImage, { clientToImageProps } from "../logo-image/logo-image";
 import styles from "./float-card.module.scss";
 import { getImgSrc } from "../../utilities/image-utilities";
+import { event } from "../../lib/gtag";
 
 interface IFloatCardProps{
   item: IArticle;
@@ -15,9 +16,13 @@ const FloatCard = forwardRef((props: IFloatCardProps, ref: Ref<HTMLDivElement>) 
   const path = useMemo(() => getImgSrc(item.src), [item.src]);
   const logoProps = useMemo(() => clientToImageProps(item?.clientObject), [item?.clientObject]);
 
+  const trackClick = () => {
+    event({action: "highlight-clicked", category: "open-article", label: item.url, value: null});
+  }
+
   return (
     <div className={`bg-slate-50 border border-slate-200 hover:bg-white mx-2 my-4 pb-2 ${styles.hoverFloat} ${styles[size ?? "md"]}`} ref={ref}>
-      <a href={item.url} target="_blank" rel="noreferrer">
+      <a href={item.url} target="_blank" rel="noreferrer" onClick={trackClick}>
         <div className="flex flex-col h-full">
           <div className="flex relative">
             <Image priority={false} src={path} alt={item.alt} height={300} width={348} objectFit="cover" />

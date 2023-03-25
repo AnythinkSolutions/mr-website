@@ -1,3 +1,4 @@
+import { botSubscribe } from '../../lib/gtag';
 import { isValidEmail } from './../../utilities/string-utilities';
 import { Subscriber } from "./subscription-types";
 
@@ -15,6 +16,7 @@ export const validateInputs = (values: Subscriber): string | null => {
   }
 
   if(!!values.nonHumans){
+    botSubscribe();
     return "Humans shouldn't enter a value in the hidden field.";
   }
 

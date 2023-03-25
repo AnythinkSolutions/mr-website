@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ReactNode, useMemo } from "react";
+import { event } from "../../lib/gtag";
 import { IClient } from "../../utilities/app-types";
 import LogoImage, { clientToImageProps } from "../logo-image/logo-image";
 
@@ -60,10 +61,15 @@ interface ILinkOrButtonProps {
 
 const LinkOrButtonWrapper = ({url, onClick, children}: ILinkOrButtonProps) => {
 
+  
+  const trackClick = () => {
+    event({action: "showcase-clicked", category: "open-article", label: url, value: null});
+  }
+
   return (
     <>
       {url && 
-        <a href={url} target="_blank" rel="noreferrer">
+        <a href={url} target="_blank" rel="noreferrer" onClick={trackClick}>
           {children}
         </a>
       }

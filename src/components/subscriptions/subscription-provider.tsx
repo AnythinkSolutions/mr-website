@@ -3,6 +3,7 @@ import cookieCutter from "cookie-cutter";
 import { Subscriber } from "./subscription-types";
 import { validateInputs } from "./subscription-utils";
 import { decodeCookie, encodeCookie } from "../../utilities/string-utilities";
+import { subscriberJoin, subscriberVisit } from "../../lib/gtag";
 
 export type SubscriptionContext = {
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -64,6 +65,8 @@ const SubscriptionProvider = ({children}: ISubscriptionProviderProps) => {
           setSubscribed(true);
           //use a cookie to track that they're a subscriber
           cookieCutter.set(subscribedCookie, encodeCookie(cookieData));
+          //send an event to google analytics that they attempted to re-subscribe
+          subscriberJoin(result.status === 422);
         }
         else{
           console.error("Fetch error adding to subscriber list", result);
@@ -82,9 +85,10 @@ const SubscriptionProvider = ({children}: ISubscriptionProviderProps) => {
   //Check to see if they're already subscribed.
   useEffect(() => {
     const alreadySubscribed = cookieCutter.get(subscribedCookie);
-    if(!!alreadySubscribed) setSubscribed(true);
     if(!!alreadySubscribed) {
+      setSubscribed(true);
       const data = decodeCookie(alreadySubscribed);
+      subscriberVisit()
       console.log("subscriber data", data);
     }
   }, []);
