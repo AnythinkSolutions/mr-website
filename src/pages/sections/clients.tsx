@@ -31,7 +31,7 @@ function ClientsSection({data}: {data: IClient[]}){
   return (
     <div className="flex flex-col w-full">
       <EntryMotion>
-        <div className="flex flex-col items-center my-8 p-4 py-0" ref={ref}>
+        <div className="flex flex-col items-start my-8 p-4 py-0" ref={ref}>
 
           <div>
             <div className="flex justify-center md:justify-start items-center mt-4 section-header" >
