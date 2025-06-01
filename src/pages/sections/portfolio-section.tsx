@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import FlipMove from "react-flip-move";
+// import FlipMove from "react-flip-move";
 import styles from "../../styles/work.module.scss";
 import { IArticle, IClient } from "../../utilities/app-types";
 import FloatCard from "../../components/float-card/float-card";
@@ -22,7 +22,7 @@ const PortfolioSection = ({articles, clients}: IPortfolioProps) => {
   const [category, setCategory] = useState<string>("All");  
   const { width } = useWindowSize();
   const [itemCount, setItemCount] = useState( width >= SCREEN_WIDTHS.wide ? itemCounts.widescreen : itemCounts.default);
-  const SafeFlipMove = FlipMove as any;      //TODO: dependency isn't ready for React 18
+  // const SafeFlipMove = FlipMove as any;      //TODO: dependency isn't ready for React 18
 
   const itemsWithClient = useMemo<IArticle[]>(() => {
     if(!articles || !clients) return [];
@@ -92,7 +92,7 @@ const PortfolioSection = ({articles, clients}: IPortfolioProps) => {
             <CategoryFilter articles={highlights} onChange={(item) => setCategory(item)} />
 
             <div className={`flex flex-wrap p-4 justify-center relative ${styles["work-container"]}`}>
-              <SafeFlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
+              {/* <SafeFlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}> */}
                 {displayedItems.map((item, index) => (
                   <div key={index}>
                     <EntryMotion delay={index * 0.1} threshold={0} immediate={inView}>
@@ -100,19 +100,17 @@ const PortfolioSection = ({articles, clients}: IPortfolioProps) => {
                     </EntryMotion>
                   </div>
                 ))}
-              </SafeFlipMove>
+              {/* </SafeFlipMove> */}
             </div>
 
-            <Link href="/portfolio">
-              <a className="text-xl font-light mb-4 text-sky-400 mt-4">
-                <span>
-                  See more of my work
-                  <svg className="ml-1 inline align-top" height="24px" width="24px" fill="#38bdf8">
-                    <path d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                  </svg>
-                </span>
-              </a>
+            <Link href="/portfolio" className="text-xl font-light mb-4 text-sky-400 mt-4">
+              <span>
+                See more of my work
+                <svg className="ml-1 inline align-top" height="24px" width="24px" fill="#38bdf8">
+                  <path d="M0 0h24v24H0z" fill="none"/>
+                  <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                </svg>
+              </span>
             </Link>
         </div>
       </EntryMotion>

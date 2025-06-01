@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { ReactNode, useMemo } from "react";
 import { event } from "../../lib/gtag";
 import { IClient } from "../../utilities/app-types";
