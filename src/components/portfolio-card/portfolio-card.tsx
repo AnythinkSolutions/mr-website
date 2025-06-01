@@ -31,7 +31,7 @@ const PortfolioCard = ({article}: IPortfolioCardProps) => {
               src={imagePath} 
               alt={article.alt ?? "article image"} 
               fill
-              sizes="100vw"
+              sizes="(max-width: 640px) 25vw, (max-width: 1024px) 20vw, 15vw"
               style={{ objectFit: 'cover' }}
             />
           </div>

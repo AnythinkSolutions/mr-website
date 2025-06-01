@@ -40,7 +40,7 @@ const LogoImage = ({src, alt, url, hoverAnimation, size, hoverGrayscale, noLink}
                 src={src} 
                 alt={alt} 
                 fill
-                sizes="100vw"
+                sizes="(max-width: 640px) 132px, 165px"
                 style={{ objectFit: 'contain' }}
               />
             )}
@@ -65,7 +65,7 @@ const LogoImage = ({src, alt, url, hoverAnimation, size, hoverGrayscale, noLink}
               src={src} 
               alt={alt} 
               fill
-              sizes="100vw"
+              sizes="(max-width: 640px) 132px, 165px"
               style={{ objectFit: 'contain' }}
             />
           )}

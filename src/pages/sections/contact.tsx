@@ -20,12 +20,12 @@ const ContactSection = () => {
                 src="/assets/images/mr-logo-initials.gif" 
                 alt="Meghan Rabbitt Logo" 
                 fill
-                sizes="100vw"
+                sizes="(max-width: 640px) 96px, 192px"
                 style={{ objectFit: 'cover' }}
               />
             </div>
             <h3 className="text-lg sm:text-3xl mb-4 font-light text-sky-400 mt-4"><a href="mailto:hello@meghanrabbitt.com">hello@meghanrabbitt.com</a></h3>
-            <h3 className="text-lg sm:text-3xl mb-4 font-light font-light">Boston, MA USA</h3>
+            <h3 className="text-lg sm:text-3xl mb-4 font-light font-light">Boulder, CO USA</h3>
           </div>
         </div>
       </EntryMotion>

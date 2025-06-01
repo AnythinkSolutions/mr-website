@@ -32,9 +32,9 @@ const ShowcaseCard = ({config, url, onClick, priority = false}: IShowcaseCardPro
           <Image
             priority={priority}
             src={config.src}
-            alt={config.alt}
+            alt={config.alt ?? config.title}
             fill
-            sizes="100vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             style={{
               objectFit: "cover"
             }} />

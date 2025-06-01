@@ -7,7 +7,7 @@ import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 import EntryMotion from "../entry-motion/entry-motion";
 
 const VISIBLE_POSITION = -50;
-const hiddenState = { opacity: 0, translateY: -50 };
+const hiddenState = { opacity: 0, y: -50 };
 
 const NavBar = () => {  
   const [paths, setPaths] = useState({home: '', about: '/about'});
@@ -48,12 +48,12 @@ const NavBar = () => {
       {/* The spacer eliminates the jump in the page when the navbar switches to fixed position. */}
       {isSticky && <div id="spacer" className={styles.spacer} />}
       <div id="navbar" className={`w-full ${styles.navbar} ${isSticky ? styles.sticky : ""}`}>
-        <EntryMotion hidden={hiddenState}>
+        <EntryMotion hidden={hiddenState} duration={0.33}>
           <div className="navbar-inner w-full flex justify-between center-content p-4 pb-0">
           
             <div className={`${styles.logo} hidden sm:flex`}>
               <Link href="/">
-                <Image className="" src="/assets/images/mr-logo.png" alt="Meghan Rabbitt Logo" height={72} width={243}/>
+                <Image className="" src="/assets/images/mr-logo.png" priority alt="Meghan Rabbitt Logo" height={72} width={243}/>
               </Link>
             </div>
             <div className={`${styles.logo} flex sm:hidden`}>
@@ -61,7 +61,7 @@ const NavBar = () => {
                 <Image className="flex sm:hidden" src="/assets/images/mr-logo.png" alt="Meghan Rabbitt Logo" height={48} width={162}/>
               </Link>
             </div>
-            <div className="hidden sm:flex flex-col justify-center ">
+            <div id="navbar-links" className="flex-none sm:flex flex-col justify-center">
               <ul className="inline-flex items-center">
                 
                 {!isProduction && <li className="px-3 slide-up-sm text-red-500">Env: {process.env.NODE_ENV}</li>}

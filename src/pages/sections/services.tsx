@@ -37,7 +37,7 @@ const ServicesSection = ({serviceData}: IServicesProps) => {
                         src={svc.image} 
                         alt={svc.title} 
                         fill
-                        sizes="100vw"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 325px, 325px"
                         style={{ objectFit: 'cover' }}
                       />
                     </FlipCard>  

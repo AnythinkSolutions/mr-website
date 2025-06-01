@@ -23,7 +23,7 @@ const Card = ({src, alt, url, onClick, children}: ICardProps) => {
               src={src} 
               alt={alt} 
               fill
-              sizes="100vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               style={{ objectFit: 'cover' }}
             />
           </div>
