@@ -22,7 +22,13 @@ function BookSection(){
             <span className="hidden md:inline-block" />
           </div>
 
-          <Image src={bookAnnouncement} alt="Book Announcement" height={imageSize.height} width={imageSize.width} layout="fixed" objectFit="contain" />
+          <Image 
+            src={bookAnnouncement} 
+            alt="Book Announcement" 
+            height={imageSize.height} 
+            width={imageSize.width} 
+            style={{ objectFit: 'contain' }}
+          />
           <p className="font-normal mt-4 px-4">{bookBlurb}</p>
         </div>
 

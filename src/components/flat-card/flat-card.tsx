@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { ReactNode, useMemo } from "react";
 import { event } from "../../lib/gtag";
 import { IClient } from "../../utilities/app-types";
@@ -29,7 +29,15 @@ const ShowcaseCard = ({config, url, onClick, priority = false}: IShowcaseCardPro
     <div className={`rounded-lg relative w-full h-full overflow-hidden border border-slate-100 ${styles.hoverFloat}`}>
       <LinkOrButtonWrapper url={url} onClick={onClick}>
         <div className="w-full h-full relative">
-          <Image priority={priority} src={config.src} alt={config.alt} layout="fill" objectFit="cover" />
+          <Image
+            priority={priority}
+            src={config.src}
+            alt={config.alt}
+            fill
+            sizes="100vw"
+            style={{
+              objectFit: "cover"
+            }} />
           <div className="absolute bottom-0 right-0 w-full bg-black/40 backdrop-blur-sm">
             <div className="flex flex-col items-center text-center h-full p-2">
               <span className="text-white text-elipses max-h-12">{config.title}</span>
@@ -43,7 +51,7 @@ const ShowcaseCard = ({config, url, onClick, priority = false}: IShowcaseCardPro
         </div>
       </LinkOrButtonWrapper>
     </div>
-  )
+  );
 };
 
 export default ShowcaseCard;

@@ -33,7 +33,13 @@ const ServicesSection = ({serviceData}: IServicesProps) => {
                 <EntryMotion key={svc.key} delay={index * 0.2}>
                   <div className="h-full w-full" style={{minHeight, minWidth}}>
                     <FlipCard title={svc.title} description={svc.description} backColor="sky-200">
-                      <Image src={svc.image} alt={svc.title} layout="fill" objectFit="cover"/>
+                      <Image 
+                        src={svc.image} 
+                        alt={svc.title} 
+                        fill
+                        sizes="100vw"
+                        style={{ objectFit: 'cover' }}
+                      />
                     </FlipCard>  
                   </div>
                   </EntryMotion>
