@@ -2,16 +2,16 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "has": [{ "type": "host", "value": "meghanrabbitt.com" }],
       "destination": "https://newrulesofwomenshealth.com/:path*",
-      "statusCode": 301
+      "permanent": true
     },
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "has": [{ "type": "host", "value": "www.meghanrabbitt.com" }],
       "destination": "https://newrulesofwomenshealth.com/:path*",
-      "statusCode": 301
+      "permanent": true
     }
   ]
 }
