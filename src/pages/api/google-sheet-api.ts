@@ -55,6 +55,9 @@ export async function getServiceData(){
 
 async function getSheetData<RowType>(sheetName: string, rowMapFunc: (row: any) => RowType) : Promise<RowType[]> {
   try {
+    console.log(`[Debug] Attempting to fetch sheet: ${sheetName}`);
+    console.log(`[Debug] Using spreadsheet ID: ${process.env.SS_ID}`);
+    
     const target = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
     const jwt = new google.auth.JWT(
       process.env.GS_CLIENT_EMAIL,
@@ -63,22 +66,39 @@ async function getSheetData<RowType>(sheetName: string, rowMapFunc: (row: any) =
       target
     );
 
+    console.log(`[Debug] JWT created with client email: ${process.env.GS_CLIENT_EMAIL?.substring(0, 5)}...`);
+    
     const sheets = google.sheets({ version: "v4", auth: jwt });
+    console.log(`[Debug] Google Sheets client initialized`);
+    
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.SS_ID,
       range:`${sheetName}`,
     });
 
+    console.log(`[Debug] API Response received`);
     const rows = response.data.values;
 
     if (rows?.length) {
+      console.log(`[Debug] Found ${rows.length} rows in sheet`);
       const items = rows.slice(1).map(row => rowMapFunc(row));
       return items;
-      // const ordered = items.filter(i => !i.isHidden).sort((a, b) => (a.order ?? 999)  - (b.order ?? 999));
-      // return ordered;
+    } else {
+      console.log(`[Debug] No rows found in sheet`);
     }
-  } catch (err) {
-    console.log(err);
+  } catch (error: any) {
+    console.error('[Error] Google Sheets API Error:', {
+      error: error.message,
+      code: error.code,
+      status: error.status,
+      details: error.errors,
+      sheet: sheetName,
+      envVarsPresent: {
+        SS_ID: !!process.env.SS_ID,
+        GS_CLIENT_EMAIL: !!process.env.GS_CLIENT_EMAIL,
+        GS_PRIVATE_KEY: !!process.env.GS_PRIVATE_KEY,
+      }
+    });
   }
 
   return [];

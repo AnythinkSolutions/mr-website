@@ -2,6 +2,7 @@ import { ReactNode, useEffect} from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { event } from "../../lib/gtag";
+
 export interface IEntryMotionProps {
   duration?: number;
   delay?: number;
@@ -28,12 +29,22 @@ const EntryMotion = (props: IEntryMotionProps) => {
     else if(inView) controls.start("visible");
 
     if(inView && eventLabel) event({action: eventAction, category: eventCategory, label: eventLabel, value: null});
-
   }, [controls, immediate, inView, eventAction, eventCategory, eventLabel]);
 
   const motionVariants = {
-    visible: { ...visible, transition: { duration, delay } },
-    hidden: { ...hidden }
+    visible: { 
+      opacity: visible?.opacity ?? 1,
+      y: visible?.y ?? 0,
+      x: visible?.x ?? 0,
+      scale: visible?.scale ?? 1,
+      transition: { duration, delay } 
+    },
+    hidden: { 
+      opacity: hidden?.opacity ?? 0,
+      y: hidden?.y ?? 0,
+      x: hidden?.x ?? 0,
+      scale: hidden?.scale ?? 1
+    }
   };
 
   return (
@@ -42,11 +53,11 @@ const EntryMotion = (props: IEntryMotionProps) => {
       animate={controls}
       initial="hidden"
       variants={motionVariants}
-      style={fullSize ? {height: "100%", width: "100%"} : {}}
-      >
-        {children}
+      className={fullSize ? "size-full" : ""}
+    >
+      {children}
     </motion.div>
-  )
+  );
 };
 
 export default EntryMotion;
@@ -56,56 +67,44 @@ EntryMotion.defaultProps = {
   delay: 0,
   triggerOnce: true,
   threshold: 0.1,
-  visible: { opacity: 1, translateY: 0 },
-  hidden: { opacity: 0, translateY: 35 },
+  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 35 },
   immediate: false,
   eventAction: "reveal",
   eventCategory: "section-viewed",
 };
 
 export const fadeInProps = {
-  hidden: {opacity: 0},
-  visible: {opacity: 1},
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
 };
 
-export const fadeLeft = (xDistanceAbsolute: number) => {
-  return {
-    visible: { opacity: 1, translateX: 0 },
-    hidden: {opacity: 0, translateX: -xDistanceAbsolute }
-  };
-}
+export const fadeLeft = (distance: number) => ({
+  visible: { opacity: 1, x: 0 },
+  hidden: { opacity: 0, x: -distance }
+});
 
-export const fadeRight = (xDistanceAbsolute: number) => {
-  return {
-    visible: { opacity: 1, translateX: 0 },
-    hidden: {opacity: 0, translateX: xDistanceAbsolute }
-  };
-}
+export const fadeRight = (distance: number) => ({
+  visible: { opacity: 1, x: 0 },
+  hidden: { opacity: 0, x: distance }
+});
 
-export const fadeUp = (yDistanceAbsolute: number) => {
-  return {
-    visible: { opacity: 1, translateY: 0 },
-    hidden: {opacity: 0, translateY: yDistanceAbsolute }
-  };
-}
+export const fadeUp = (distance: number) => ({
+  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: distance }
+});
 
-export const fadeDown = (yDistanceAbsolute: number) => {
-  return {
-    visible: { opacity: 1, translateY: 0 },
-    hidden: {opacity: 0, translateY: -yDistanceAbsolute }
-  };
-}
+export const fadeDown = (distance: number) => ({
+  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: -distance, x: -distance }
+});
 
-export const fadeDownRight = (yDistanceAbsolute: number, xDistanceAbsolute: number) => {
-  return {
-    visible: { opacity: 1, translateY: 0, translateX: 0},
-    hidden: {opacity: 0, translateY: -yDistanceAbsolute, translateX: -xDistanceAbsolute }
-  };
-}
+export const fadeDownRight = (yDistance: number, xDistance: number) => ({
+  visible: { opacity: 1, y: 0, x: 0 },
+  hidden: { opacity: 0, y: -yDistance, x: -xDistance }
+});
 
-export const fadeDownGrowRight = (yDistanceAbsolute: number = 50, xDistanceAbsolute: number = 50, startScale: number = 0.5) => {
-  return {
-    visible: { opacity: 1, translateY: 0, translateX: 0, scaleX: 1, scaleY: 1},
-    hidden: {opacity: 0, translateY: -yDistanceAbsolute, translateX: -xDistanceAbsolute, scaleX: startScale, scaleY: startScale }
-  };
-}
+export const fadeDownGrowRight = (yDistance: number = 50, xDistance: number = 50, startScale: number = 0.5) => ({
+  visible: { opacity: 1, y: 0, x: 0, scale: 1 },
+  hidden: { opacity: 0, y: -yDistance, x: -xDistance, scale: startScale }
+});

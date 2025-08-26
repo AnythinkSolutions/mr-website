@@ -1,0 +1,60 @@
+.navbarBook {
+  transition: all 0.33s ease-in-out;   
+}
+
+.navbarLinks {
+  li {
+    font-size: 20px;
+    font-weight: 300;
+  }
+}
+
+.spacer {
+  height: 88px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  -webkit-box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+  height: 65px;
+
+  & div:first-child {
+    padding-top: 0 !important;  
+
+    & .logo {
+      transform: scale(0.7, 0.7);
+    }
+  }
+}
+
+.title{
+  font-size: 40px;
+  font-family: 'Josefin Sans', 'Cinzel', 'Poppins';
+  font-weight: 400;
+  color: #334155;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+}
+
+.subtitle{
+  font-size: 16px;
+  font-family: 'Josefin Sans', 'Cinzel', 'Poppins';
+  font-weight: 300;
+  color: #334155;
+  text-transform: uppercase;
+}
+
+@media(max-width: 640px){
+  .spacer {
+    height: 72px;
+  }
+}

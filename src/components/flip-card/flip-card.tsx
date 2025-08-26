@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react";
+import { ReactNode } from "react";
 import styles from "./flip-card.module.scss";
 
 export interface IFlipCardProps {

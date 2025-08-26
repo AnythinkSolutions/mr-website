@@ -11,7 +11,14 @@ function HeaderSection(){
     <div id="header" className={`w-full relative p-0 md:px-6 ${styles.header}`}>
       <div className={`flex flex-col md:flex-row ${styles.headerContainer}`}>
         <EntryMotion {...fadeInProps}>
-          <Image priority src="/assets/images/headshot-bw-2x3.jpg" alt="Meghan Rabbitt" height={600} width={400} objectFit="cover"/>
+          <Image 
+            priority 
+            src="/assets/images/headshot-bw-2x3.jpg" 
+            alt="Meghan Rabbitt" 
+            height={600} 
+            width={400} 
+            style={{ objectFit: 'cover' }}
+          />
         </EntryMotion>
         <div className="p-3 sm:p-8 flex flex-col justify-start md:justify-center relative grow">
           <EntryMotion {...fadeDown(50)}>

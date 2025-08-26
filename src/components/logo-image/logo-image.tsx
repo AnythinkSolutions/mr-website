@@ -34,15 +34,51 @@ const LogoImage = ({src, alt, url, hoverAnimation, size, hoverGrayscale, noLink}
       {url && !noLink &&
         <a href={url} target="_blank" rel="noreferrer" className="h-full w-full">
           <div className="relative h-full w-full">
-            {isAuto && <Image className={styles.clientLogo} src={src} alt={alt} layout="fill" objectFit="contain"/>}
-            {!isAuto && <Image className={styles.clientLogo} src={src} alt={alt} height={imageHeight} width={imageWidth}/>}
+            {isAuto && (
+              <Image 
+                className={styles.clientLogo} 
+                src={src} 
+                alt={alt} 
+                fill
+                sizes="(max-width: 640px) 132px, 165px"
+                style={{ objectFit: 'contain' }}
+              />
+            )}
+            {!isAuto && (
+              <Image 
+                className={styles.clientLogo} 
+                src={src} 
+                alt={alt} 
+                height={imageHeight} 
+                width={imageWidth} 
+                style={{ objectFit: 'contain' }}
+              />
+            )}
           </div>
         </a>
       }
       {(!url || noLink) && 
         <>
-          {isAuto && <Image className={styles.clientLogo} src={src} alt={alt} layout="fill" objectFit="contain" />}
-          {!isAuto && <Image className={styles.clientLogo} src={src} alt={alt} height={imageHeight} width={imageWidth} objectFit="contain" />}
+          {isAuto && (
+            <Image 
+              className={styles.clientLogo} 
+              src={src} 
+              alt={alt} 
+              fill
+              sizes="(max-width: 640px) 132px, 165px"
+              style={{ objectFit: 'contain' }}
+            />
+          )}
+          {!isAuto && (
+            <Image 
+              className={styles.clientLogo} 
+              src={src} 
+              alt={alt} 
+              height={imageHeight} 
+              width={imageWidth} 
+              style={{ objectFit: 'contain' }}
+            />
+          )}
         </>
       }
       

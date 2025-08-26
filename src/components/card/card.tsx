@@ -18,7 +18,14 @@ const Card = ({src, alt, url, onClick, children}: ICardProps) => {
       <LinkOrButtonWrapper url={url} onClick={onClick} className="w-full h-full">
         <div className="w-full h-full grayscale hover:grayscale-0">
           <div className="absolute inset-0 h-full w-full z-0">
-            <Image priority={false} src={src} alt={alt} layout="fill" objectFit="cover" />
+            <Image 
+              priority={false} 
+              src={src} 
+              alt={alt} 
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              style={{ objectFit: 'cover' }}
+            />
           </div>
           <div className="relative z-10 w-full h-full">
             {children}

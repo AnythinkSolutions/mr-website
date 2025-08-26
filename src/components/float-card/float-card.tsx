@@ -11,8 +11,7 @@ interface IFloatCardProps{
   size?: "sm" | "md" | "lg";
 }
 
-const FloatCard = forwardRef((props: IFloatCardProps, ref: Ref<HTMLDivElement>) => {
-  const {item, size: size} = props;
+const FloatCard = forwardRef(({ item, size = "md" }: IFloatCardProps, ref: Ref<HTMLDivElement>) => {
   const path = useMemo(() => getImgSrc(item.src), [item.src]);
   const logoProps = useMemo(() => clientToImageProps(item?.clientObject), [item?.clientObject]);
 
@@ -25,7 +24,14 @@ const FloatCard = forwardRef((props: IFloatCardProps, ref: Ref<HTMLDivElement>) 
       <a href={item.url} target="_blank" rel="noreferrer" onClick={trackClick}>
         <div className="flex flex-col h-full">
           <div className="flex relative">
-            <Image priority={false} src={path} alt={item.alt} height={300} width={348} objectFit="cover" />
+            <Image 
+              priority={false} 
+              src={path} 
+              alt={item.alt} 
+              height={300} 
+              width={348} 
+              style={{ objectFit: 'cover' }}
+            />
           </div>
 
           <div className="flex flex-col h-full items-center justify-between">
@@ -53,9 +59,6 @@ const FloatCard = forwardRef((props: IFloatCardProps, ref: Ref<HTMLDivElement>) 
 export default FloatCard;
 
 FloatCard.displayName = "FloatCard";
-FloatCard.defaultProps = {
-  size: "md",
-};
 
 // const basePath = "/assets/images";
 

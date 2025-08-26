@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import FlipMove from "react-flip-move";
+// import FlipMove from "react-flip-move";
 import { IArticle, IClient } from "../utilities/app-types";
 import { getClientData, getPortfolioData } from "./api/google-sheet-api";
 import Footer from "../components/footer/footer";
@@ -19,7 +19,7 @@ export interface IPortfolioProps {
     
 const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
   const [category, setCategory] = useState<string>("All");    
-  const SafeFlipMove = FlipMove as any;      //TODO: dependency isn't ready for React 18
+  // const SafeFlipMove = FlipMove as any;      //TODO: dependency isn't ready for React 18
 
   const writings = useMemo<IArticle[]>(() => {
     if(!portfolioData || !clientData) return [];
@@ -81,13 +81,13 @@ const Portfolio: NextPage<IPortfolioProps> = ({portfolioData, clientData}) => {
         </div>
 
         <div className={`grid lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-6 p-4 mt-8 justify-center relative ${styles["work-container"]}`}>
-          <SafeFlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}>
+          {/* <SafeFlipMove staggerDurationBy="30" duration={500} easing="ease-in-out" typeName={null}> */}
             {displayedItems.map((item, index) => (
               <div key={index} >
                 <PortfolioCard article={item}/>
               </div>
             ))}
-          </SafeFlipMove>
+          {/* </SafeFlipMove> */}
         </div>
 
       </main>

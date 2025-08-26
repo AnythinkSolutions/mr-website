@@ -26,7 +26,14 @@ const PortfolioCard = ({article}: IPortfolioCardProps) => {
       <a href={article.url} target="_blank" rel="noreferrer" onClick={trackClick}>
         <div className="w-full h-full grid grid-cols-4 grid-rows-3 gap-1">
           <div className="row-span-3 rounded-lg relative">
-            <Image priority={false} src={imagePath} alt={article.alt ?? "article image"} layout="fill" objectFit="cover" />
+            <Image 
+              priority={false} 
+              src={imagePath} 
+              alt={article.alt ?? "article image"} 
+              fill
+              sizes="(max-width: 640px) 25vw, (max-width: 1024px) 20vw, 15vw"
+              style={{ objectFit: 'cover' }}
+            />
           </div>
           <div className="col-span-3 row-span-2 p-2 overflow-hidden">
             <span className="font-light">{article.title}</span>
