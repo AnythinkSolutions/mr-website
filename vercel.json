@@ -3,25 +3,25 @@
   "redirects": [
     {
       "source": "/",
-      "has": [{ "type": "header", "key": "host", "value": "meghanrabbitt.com" }],
+      "has": [{ "type": "host", "value": "meghanrabbitt.com" }],
       "destination": "https://newrulesofwomenshealth.com",
       "permanent": true
     },
     {
-      "source": "/(.*)",
-      "has": [{ "type": "header", "key": "host", "value": "meghanrabbitt.com" }],
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "meghanrabbitt.com" }],
       "destination": "https://newrulesofwomenshealth.com/:path*",
       "permanent": true
     },
     {
       "source": "/",
-      "has": [{ "type": "header", "key": "host", "value": "www.meghanrabbitt.com" }],
+      "has": [{ "type": "host", "value": "www.meghanrabbitt.com" }],
       "destination": "https://newrulesofwomenshealth.com",
       "permanent": true
     },
     {
-      "source": "/(.*)",
-      "has": [{ "type": "header", "key": "host", "value": "www.meghanrabbitt.com" }],
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.meghanrabbitt.com" }],
       "destination": "https://newrulesofwomenshealth.com/:path*",
       "permanent": true
     }
