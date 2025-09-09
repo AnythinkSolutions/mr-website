@@ -5,15 +5,18 @@ import styles from "./navbar.module.scss"
 import { useRouter } from "next/router";
 import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 import EntryMotion from "../entry-motion/entry-motion";
+import { useIsMobile } from "../../utilities/app-hooks";
 
 const VISIBLE_POSITION = -50;
-const hiddenState = { opacity: 0, y: -50 };
 
 const NavBar = () => {  
   const [paths, setPaths] = useState({home: '', about: '/about'});
   const { asPath } = useRouter();
   const [isSticky, setSticky] = useState(false);
   const isHome = useMemo(() => ["/about", "/portfolio"].indexOf(asPath) < 0, [asPath]);
+
+  const isMobile = useIsMobile();
+  const hiddenState = { opacity: 0, y: isMobile ? 0 : VISIBLE_POSITION };
 
   const isProduction = process.env.NODE_ENV === "production";
 
@@ -49,7 +52,7 @@ const NavBar = () => {
       {isSticky && <div id="spacer" className={styles.spacer} />}
       <div id="navbar" className={`w-full ${styles.navbar} ${isSticky ? styles.sticky : ""}`}>
         <EntryMotion hidden={hiddenState} duration={0.33}>
-          <div className="navbar-inner w-full flex justify-between center-content p-4 pb-0">
+          <div className="navbar-inner w-full flex justify-between center-content p-4 pb-0 overflow-hidden">
           
             <div className={`${styles.logo} hidden sm:flex`}>
               <Link href="/">
@@ -64,7 +67,7 @@ const NavBar = () => {
             <div id="navbar-links" className="flex-none sm:flex flex-col justify-center">
               <ul className="inline-flex items-center">
                 
-                {!isProduction && <li className="px-3 slide-up-sm text-red-500">Env: {process.env.NODE_ENV}</li>}
+                {!isProduction && !isMobile && <li className="px-3 slide-up-sm text-red-500">Env: {process.env.NODE_ENV}</li>}
 
                 {!isHome && 
                   <li className="px-3 slide-up-sm">

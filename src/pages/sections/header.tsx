@@ -1,32 +1,27 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Image from 'next/image'
 import TypeSpan from "../../components/type-span";
 import styles from "../../styles/header.module.scss";
 import EntryMotion, { fadeInProps, fadeDown } from "../../components/entry-motion/entry-motion";
+import { useWindowSize } from "../../utilities/app-hooks";
+import { SCREEN_WIDTHS } from "../../utilities/app-utilities";
 
 function HeaderSection(){
   const [isFinished, setFinished] = useState(false);
+  const dimensions = useWindowSize();
+  const imageSize = useMemo(() => 
+    dimensions.width <= SCREEN_WIDTHS.mobile ? {height: 600, width: dimensions.width} : {height: 600, width: 400}, [dimensions.width]);
 
   return (
     <div id="header" className={`w-full relative p-0 md:px-6 ${styles.header}`}>
       <div className={`flex flex-col md:flex-row ${styles.headerContainer}`}>
         <EntryMotion {...fadeInProps}>
-          {/* <Image 
-            priority 
-            src="/assets/images/headshot-bw-2x3.jpg" 
-            alt="Meghan Rabbitt" 
-            height={600} 
-            width={400} 
-            style={{ 
-              objectFit: 'cover',
-            }}
-          /> */}
           <Image 
             priority 
             src="/assets/images/MR-Headshot.jpeg"
             alt="Meghan Rabbitt" 
-            height={600} 
-            width={400} 
+            height={imageSize.height} 
+            width={imageSize.width} 
             style={{ 
               objectFit: 'cover',
               maskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 10%, black 30%)',

@@ -104,3 +104,8 @@ export function useWindowSize(): WindowSize {
 
   return windowSize
 }
+
+export function useIsMobile(): boolean {
+  const { width } = useWindowSize()
+  return width < 640 // Using Tailwind's sm breakpoint
+}
