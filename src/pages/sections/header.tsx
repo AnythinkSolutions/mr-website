@@ -24,8 +24,8 @@ function HeaderSection(){
             width={imageSize.width} 
             style={{ 
               objectFit: 'cover',
-              maskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 10%, black 30%)',
-              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 10%, black 30%)'
+              maskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 7%, black 20%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 7%, black 20%)'
             }}
           />
         </EntryMotion>

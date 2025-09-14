@@ -13,10 +13,20 @@ const NavBar = () => {
   const [paths, setPaths] = useState({home: '', about: '/about'});
   const { asPath } = useRouter();
   const [isSticky, setSticky] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isHome = useMemo(() => ["/about", "/portfolio"].indexOf(asPath) < 0, [asPath]);
 
   const isMobile = useIsMobile();
   const hiddenState = { opacity: 0, y: isMobile ? 0 : VISIBLE_POSITION };
+
+  const toggleMenu = () => {
+    console.log('Toggle menu, current state:', isMenuOpen);
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
 
   const isProduction = process.env.NODE_ENV === "production";
 
@@ -64,11 +74,15 @@ const NavBar = () => {
                 <Image className="flex sm:hidden" src="/assets/images/mr-logo.png" alt="Meghan Rabbitt Logo" height={48} width={162}/>
               </Link>
             </div>
-            <div id="navbar-links" className="flex-none sm:flex flex-col justify-center">
+            {/* Desktop Navigation */}
+            <div id="navbar-links" className="hidden sm:flex flex-col justify-center">
               <ul className="inline-flex items-center">
                 
                 {!isProduction && !isMobile && <li className="px-3 slide-up-sm text-red-500">Env: {process.env.NODE_ENV}</li>}
 
+                <li className="px-3 slide-up-sm">
+                  <Link href={`${paths.home}#book`}>My Book</Link>
+                </li>
                 {!isHome && 
                   <li className="px-3 slide-up-sm">
                     <Link scroll={true} href={`/`}>Home</Link>
@@ -96,7 +110,7 @@ const NavBar = () => {
                   <div className={styles.vline} />
                 </li>
                 <li className="px-2 slide-up-sm hidden md:flex shrink-0">
-                  <a className="icon icon--fill" href="https://www.linkedin.com/in/meghan-rabbitt-04b80116/" rel="noreferrer" target="_blank" aria-label="Instagram">
+                  <a className="icon icon--fill" href="https://www.linkedin.com/in/meghan-rabbitt-04b80116/" rel="noreferrer" target="_blank" aria-label="LinkedIn">
                     <Image src="/assets/images/logos/linkedin.svg" alt="linked in logo" width={16} height={16}/>
                   </a>  
                 </li>
@@ -106,16 +120,110 @@ const NavBar = () => {
                   </a>  
                 </li>
                 <li className="px-2 slide-up-sm hidden md:flex shrink-0">
-                  <a className="icon icon--fill" href="https://www.facebook.com/megrabbitt" rel="noreferrer" target="_blank" aria-label="Instagram">
+                  <a className="icon icon--fill" href="https://www.facebook.com/megrabbitt" rel="noreferrer" target="_blank" aria-label="Facebook">
                     <Image src="/assets/images/logos/facebook.svg" alt="facebook logo" width={16} height={16}/>
                   </a>  
                 </li>
               </ul>  
             </div>
+
+            {/* Mobile Hamburger Menu */}
+            <div className="sm:hidden flex items-center">
+              <button 
+                className={`${styles.hamburger} ${isMenuOpen ? styles.hamburgerOpen : ''}`}
+                onClick={toggleMenu}
+                aria-label="Toggle navigation menu"
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+            </div>
           
           </div>
 
         </EntryMotion>
+      </div>
+
+      {/* Mobile Sidebar Overlay */}
+      {isMenuOpen && (
+        <div 
+          className={`${styles.overlay}`}
+          onClick={closeMenu}
+        />
+      )}
+
+      {/* Mobile Sidebar Menu */}
+      <div className={`${styles.sidebar} ${isMenuOpen ? styles.sidebarOpen : ''}`}>
+        <div className={styles.sidebarContent}>
+          <div className={styles.sidebarHeader}>
+            <Link href="/" onClick={closeMenu}>
+              <Image 
+                src="/assets/images/mr-logo.png" 
+                alt="Meghan Rabbitt Logo" 
+                height={48} 
+                width={162}
+                className={styles.sidebarLogo}
+              />
+            </Link>
+            <button 
+              className={styles.closeButton}
+              onClick={closeMenu}
+              aria-label="Close navigation menu"
+            >
+              ×
+            </button>
+          </div>
+          
+          <nav className={styles.sidebarNav}>
+            <ul>
+              <li>
+                <Link href={`${paths.home}#book`} onClick={closeMenu}>My Book</Link>
+              </li>
+              {!isHome && (
+                <li>
+                  <Link scroll={true} href={`/`} onClick={closeMenu}>Home</Link>
+                </li>
+              )}
+              <li>
+                <Link scroll={true} href={`${paths.home}#clients`} onClick={closeMenu}>Clients</Link>
+              </li>
+              <li>
+                <Link scroll={true} href={`${paths.home}#services`} onClick={closeMenu}>Services</Link>
+              </li>
+              <li>
+                <Link scroll={true} href={`${paths.home}#work`} onClick={closeMenu}>Work</Link>
+              </li>
+              <li>
+                <Link scroll={true} href={`${paths.home}#testimonials`} onClick={closeMenu}>Testimonials</Link>
+              </li>
+              <li>
+                <Link href={`${paths.about}`} onClick={closeMenu}>About Me</Link>
+              </li>
+              <li>
+                <Link scroll={true} href={`${paths.home}#contact`} onClick={closeMenu}>Contact Me</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <div className={styles.sidebarSocial}>
+            <h4>Connect</h4>
+            <div className={styles.socialLinks}>
+              <a href="https://www.linkedin.com/in/meghan-rabbitt-04b80116/" rel="noreferrer" target="_blank" aria-label="LinkedIn">
+                <Image src="/assets/images/logos/linkedin.svg" alt="LinkedIn" width={24} height={24}/>
+                LinkedIn
+              </a>
+              <a href="https://www.instagram.com/meghanrabbitt/?utm_medium=copy_link" rel="noreferrer" target="_blank" aria-label="Instagram">
+                <Image src="/assets/images/logos/instagram.svg" alt="Instagram" width={24} height={24}/>
+                Instagram
+              </a>
+              <a href="https://www.facebook.com/megrabbitt" rel="noreferrer" target="_blank" aria-label="Facebook">
+                <Image src="/assets/images/logos/facebook.svg" alt="Facebook" width={24} height={24}/>
+                Facebook
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

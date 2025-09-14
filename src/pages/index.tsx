@@ -44,7 +44,7 @@ const Home: NextPage<IPageProps> = (props) => {
           <NavBar />
           <HeaderSection />
           <div className={styles.section_book}>
-            {/* <BookSection /> */}
+            <div id="book" className="scroll-anchor" />
             <BookBanner />
           </div>
           
