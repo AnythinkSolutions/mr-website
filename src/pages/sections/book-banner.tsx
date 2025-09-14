@@ -5,18 +5,18 @@ const BookBanner = () => {
     <div>
       <div className={`flex flex-col w-full ${styles.bookBanner} mb-8`}>
         
-        <div className="flex flex-col w-full text-center mb-8">
-          <h1 className="text-3xl font-bold">My book, The New Rules of Women's Health, is here!</h1>
+        <div className={`${styles.bannerTitle}`}>
+          <h1 className={`${styles.titleText}`}>My book, The New Rules of Women's Health, is here!</h1>
         </div>
 
-        <div className="grid grid-cols-3 items-center my-4 py-0 h-full w-full gap-8">
+        <div className={`${styles.bannerContent}`}>
           
-          <div className="flex flex-col justify-center h-full w-full px-2 text-center">
-            <h1 className="text-3xl font-bold">“This book belongs in every woman’s hands. It needs to go with you to every doctor’s appointment. You need to share it with everyone in your life.”</h1>
-            <p className="text-2xl mt-4 w-full text-center">— Maria Shriver</p>
+          <div className={`${styles.testimonialSection}`}>
+            <h1 className={`${styles.testimonialText}`}>"This book belongs in every woman's hands. It needs to go with you to every doctor's appointment. You need to share it with everyone in your life."</h1>
+            <p className={`${styles.testimonialAuthor}`}>— Maria Shriver</p>
           </div>
 
-          <div className="flex flex-col items-center justify-center relative">
+          <div className={`${styles.bookSection}`}>
             <a href="https://www.newrulesofwomenshealth.com" target="_blank" rel="noreferrer">
               <img 
                 src="/assets/images/book/book-3d.png" 
@@ -26,10 +26,10 @@ const BookBanner = () => {
             </a>
           </div>
 
-          <div className="flex flex-col justify-center h-full w-full px-2 text-center">
-            <h2 className="text-3xl text-center">AVAILABLE FOR<br/> <span className="font-bold">PRE-ORDER</span> NOW!</h2>
+          <div className={`${styles.actionSection}`}>
+            <h2 className={`${styles.actionTitle}`}>AVAILABLE FOR<br/> <span className="font-bold">PRE-ORDER</span> NOW!</h2>
             
-            <a className={`mt-8 w-full text-white text-2xl px-4 py-4 rounded-xl cursor-pointer ${styles.learnMoreButton}`} href="https://www.newrulesofwomenshealth.com" target="_blank" rel="noreferrer">
+            <a className={`${styles.learnMoreButton}`} href="https://www.newrulesofwomenshealth.com" target="_blank" rel="noreferrer">
               Learn More
             </a>
 

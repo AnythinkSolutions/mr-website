@@ -1,9 +1,84 @@
 .bookBanner {
   height: 600px;
-  width:100%;
+  width: 100%;
   color: #fff;
   padding: 20px;
   margin-top: 30px;
+}
+
+// Banner title section
+.bannerTitle {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.titleText {
+  font-size: 1.875rem; // 3xl
+  font-weight: bold;
+  margin: 0;
+}
+
+// Main content layout - Desktop: 3 columns
+.bannerContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  height: 100%;
+  width: 100%;
+}
+
+// Testimonial section
+.testimonialSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 0 0.5rem;
+  text-align: center;
+}
+
+.testimonialText {
+  font-size: 1.875rem; // 3xl
+  font-weight: bold;
+  margin: 0;
+}
+
+.testimonialAuthor {
+  font-size: 1.5rem; // 2xl
+  margin: 1rem 0 0 0;
+  width: 100%;
+  text-align: center;
+}
+
+// Book section
+.bookSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+// Action section
+.actionSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 0 0.5rem;
+  text-align: center;
+}
+
+.actionTitle {
+  font-size: 1.875rem; // 3xl
+  text-align: center;
+  margin: 0;
 }
 
 .bookImage {
@@ -33,6 +108,7 @@
   justify-content: center;
   flex: 1;
   max-width: 200px;
+  min-height: 60px; // Ensure minimum height for visibility
 }
 
 .retailerLogo {
@@ -42,6 +118,7 @@
   width: auto;
   object-fit: contain;
   transition: opacity 0.3s ease;
+  display: block; // Ensure proper display
   
   &:hover {
     opacity: 0.8;
@@ -68,7 +145,17 @@
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 0.75rem; // xl
+  padding: 1rem 1rem; // py-4 px-4
+  margin-top: 2rem; // mt-8
+  width: 100%;
+  color: white;
+  font-size: 1.5rem; // text-2xl
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
   transition: all 0.3s ease;
+  display: inline-block;
   
   &:hover {
     background: rgba(255, 255, 255, 0.35);
@@ -77,6 +164,8 @@
     border-color: rgba(0, 0, 0, 0.3);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
+    text-decoration: none;
+    color: white;
   }
   
   &:active {
@@ -85,33 +174,177 @@
   }
 }
 
-// Responsive adjustments
+// Tablet Layout (768px - 1024px)
+@media (max-width: 1024px) and (min-width: 769px) {
+  .bookBanner {
+    height: auto;
+    min-height: 500px;
+  }
+  
+  .bannerContent {
+    gap: 1.5rem;
+  }
+  
+  .titleText {
+    font-size: 1.5rem; // 2xl
+  }
+  
+  .testimonialText {
+    font-size: 1.5rem; // 2xl
+  }
+  
+  .testimonialAuthor {
+    font-size: 1.25rem; // xl
+  }
+  
+  .actionTitle {
+    font-size: 1.5rem; // 2xl
+  }
+  
+  .bookImage {
+    height: 400px;
+  }
+}
+
+// Mobile Layout (768px and below)
 @media (max-width: 768px) {
+  .bookBanner {
+    height: auto;
+    min-height: auto;
+    padding: 15px;
+  }
+  
+  .bannerContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .bannerTitle {
+    margin-bottom: 1.5rem;
+  }
+  
+  .titleText {
+    font-size: 1.25rem; // xl
+  }
+  
+  .testimonialSection {
+    order: 1;
+    padding: 0;
+  }
+  
+  .testimonialText {
+    font-size: 1.25rem; // xl
+  }
+  
+  .testimonialAuthor {
+    font-size: 1rem; // base
+  }
+  
+  .bookSection {
+    order: 2;
+  }
+  
+  .bookImage {
+    height: 300px;
+  }
+  
+  .actionSection {
+    order: 3;
+    padding: 0;
+  }
+  
+  .actionTitle {
+    font-size: 1.25rem; // xl
+  }
+  
+  .learnMoreButton {
+    margin-top: 1rem;
+    font-size: 1.125rem; // lg
+    padding: 1.25rem 1rem; // Increased vertical padding for taller button
+  }
+  
   .logoContainer {
     gap: 1.5rem;
     margin-top: 1.5rem;
     padding: 0.5rem;
+    flex-direction: row !important; // Force side-by-side layout
+    justify-content: center;
+    align-items: center;
+    display: flex !important; // Ensure flex display
+  }
+  
+  .logoWrapper {
+    max-width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
   }
   
   .retailerLogo {
     max-height: 60px;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    object-fit: contain;
   }
   
   .logoDivider {
     height: 50px;
+    width: 2px;
+    background: linear-gradient(180deg, 
+      transparent 0%, 
+      rgba(255, 255, 255, 0.3) 20%, 
+      rgba(255, 255, 255, 0.6) 50%, 
+      rgba(255, 255, 255, 0.3) 80%, 
+      transparent 100%
+    );
   }
 }
 
+// Small Mobile Layout (480px and below)
 @media (max-width: 480px) {
+  .bookBanner {
+    padding: 10px;
+  }
+  
+  .titleText {
+    font-size: 1.125rem; // lg
+  }
+  
+  .testimonialText {
+    font-size: 1.125rem; // lg
+  }
+  
+  .testimonialAuthor {
+    font-size: 0.875rem; // sm
+  }
+  
+  .actionTitle {
+    font-size: 1.125rem; // lg
+  }
+  
+  .bookImage {
+    height: 250px;
+  }
+  
+  .learnMoreButton {
+    font-size: 1rem; // base
+    padding: 1rem 0.75rem;
+  }
+  
   .logoContainer {
     gap: 1rem;
-    flex-direction: column;
+    flex-direction: row !important; // Keep side-by-side even on small mobile
+    justify-content: center;
+    align-items: center;
   }
   
   .logoDivider {
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, 
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(180deg, 
       transparent 0%, 
       rgba(255, 255, 255, 0.3) 20%, 
       rgba(255, 255, 255, 0.6) 50%, 
@@ -120,7 +353,19 @@
     );
   }
   
+  .logoWrapper {
+    max-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  }
+  
   .retailerLogo {
     max-height: 50px;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    object-fit: contain;
   }
 }
