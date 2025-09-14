@@ -18,6 +18,7 @@ import styles from '../styles/Home.module.scss'
 import BookSection from "./sections/book";
 import SubscriptionProvider from "../components/subscriptions/subscription-provider";
 import SubscribeForm from "../components/subscriptions/subscription-form";
+import BookBanner from "./sections/book-banner";
 
 interface IPageProps {
   portfolioData: IArticle[];
@@ -42,8 +43,9 @@ const Home: NextPage<IPageProps> = (props) => {
         <main className={styles.main}>
           <NavBar />
           <HeaderSection />
-          <div className={styles.section_compact}>
-            <BookSection />
+          <div className={styles.section_book}>
+            {/* <BookSection /> */}
+            <BookBanner />
           </div>
           
           <div className={`${styles.section} flex justify-center`}>
