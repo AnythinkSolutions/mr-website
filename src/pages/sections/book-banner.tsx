@@ -17,7 +17,7 @@ const BookBanner = () => {
           </div>
 
           <div className={`${styles.bookSection}`}>
-            <a href="https://www.newrulesofwomenshealth.com" target="_blank" rel="noreferrer">
+            <a href="https://www.newrulesofwomenshealth.com?utm_source=mr-website&utm_medium=referral&utm_campaign=pre-launch&utm_content=book-image" target="_blank" rel="noreferrer">
               <img 
                 src="/assets/images/book/book-3d.png" 
                 alt="The New Rules of Women's Health book" 
@@ -29,7 +29,7 @@ const BookBanner = () => {
           <div className={`${styles.actionSection}`}>
             <h2 className={`${styles.actionTitle}`}>AVAILABLE FOR<br/> <span className="font-bold">PRE-ORDER</span> NOW!</h2>
             
-            <a className={`${styles.learnMoreButton}`} href="https://www.newrulesofwomenshealth.com" target="_blank" rel="noreferrer">
+            <a className={`${styles.learnMoreButton}`} href="https://www.newrulesofwomenshealth.com?utm_source=mr-website&utm_medium=referral&utm_campaign=pre-launch&utm_content=learn-more-button" target="_blank" rel="noreferrer">
               Learn More
             </a>
 
