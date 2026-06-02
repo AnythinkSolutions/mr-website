@@ -140,7 +140,7 @@
 
 // Learn More button glassmorphism effect
 .learnMoreButton {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -149,8 +149,9 @@
   padding: 1rem 1rem; // py-4 px-4
   margin-top: 2rem; // mt-8
   width: 100%;
-  color: white;
+  color: #444;
   font-size: 1.5rem; // text-2xl
+  font-weight: 700;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
@@ -158,14 +159,14 @@
   display: inline-block;
   
   &:hover {
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-color: rgba(0, 0, 0, 0.3);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
     text-decoration: none;
-    color: white;
+    color: #333;
   }
   
   &:active {

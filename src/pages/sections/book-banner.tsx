@@ -27,10 +27,10 @@ const BookBanner = () => {
           </div>
 
           <div className={`${styles.actionSection}`}>
-            <h2 className={`${styles.actionTitle}`}>AVAILABLE FOR<br/> <span className="font-bold">PRE-ORDER</span> NOW!</h2>
+            {/* <h2 className={`${styles.actionTitle}`}>ORDER NOW!</h2> */}
             
             <a className={`${styles.learnMoreButton}`} href="https://www.newrulesofwomenshealth.com?utm_source=mr-website&utm_medium=referral&utm_campaign=pre-launch&utm_content=learn-more-button" target="_blank" rel="noreferrer">
-              Learn More
+              ORDER NOW
             </a>
 
             <div className={`${styles.logoContainer}`}>
